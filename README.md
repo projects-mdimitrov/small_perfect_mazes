@@ -1,3 +1,4 @@
+# small_perfect_mazes
 # Crossed maze experiment data and code
 
 This is a self-contained research-data and code package for the crossed maze
