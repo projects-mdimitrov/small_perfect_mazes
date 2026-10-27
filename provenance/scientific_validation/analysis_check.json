@@ -1,0 +1,11 @@
+{
+  "status": "pass",
+  "baseline_and_current_numeric_csvs_match": true,
+  "current_source_margins_and_deviations_match": true,
+  "scientific_json_outputs_match": true,
+  "no_manuscript_required": true,
+  "raw_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+  "archive_raw_unchanged": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+  "font_override": "v21 uses the archived v12 Arial/DejaVu fallback; numerical code unchanged",
+  "scope": "Recomputed statistics, deviations and scientific plots; no manuscript is required."
+}

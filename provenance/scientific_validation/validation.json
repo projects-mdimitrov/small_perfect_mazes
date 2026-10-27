@@ -1,0 +1,76 @@
+{
+  "status": "pass",
+  "checked_utc": "2026-10-20T14:55:17.903132+00:00",
+  "no_article_files_in_release": true,
+  "no_editorial_python_dependencies": true,
+  "self_test": {
+    "status": "pass",
+    "generator_variants": 14,
+    "source_files": 12
+  },
+  "full_generation_replay": {
+    "status": "pass",
+    "runs_csv_byte_identical": true,
+    "runs_csv_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+    "note": "Manifest timestamp is expected to differ."
+  },
+  "numeric_analysis": {
+    "status": "pass",
+    "baseline_and_current_numeric_csvs_match": true,
+    "current_source_margins_and_deviations_match": true,
+    "scientific_json_outputs_match": true,
+    "no_manuscript_required": true,
+    "raw_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+    "archive_raw_unchanged": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+    "font_override": "v21 uses the archived v12 Arial/DejaVu fallback; numerical code unchanged",
+    "scope": "Recomputed statistics, deviations and scientific plots; no manuscript is required."
+  },
+  "independent_graph_audit": {
+    "status": "pass",
+    "row_count": 40320,
+    "status_counts": {
+      "ok": 40278,
+      "stream_exhausted": 42
+    },
+    "independently_recomputed_metrics": [
+      "dead_end_fraction",
+      "diameter_normalized",
+      "adjusted_orientation_anisotropy",
+      "solution_stretch"
+    ],
+    "complete_wall_graphs_checked": 40278,
+    "unique_run_keys": 40320,
+    "source_files_hash_checked": 12,
+    "control_corpora": 64
+  },
+  "independent_cell_metric_audit": {
+    "status": "pass",
+    "raw_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+    "actual_attempts": 40320,
+    "statuses": {
+      "ok": 40278,
+      "stream_exhausted": 42
+    },
+    "completed_wall_strings_checked": 40278,
+    "checks": [
+      "all four cell fractions and six degree counts reconstructed from walls",
+      "partition of all cells",
+      "tree leaf/branch identity",
+      "unique attempt keys"
+    ],
+    "scope": "Extends, does not replace, the archived full graph/four-foreground-metric audit."
+  },
+  "old_package_and_original_scientific_inputs_unchanged": true,
+  "scope": "Experiment and numerical results only; no article is an input, an output or a prerequisite.",
+  "limitations": "These checks do not establish mathematical digit validity for every source, causal claims, scientific novelty or publication suitability.",
+  "control_archive_checked_utc": "2026-10-20T15:08:47.293219+00:00",
+  "saved_control_sequence_archive": {
+    "status": "pass",
+    "export_check": "control_corpora/export_check.json",
+    "independent_check": "provenance/scientific_validation/control_corpora_independent.json",
+    "saved_records": 80,
+    "unique_corpora": 64,
+    "control_rows_checked": 32256,
+    "all_original_scientific_files_unchanged": true
+  }
+}

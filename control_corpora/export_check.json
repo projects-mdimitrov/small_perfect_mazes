@@ -1,0 +1,26 @@
+{
+  "status": "pass",
+  "files": 2,
+  "saved_records": 80,
+  "unique_corpora": 64,
+  "digits_per_corpus": 960000,
+  "control_rows_checked": 32256,
+  "all_saved_source_hashes_match_raw": true,
+  "all_saved_digits_match_seed_replay": true,
+  "secondary_matches_primary_first_16": true,
+  "raw_csv_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+  "file_checks": [
+    {
+      "filename": "control_10x10.jsonl",
+      "records": 64,
+      "bytes": 61452023,
+      "sha256": "5ae79c784d538df9238e2a7b4e19572b1f24a7c1b6a30b4c0346111ac63c090a"
+    },
+    {
+      "filename": "control_20x20.jsonl",
+      "records": 16,
+      "bytes": 15362999,
+      "sha256": "e111112616f1f25651187044f3180be6efed93fe34f2825a06bd81c876b5727e"
+    }
+  ]
+}

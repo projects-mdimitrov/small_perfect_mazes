@@ -1,0 +1,4 @@
+# Python 3.12; scientific analysis only
+numpy==2.3.5
+pandas==3.0.1
+Pillow==12.3.0

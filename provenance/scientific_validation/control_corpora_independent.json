@@ -1,0 +1,603 @@
+{
+  "status": "pass",
+  "checked_utc": "2026-10-20T15:06:30.115708+00:00",
+  "method": "Independent Python integer cyrb128 + xoshiro128** implementation; no original JS code imported or executed",
+  "control_csv_rows_checked": 32256,
+  "unique_seed_corpora_checked": 64,
+  "full_decimal_strings_independently_reconstructed": 64,
+  "exported_records_checked": 80,
+  "shared_first_16_corpora_identical": true,
+  "raw_csv_sha256_before_and_after": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+  "exports": [
+    {
+      "path": "control_corpora/control_10x10.jsonl",
+      "sha256": "5ae79c784d538df9238e2a7b4e19572b1f24a7c1b6a30b4c0346111ac63c090a",
+      "records": 64,
+      "digit_characters": 61440000
+    },
+    {
+      "path": "control_corpora/control_20x20.jsonl",
+      "sha256": "e111112616f1f25651187044f3180be6efed93fe34f2825a06bd81c876b5727e",
+      "records": 16,
+      "digit_characters": 15360000
+    }
+  ],
+  "corpora": [
+    {
+      "corpus_index": 1,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/001",
+      "source_sha256": "d57550483391d76032b9f8f86077192fc96b42f01fea1482a0840a1064654e16",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192000,
+      "rejected_prng_draws": 0
+    },
+    {
+      "corpus_index": 2,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/002",
+      "source_sha256": "fe4a7037239e4605f413c0fd3943a068fc8e25c1e6188b18ab838ab16dfb18c4",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 3,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/003",
+      "source_sha256": "e9ea983335586526b60ec1aaee5491befb7eefe3628f302b5a2a77565fa34619",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 4,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/004",
+      "source_sha256": "042b770cfd9ab99c35f3a9c9183533ec3164015e5645d0d8797ae7389b7822e2",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 5,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/005",
+      "source_sha256": "06f2bcaf8e0eb814aaa54aae725d7a54ae4f28f3143ecee605ebff0bae562cdc",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 6,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/006",
+      "source_sha256": "9f9a44dc370636d88d162a84bb9ffe1dc30fbab89b5889c91015125c0cc42040",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 7,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/007",
+      "source_sha256": "d30414b167ef03e460fd8c194eb8a4d9ee09c297a434cad6022c0e144ed34f56",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 8,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/008",
+      "source_sha256": "b5ab8b13c7e913227c6eae6e5a27e4dc78794a560d547ff474381aba18bc3998",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 9,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/009",
+      "source_sha256": "b19af1b93a07c9a081fc16a4917f2943124cc740caffc1bda23f53e3edd1d164",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 10,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/010",
+      "source_sha256": "3c0425b7124ec69c6a8e83ddf916fd426fb905243e910fce1311acc21d22777e",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 11,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/011",
+      "source_sha256": "a2544d77fc8fb914461549e443ebec30855d7805e0fce20f72cf3fc111d4fb77",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192007,
+      "rejected_prng_draws": 7
+    },
+    {
+      "corpus_index": 12,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/012",
+      "source_sha256": "1a10033fae0c430ff4a918c60fd238563ceb3f0539fdf51e4f6f9651823304d8",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 13,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/013",
+      "source_sha256": "f640f13ff11ccb35682b01755ed28fe0d0217ca2fcd1e5c22b3037410a19825d",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 14,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/014",
+      "source_sha256": "876ba988141c0ac3e5bb363018d03e23ebac3fb063e9e7d530c19764f2da1129",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 15,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/015",
+      "source_sha256": "1c596a82f7dabf5669200e2e95ba175e8d88fab2e10efd507f145fc78ea91494",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192000,
+      "rejected_prng_draws": 0
+    },
+    {
+      "corpus_index": 16,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/016",
+      "source_sha256": "f75f1d496c6cc94cc82ebac0f26f9e76d1d847174b440335e0b4bd2f7fabfd19",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192005,
+      "rejected_prng_draws": 5
+    },
+    {
+      "corpus_index": 17,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/017",
+      "source_sha256": "b66d62813424d3721dc2bfff7c93b21c6d75cc6c1bd1733d70cd8127c3714efc",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 18,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/018",
+      "source_sha256": "e69b60015ec6dc14c4b7d2b1e6aa5db343f96dddb46e04255d3b438e347609a8",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 19,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/019",
+      "source_sha256": "46e1e6d87b3d8c033afda3b6209b59c2266f1674224daede23c92396f5fde962",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 20,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/020",
+      "source_sha256": "4b36f82389e77dfb65bf671bccdfe760c1ecc2d1e36dbe9f24500cbc7399b2d3",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 21,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/021",
+      "source_sha256": "f7160c6c0da99654e68b119ae5332ab0aa3cd104a4f25b7c5d6b605344fb51e8",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 22,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/022",
+      "source_sha256": "351857f5213b25a680127ce18aa744ea6c7c0cdc2499b643253897030a920dd8",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 23,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/023",
+      "source_sha256": "401e0386b793d85efcb673301b299e8c741e1fc9f16e96b0d28f7f88597669d3",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 24,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/024",
+      "source_sha256": "5aca0064fa1eefc44357709f6b7c5aaeb9d5f09241470a1f27629dcc49164660",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 25,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/025",
+      "source_sha256": "6908d141339d3c2094ac28620af17dc9ace04db46efa08df8e0042060d9a8ce9",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 26,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/026",
+      "source_sha256": "ad134cbe0d464d7bb8dd41a8deae0bbb8d7e1cab6811b23cb9281d19bf5a9caf",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192005,
+      "rejected_prng_draws": 5
+    },
+    {
+      "corpus_index": 27,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/027",
+      "source_sha256": "c5f5cdcf9f3f4c82632add50b4f16f1acbd92d51313aaf787ab5988d86c01656",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 28,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/028",
+      "source_sha256": "1af3ab81a26a626e86fd9a0d31ab743641c198e15a35d67fcfa913f248539cbb",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 29,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/029",
+      "source_sha256": "f023b6f3850475b50f3f7954e24c72b2fc4fd796859781d1951e93432bafc709",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192000,
+      "rejected_prng_draws": 0
+    },
+    {
+      "corpus_index": 30,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/030",
+      "source_sha256": "1104bf7a4e73468f91367da7441b44f85744c7cfc44b53f3a9e4ef7f6b09e90e",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 31,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/031",
+      "source_sha256": "5e18e0628e703002fb76f713cbce0964c3639377360b983ab65796affa073f3f",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 32,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/032",
+      "source_sha256": "52200edbef866dd289b4d56c69540d22b0aeca01ac4f98a80b0454a6e05cef9d",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 33,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/033",
+      "source_sha256": "f40a9e656b9a74b0bbeaf97156c5d5b39c74da890b6c225abe9b81953cfeb270",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192007,
+      "rejected_prng_draws": 7
+    },
+    {
+      "corpus_index": 34,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/034",
+      "source_sha256": "2b70d552b082577caceef961a2b4ac50a67d380343e0fba9c4f6c5eac51a0984",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 35,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/035",
+      "source_sha256": "d3ddd6dca5c49ae6daee8a2909219ce9a24ee6bd76515fbe3f995aaa0544db30",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 36,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/036",
+      "source_sha256": "33c38d5c05c58c5ca2f24a773daafa392bfd2433b2c94cce0b8e9d048484051c",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 37,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/037",
+      "source_sha256": "e2454042d602128e7eced55e7b7a809e52415d1c9461cf79eb4d251dc429dcfc",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 38,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/038",
+      "source_sha256": "2589d137ea40f0777398f5411b63acd196d6bcfd60571d665660193a91f01e69",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 39,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/039",
+      "source_sha256": "61be1cd3b07d094bd71c527703a069fd7b9a5b1ba62a8b61bd193907afa24e6d",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 40,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/040",
+      "source_sha256": "d72bbc5fdc77e725b911e26e2f018d2eb6616d5699da70385423647673eac7d4",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 41,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/041",
+      "source_sha256": "f89d1b54cd53d44591b56d15832a2ed1ab1879088e4b2efcf0d35ccb45817316",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 42,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/042",
+      "source_sha256": "4f8fbe681c583947f7f07a9b600506242d407b33d395db41c17f1292a091f123",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 43,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/043",
+      "source_sha256": "a786c822bbee9976e098e575be9235cd01e1e04b838c9d185dbaa8fcd8bfddf6",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 44,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/044",
+      "source_sha256": "ea761b8f922941e4ca1acb6627ea87c9c33a1d5e78ba16babd98e87fdcd65de0",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 45,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/045",
+      "source_sha256": "31631272dc9d21e8e5c1f17b1ccb064a119a6456b1319f825ecd6c9a7586909a",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 46,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/046",
+      "source_sha256": "7a3be118af618317bb09cb4b34a451bcb6506f5f51432c9963768c5fd92a63d4",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 47,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/047",
+      "source_sha256": "40844df6b9ffe2d6cf3fd754263b18f8d87ede216c3967f4d62a542fab446813",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192006,
+      "rejected_prng_draws": 6
+    },
+    {
+      "corpus_index": 48,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/048",
+      "source_sha256": "b0dd1d398c8fec68e9f10b2dd63b91b46aefcdf2996a62ea67a4f34c77c8a6a2",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 49,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/049",
+      "source_sha256": "4c851194362eb3df6b8c9f0a3b1bf7c23f876a296863b1c312987111e10b7546",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 50,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/050",
+      "source_sha256": "59f13fff1dace668b0f2766e6c54f7b29f8ea51be52b115a65e2d02e3d9f1d48",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 51,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/051",
+      "source_sha256": "2c4dd624fec185a7aee7a6ed9b19f31afd77e0ca0f8c50e1cbb799274f1e4a4d",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 52,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/052",
+      "source_sha256": "0419cbe79f6ea09de79696f7a1fa403c1c10f678699a31f417b8a51afff99112",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 53,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/053",
+      "source_sha256": "b575d7764c4654716e94599723435baf012f564261947f2ca0122a5b1c17d417",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 54,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/054",
+      "source_sha256": "9855829c80eb6f5e0278dffbf6bc10c8de635cf3851c377fe3b9418c4fc88f86",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192002,
+      "rejected_prng_draws": 2
+    },
+    {
+      "corpus_index": 55,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/055",
+      "source_sha256": "7e24b7a20d150cea7a2db98d2b74678c18e06271856d6b2e78f727ebba7bab0b",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    },
+    {
+      "corpus_index": 56,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/056",
+      "source_sha256": "5c9303b95d76cbc1b4be8c18566889a698becafd4b3689ded21244a96634c153",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192005,
+      "rejected_prng_draws": 5
+    },
+    {
+      "corpus_index": 57,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/057",
+      "source_sha256": "78bb56e9a804e795c435109a0431591f0469c735a0ef4c5fc83f2b52200e141e",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 58,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/058",
+      "source_sha256": "17b24c2a79fc70b07dedbed808918a6b7431e6033b48c3254a99b2be7c9235dc",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192000,
+      "rejected_prng_draws": 0
+    },
+    {
+      "corpus_index": 59,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/059",
+      "source_sha256": "07e7fc9e02c5379d8e62613560d809eefb287788784a39812610a62bc6222519",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 60,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/060",
+      "source_sha256": "1ba189774a2d869e88711a6d3e37714672e0e8f31837e2f88132e5ac72bbca6e",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 61,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/061",
+      "source_sha256": "837b081022dcc2752264ef85d401b18a80fe18e73a7e1294866c661f313e9982",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192001,
+      "rejected_prng_draws": 1
+    },
+    {
+      "corpus_index": 62,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/062",
+      "source_sha256": "bb57d11870bf734b129aac3f19f99e4a9374e0169d699235b8b8ea145236b531",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192004,
+      "rejected_prng_draws": 4
+    },
+    {
+      "corpus_index": 63,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/063",
+      "source_sha256": "1c5bc4c07589c7e7071494c4c72b8ee47763b92708a7907440ca5aa6fd27123f",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192005,
+      "rejected_prng_draws": 5
+    },
+    {
+      "corpus_index": 64,
+      "corpus_seed": "maze-crossed-algorithms-constants-2026-v1/pseudo-iid/064",
+      "source_sha256": "a1ff9a306053d82660fcfe771a55f349af8c5ddcbced98a8d24d5ccd9ecfa94a",
+      "digits": 960000,
+      "blocks": 192000,
+      "raw_prng_draws": 192003,
+      "rejected_prng_draws": 3
+    }
+  ]
+}

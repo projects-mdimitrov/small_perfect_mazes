@@ -1,0 +1,55 @@
+{
+  "scientific_input_bytes_preserved": true,
+  "numerical_functions_ast_checks": "pass",
+  "adaptations": [
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/analysis_v12.py",
+      "package_path": "article_all_algorithms_v1/revision_v12/analysis_v12.py",
+      "source_sha256": "c9b120044f74647251f622f5c981593f08c82aab4ef799dcd73337f43deb649a",
+      "adapted_sha256": "17b7e5afceb6cddcf226b9384e5ff46171f75c3ed69db52f51114d534862a2d4",
+      "adaptation": "Only distribution-version metadata queries narrowed to the three scientific dependencies; formulas and all functions except main are unchanged."
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v18/analysis_v18.py",
+      "package_path": "article_all_algorithms_v1/revision_v18/analysis_v18.py",
+      "source_sha256": "1edb536c0796d216b23e5db21f32a39d2816d93bcbe507121b0bd53d346c2f2b",
+      "adapted_sha256": "7d0e4a86d1a4a8f7a7e47048c57f01248618fab2a84e15df57156b789483f60e",
+      "adaptation": "Document-derived source-mean verification receipt replaced with an existing numeric CSV reference; partition and plot functions unchanged."
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/analysis_v21.py",
+      "package_path": "article_all_algorithms_v1/revision_v21/analysis_v21.py",
+      "source_sha256": "5f99267f021ab9249018bdb236a5c5ed13368734b4cda45f370653e6426fa0cc",
+      "adapted_sha256": "7105ab431926f30ef2576394cab6604882b73c5998b7defcfc383c0d44949a59",
+      "adaptation": "Only editorial document path/hash checks and the document hash report field removed; raw-data hash checks and every numerical calculation retained."
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v14/build_v14.py",
+      "package_path": "analysis/minmax_plots.py",
+      "source_sha256": "2da2f99f70c7b11193388240dc556d2ba8c14f1324e4f25eb30c48aaefee563a",
+      "adapted_sha256": "f1ab9862caeac47b68d3367cd499efde8652ba62fb518930f6f9f0a7f011bddc",
+      "adaptation": "Unchanged AST for panel_summaries and draw_distributions, extracted into a numeric-only module with no editorial imports."
+    },
+    {
+      "source_relative_path": "reproduce.py",
+      "package_path": "reproduce.py",
+      "source_sha256": "ceb5357e20a537b605cda6d464f87b662db3d7cb39200fd7f9d1379f2ba2fa13",
+      "adapted_sha256": "04119cee4b079ee28293797c274bbda7dbeac0eedee290fe1af47560e52a1c53",
+      "adaptation": "Staging no longer copies any document, editorial builder or Word verification receipt; the min/max helper and its independent numeric config are used instead."
+    }
+  ],
+  "reference_metadata_changes": [
+    {
+      "path": "article_all_algorithms_v1/revision_v21/outputs/analysis_v21.json",
+      "change": "Removed only source_docx_sha256; all scientific fields are unchanged."
+    },
+    {
+      "path": "article_all_algorithms_v1/revision_v18/outputs/secondary_variance.json",
+      "change": "Updated one verification-description string to refer to a numeric source reference; every numerical result unchanged."
+    },
+    {
+      "path": "reference_results/minmax_boxplots/config.json",
+      "change": "Retained only matched_axes, plotted_summaries and definition from the prior verification receipt; excluded document-related metadata."
+    }
+  ]
+}

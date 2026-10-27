@@ -1,0 +1,125 @@
+{
+  "study_id": "maze-crossed-algorithms-constants-2026-v1",
+  "status": "complete",
+  "timestamp_utc": "2026-09-25T09:32:29.763Z",
+  "core_app_version": "15.0.0",
+  "decoder_version": "decimal5-rejection-v2",
+  "html_sha256": "b999ca85b79868b6bdf68a0ed07e0dac73db248106ab55e69a624f440c73f30c",
+  "protocol_sha256": "4f1c47607dc9d332a8110402e2de9a6dcc288d9a70036ffdbdb227f9a0ca4a6d",
+  "runner_sha256": "04a5556f936344698f48471cb78d69123dccfe95ec5eee54657c2b17777d8680",
+  "node_version": "v24.19.0",
+  "sources": {
+    "pi": {
+      "file": "irrational_numbers/pi.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "7806ee47461b49ef1f578e14461b2c83c09c6d7a9a914275da1d71e9cbbf7069",
+      "arithmetic_status": "proven_irrational"
+    },
+    "e": {
+      "file": "irrational_numbers/e.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "c6e9fe4f3d84085f85e98234bf1f284b5b8de993059453548d3ccaa3016138ac",
+      "arithmetic_status": "proven_irrational"
+    },
+    "phi": {
+      "file": "irrational_numbers/phi.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "b3a8d00d8384e1eeda6f906db0132d39c2cbd38447a0fa6eda9f5a06773d72d7",
+      "arithmetic_status": "proven_irrational"
+    },
+    "sqrt2": {
+      "file": "irrational_numbers/sqrt2.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "b521e4c4ee7afb3e2ce0d58337388c54f9fbbc6811945574117ef5eec093cefb",
+      "arithmetic_status": "proven_irrational"
+    },
+    "sqrt3": {
+      "file": "irrational_numbers/sqrt3.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "bb0d9aafc282bf86ddee32b7fa2764cb888ffaf973e9ea0be4ce98bc61eb1e3c",
+      "arithmetic_status": "proven_irrational"
+    },
+    "sqrt5": {
+      "file": "irrational_numbers/sqrt5.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "8e41c7bcb5f3a967df93b8bb7dce80a11e7490a44401f80d2eeadb3241e883b2",
+      "arithmetic_status": "proven_irrational"
+    },
+    "sqrt7": {
+      "file": "irrational_numbers/sqrt7.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "2fa5041ec14b959878531726fb8264b7dbc915cd331eec2809937ed9337a6766",
+      "arithmetic_status": "proven_irrational"
+    },
+    "ln2": {
+      "file": "irrational_numbers/ln2.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "f05e0e2dd51d12b49ca959b5edda04afa436d88cb984fc8e8cf510e10142c8f5",
+      "arithmetic_status": "proven_irrational"
+    },
+    "inv_pi": {
+      "file": "irrational_numbers/1_over_pi.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "4843a8f7cb0e0c2d4a6892972418973c32547ad133b0bd57e802b358139a126f",
+      "arithmetic_status": "proven_irrational"
+    },
+    "inv_e": {
+      "file": "irrational_numbers/1_over_e.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "3dc6c27f31d2680ff6b67d7105fdd2b2bee0fb46e30c30ff2d2df634e89ba5c6",
+      "arithmetic_status": "proven_irrational"
+    },
+    "apery": {
+      "file": "irrational_numbers/apery.zeta3.1mil.txt",
+      "digit_count": 980380,
+      "sha256": "b0860c94afc5e07f2e0f55ba98c242740cace22729a6815ddf775e927b9f7ffc",
+      "arithmetic_status": "proven_irrational"
+    },
+    "euler_m": {
+      "file": "irrational_numbers/euler_m.1mil.txt",
+      "digit_count": 1000000,
+      "sha256": "f94f0a985277533d11ffe68547169bfb5a0e964658488ec627e00ae8471bcc33",
+      "arithmetic_status": "unknown"
+    }
+  },
+  "algorithms": [
+    "dfs",
+    "prim",
+    "kruskal",
+    "wilson",
+    "aldous",
+    "hunt",
+    "growing",
+    "division",
+    "eller",
+    "sidewinder",
+    "binary_ur",
+    "binary_dr",
+    "binary_ul",
+    "binary_dl"
+  ],
+  "size_design": [
+    {
+      "series": "primary_10x10",
+      "cols": 10,
+      "rows": 10,
+      "windows": 32,
+      "budget": 6000,
+      "controls": 64
+    },
+    {
+      "series": "secondary_20x20",
+      "cols": 20,
+      "rows": 20,
+      "windows": 16,
+      "budget": 12000,
+      "controls": 16
+    }
+  ],
+  "rows": 40320,
+  "statuses": {
+    "ok": 40278,
+    "stream_exhausted": 42
+  },
+  "runs_csv_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949"
+}

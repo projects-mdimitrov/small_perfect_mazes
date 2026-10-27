@@ -1,0 +1,1630 @@
+{
+  "completed_observations": 2446,
+  "planned_observations": 2464,
+  "cell_count": 154,
+  "family_weight_sum": 11,
+  "observation_weight": "q_a * 16 / m_aj for completed runs only",
+  "definition": "Window within irrational source is variation among completed windows within a fixed algorithm–source combination; it is not a separately estimated window-index effect",
+  "family_balanced": [
+    {
+      "metric": "dead_end_fraction",
+      "scheme": "family_and_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 11.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 1936.0,
+      "ss_total": 10.422825064327156,
+      "ss_algorithm": 10.089586800437075,
+      "ss_source": 0.0008833253958172121,
+      "ss_interaction": 0.019577061501540236,
+      "ss_window_within_irrational_source": 0.3127778769927226,
+      "algorithm_percent": 96.80280286934286,
+      "source_percent": 0.008474913378719699,
+      "interaction_percent": 0.18782874490088192,
+      "window_within_irrational_source_percent": 3.0008934723775287,
+      "maximum_absolute_weighted_cross_product": 1.1492543028346347e-16,
+      "projection_check": "Weighted least-squares components agree; reversing main-effect order does not change shares"
+    },
+    {
+      "metric": "junction_fraction",
+      "scheme": "family_and_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 11.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 1936.0,
+      "ss_total": 7.262202259240977,
+      "ss_algorithm": 6.98582740463095,
+      "ss_source": 0.0008136416933771539,
+      "ss_interaction": 0.01524950727333645,
+      "ss_window_within_irrational_source": 0.2603117056433143,
+      "algorithm_percent": 96.19433823592082,
+      "source_percent": 0.0112037872856242,
+      "interaction_percent": 0.2099846125041728,
+      "window_within_irrational_source_percent": 3.5844733642893782,
+      "maximum_absolute_weighted_cross_product": 1.1416648876272362e-16,
+      "projection_check": "Weighted least-squares components agree; reversing main-effect order does not change shares"
+    },
+    {
+      "metric": "diameter_normalized",
+      "scheme": "family_and_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 11.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 1936.0,
+      "ss_total": 26.158178806768348,
+      "ss_algorithm": 23.451289914877638,
+      "ss_source": 0.019502403329007368,
+      "ss_interaction": 0.14428491998563533,
+      "ss_window_within_irrational_source": 2.5431015685760694,
+      "algorithm_percent": 89.6518449855144,
+      "source_percent": 0.07455566181832651,
+      "interaction_percent": 0.5515862593167307,
+      "window_within_irrational_source_percent": 9.722013093350556,
+      "maximum_absolute_weighted_cross_product": 1.2659686667026993e-15,
+      "projection_check": "Weighted least-squares components agree; reversing main-effect order does not change shares"
+    },
+    {
+      "metric": "adjusted_orientation_anisotropy",
+      "scheme": "family_and_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 11.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 1936.0,
+      "ss_total": 8.88564599705705,
+      "ss_algorithm": 5.425514563651015,
+      "ss_source": 0.01698012326488142,
+      "ss_interaction": 0.16912012122792353,
+      "ss_window_within_irrational_source": 3.2740311889132383,
+      "algorithm_percent": 61.059314825820884,
+      "source_percent": 0.19109610342911795,
+      "interaction_percent": 1.9032957343105559,
+      "window_within_irrational_source_percent": 36.84629333643954,
+      "maximum_absolute_weighted_cross_product": 1.710871028182126e-16,
+      "projection_check": "Weighted least-squares components agree; reversing main-effect order does not change shares"
+    },
+    {
+      "metric": "solution_stretch",
+      "scheme": "family_and_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 11.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 1936.0,
+      "ss_total": 1172.7296079706643,
+      "ss_algorithm": 780.9481558309382,
+      "ss_source": 2.539020843845175,
+      "ss_interaction": 29.428816244048082,
+      "ss_window_within_irrational_source": 359.81361505183315,
+      "algorithm_percent": 66.59234579932884,
+      "source_percent": 0.2165052222258456,
+      "interaction_percent": 2.5094289462830925,
+      "window_within_irrational_source_percent": 30.681720032162254,
+      "maximum_absolute_weighted_cross_product": 2.4658053376924727e-13,
+      "projection_check": "Weighted least-squares components agree; reversing main-effect order does not change shares"
+    }
+  ],
+  "equal_variants": [
+    {
+      "metric": "dead_end_fraction",
+      "scheme": "equal_variants_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 14.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 2464.0,
+      "ss_total": 10.513301609027529,
+      "ss_algorithm": 10.100931686756766,
+      "ss_source": 0.0007310304208726454,
+      "ss_interaction": 0.023850467982166668,
+      "ss_window_within_irrational_source": 0.3877884238677235,
+      "algorithm_percent": 96.07763633531954,
+      "source_percent": 0.006953385796950089,
+      "interaction_percent": 0.22685992344866074,
+      "window_within_irrational_source_percent": 3.688550355434857,
+      "maximum_absolute_weighted_cross_product": 6.028164079019405e-17,
+      "projection_check": null
+    },
+    {
+      "metric": "junction_fraction",
+      "scheme": "equal_variants_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 14.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 2464.0,
+      "ss_total": 7.66649857475661,
+      "ss_algorithm": 7.310992061765897,
+      "ss_source": 0.0007765556920920958,
+      "ss_interaction": 0.019407704780303302,
+      "ss_window_within_irrational_source": 0.33532225251831577,
+      "algorithm_percent": 95.36285685669746,
+      "source_percent": 0.010129209371394807,
+      "interaction_percent": 0.2531495257066482,
+      "window_within_irrational_source_percent": 4.373864408224471,
+      "maximum_absolute_weighted_cross_product": 7.196391919872536e-17,
+      "projection_check": null
+    },
+    {
+      "metric": "diameter_normalized",
+      "scheme": "equal_variants_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 14.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 2464.0,
+      "ss_total": 29.04805860628711,
+      "ss_algorithm": 26.31983104325683,
+      "ss_source": 0.015483846896547101,
+      "ss_interaction": 0.14886034106775778,
+      "ss_window_within_irrational_source": 2.5638833750659753,
+      "algorithm_percent": 90.60788330122762,
+      "source_percent": 0.05330424007474223,
+      "interaction_percent": 0.5124622718694829,
+      "window_within_irrational_source_percent": 8.826350186828158,
+      "maximum_absolute_weighted_cross_product": 1.5594621947945253e-15,
+      "projection_check": null
+    },
+    {
+      "metric": "adjusted_orientation_anisotropy",
+      "scheme": "equal_variants_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 14.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 2464.0,
+      "ss_total": 10.075671296979387,
+      "ss_algorithm": 5.5505092932994105,
+      "ss_source": 0.024715077160531347,
+      "ss_interaction": 0.23904599746639205,
+      "ss_window_within_irrational_source": 4.261400929053055,
+      "algorithm_percent": 55.088233128083615,
+      "source_percent": 0.24529459558630848,
+      "interaction_percent": 2.3725069071879736,
+      "window_within_irrational_source_percent": 42.29396536914212,
+      "maximum_absolute_weighted_cross_product": 2.5934115965853266e-16,
+      "projection_check": null
+    },
+    {
+      "metric": "solution_stretch",
+      "scheme": "equal_variants_completed_cell_balanced",
+      "variant_levels": 14,
+      "family_weight_sum": 14.0,
+      "nominal_windows": 16,
+      "actual_completed": 2446,
+      "minimum_completed_in_cell": 13,
+      "maximum_completed_in_cell": 16,
+      "total_observation_weight": 2464.0,
+      "ss_total": 1360.8975018501008,
+      "ss_algorithm": 969.1160497103748,
+      "ss_source": 1.994944948735492,
+      "ss_interaction": 29.972892139157768,
+      "ss_window_within_irrational_source": 359.81361505183315,
+      "algorithm_percent": 71.21153859073807,
+      "source_percent": 0.1465903895057065,
+      "interaction_percent": 2.2024356792786,
+      "window_within_irrational_source_percent": 26.43943534047766,
+      "maximum_absolute_weighted_cross_product": 2.4424906541753444e-13,
+      "projection_check": null
+    }
+  ],
+  "cell_completion_counts_and_weights": [
+    {
+      "algorithm": "aldous",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "e",
+      "completed": 13,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.2307692307692308,
+      "equal_variant_completed_observation_weight": 1.2307692307692308
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "inv_e",
+      "completed": 15,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0666666666666667,
+      "equal_variant_completed_observation_weight": 1.0666666666666667
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "inv_pi",
+      "completed": 15,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0666666666666667,
+      "equal_variant_completed_observation_weight": 1.0666666666666667
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "phi",
+      "completed": 14,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.1428571428571428,
+      "equal_variant_completed_observation_weight": 1.1428571428571428
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "sqrt2",
+      "completed": 15,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0666666666666667,
+      "equal_variant_completed_observation_weight": 1.0666666666666667
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "sqrt5",
+      "completed": 13,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.2307692307692308,
+      "equal_variant_completed_observation_weight": 1.2307692307692308
+    },
+    {
+      "algorithm": "aldous",
+      "source_id": "sqrt7",
+      "completed": 14,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.1428571428571428,
+      "equal_variant_completed_observation_weight": 1.1428571428571428
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dl",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_dr",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ul",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "binary_ur",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 0.25,
+      "completed_observation_weight": 0.25,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "dfs",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "division",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "eller",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "growing",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "hunt",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "kruskal",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "prim",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "inv_e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "inv_pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "pi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "sidewinder",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "apery",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "e",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "inv_e",
+      "completed": 15,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0666666666666667,
+      "equal_variant_completed_observation_weight": 1.0666666666666667
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "inv_pi",
+      "completed": 14,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.1428571428571428,
+      "equal_variant_completed_observation_weight": 1.1428571428571428
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "ln2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "phi",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "pi",
+      "completed": 14,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.1428571428571428,
+      "equal_variant_completed_observation_weight": 1.1428571428571428
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "sqrt2",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "sqrt3",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "sqrt5",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    },
+    {
+      "algorithm": "wilson",
+      "source_id": "sqrt7",
+      "completed": 16,
+      "attempted": 16,
+      "family_variant_weight": 1.0,
+      "completed_observation_weight": 1.0,
+      "equal_variant_completed_observation_weight": 1.0
+    }
+  ],
+  "checks": [
+    "Raw rows unchanged",
+    "Every algorithm-source cell has completed runs",
+    "All 2446 completed known-source secondary runs included",
+    "Four orthogonal shares sum to 100",
+    "No missing topology imputed",
+    "Independent weighted least-squares projection agrees",
+    "Primary shares and archived complete-panel shares reproduced",
+    "Cell-balanced source means agree with the frozen numerical source reference"
+  ]
+}

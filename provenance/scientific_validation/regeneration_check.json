@@ -1,0 +1,6 @@
+{
+  "status": "pass",
+  "runs_csv_byte_identical": true,
+  "runs_csv_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+  "note": "Manifest timestamp is expected to differ."
+}

@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "raw_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+  "actual_attempts": 40320,
+  "statuses": {
+    "ok": 40278,
+    "stream_exhausted": 42
+  },
+  "completed_wall_strings_checked": 40278,
+  "checks": [
+    "all four cell fractions and six degree counts reconstructed from walls",
+    "partition of all cells",
+    "tree leaf/branch identity",
+    "unique attempt keys"
+  ],
+  "scope": "Extends, does not replace, the archived full graph/four-foreground-metric audit."
+}

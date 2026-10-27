@@ -1,0 +1,3239 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maze Analytics Lab v15 — Publication Mode</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #16233a;
+      --muted: #607089;
+      --line: #dbe3ee;
+      --panel: #ffffff;
+      --soft: #f4f7fb;
+      --blue: #2457d6;
+      --blue-dark: #183f9e;
+      --green: #16845b;
+      --amber: #c76b12;
+      --red: #c33d4a;
+      --violet: #7251c9;
+      --shadow: 0 18px 48px rgba(27, 47, 80, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(36, 87, 214, 0.10), transparent 28rem),
+        radial-gradient(circle at 92% 5%, rgba(114, 81, 201, 0.09), transparent 25rem),
+        #edf2f8;
+      font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    button, input, select { font: inherit; }
+
+    .page-header {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 24px 24px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      letter-spacing: -0.035em;
+    }
+
+    .subtitle {
+      margin: 7px 0 0;
+      max-width: 920px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .protocol-badge {
+      flex: none;
+      padding: 9px 13px;
+      border: 1px solid #b8c9f2;
+      border-radius: 999px;
+      background: #eaf0ff;
+      color: #24499b;
+      font-size: 0.76rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .app-shell {
+      max-width: 1760px;
+      margin: 0 auto;
+      padding: 10px 24px 32px;
+      display: grid;
+      grid-template-columns: minmax(310px, 390px) minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(210, 220, 233, 0.95);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .controls {
+      position: sticky;
+      top: 14px;
+      max-height: calc(100vh - 28px);
+      overflow: auto;
+      padding: 18px;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #30445f;
+    }
+
+    .control-section + .control-section {
+      margin-top: 17px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .field { margin-bottom: 11px; }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #31445e;
+      font-size: 0.78rem;
+      font-weight: 750;
+    }
+
+    select, input[type="number"], input[type="text"], input[type="date"] {
+      width: 100%;
+      min-height: 39px;
+      padding: 8px 10px;
+      border: 1px solid #c9d4e2;
+      border-radius: 9px;
+      background: white;
+      color: var(--ink);
+      outline: none;
+    }
+
+    select:focus, input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(36, 87, 214, 0.12);
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 8px 0;
+      color: #40536e;
+      font-size: 0.78rem;
+      line-height: 1.4;
+    }
+
+    .check-row input { margin-top: 2px; }
+
+    .hint {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 0.71rem;
+      line-height: 1.42;
+    }
+
+    .preflight {
+      padding: 11px;
+      border: 1px solid #cfdaea;
+      border-radius: 11px;
+      background: #f6f9fd;
+      font-size: 0.74rem;
+      line-height: 1.55;
+      color: #40536e;
+    }
+
+    .preflight strong { color: var(--ink); }
+    .preflight.warning { border-color: #efc88f; background: #fff8ed; color: #7d4b13; }
+    .preflight.error { border-color: #e6abb2; background: #fff1f3; color: #8c2733; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    button {
+      min-height: 40px;
+      border: 0;
+      border-radius: 10px;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover:not(:disabled) { transform: translateY(-1px); }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    .primary { grid-column: 1 / -1; background: var(--blue); color: white; }
+    .primary:hover:not(:disabled) { background: var(--blue-dark); }
+    .danger { background: #fbe9ec; color: var(--red); }
+    .secondary { background: #eaf0fa; color: #29476f; }
+
+    details {
+      margin-top: 12px;
+      padding: 10px 11px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: #4b5d75;
+      font-size: 0.73rem;
+      line-height: 1.5;
+    }
+
+    details summary { cursor: pointer; color: #2e4360; font-weight: 800; }
+
+    .workspace {
+      min-width: 0;
+      padding: 18px;
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    #status {
+      min-height: 22px;
+      color: #40536e;
+      font-size: 0.84rem;
+      font-weight: 650;
+    }
+
+    #sessionTag {
+      color: var(--muted);
+      font-size: 0.7rem;
+      text-align: right;
+    }
+
+    .progress-track {
+      height: 10px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #e4eaf2;
+    }
+
+    #progressFill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--violet));
+      transition: width 0.16s ease;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 9px;
+      margin: 14px 0;
+    }
+
+    .kpi {
+      min-height: 77px;
+      padding: 11px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--soft);
+    }
+
+    .kpi .label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi .value {
+      display: block;
+      margin-top: 5px;
+      font-size: 1.34rem;
+      font-weight: 850;
+      letter-spacing: -0.025em;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(320px, 620px) minmax(290px, 1fr);
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 0.9rem;
+      color: #2b405d;
+    }
+
+    .canvas-wrap {
+      display: grid;
+      min-height: 360px;
+      place-items: center;
+      overflow: auto;
+      border-radius: 10px;
+      background:
+        linear-gradient(45deg, #f7f9fc 25%, transparent 25%),
+        linear-gradient(-45deg, #f7f9fc 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f7f9fc 75%),
+        linear-gradient(-45deg, transparent 75%, #f7f9fc 75%),
+        #fff;
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    }
+
+    canvas { display: block; max-width: 100%; height: auto; background: #fff; }
+
+    .empty-state {
+      max-width: 360px;
+      color: #7a889c;
+      text-align: center;
+      line-height: 1.5;
+      font-size: 0.82rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .metric-summary {
+      padding: 10px;
+      border: 1px solid #e0e6ef;
+      border-radius: 10px;
+      background: #f8fafd;
+    }
+
+    .metric-summary .name { color: var(--muted); font-size: 0.69rem; font-weight: 750; }
+    .metric-summary .mean { margin-top: 4px; font-size: 0.93rem; font-weight: 850; }
+    .metric-summary .spread { margin-top: 2px; color: #718097; font-size: 0.66rem; }
+
+    .table-card { margin-top: 14px; }
+    .table-note { margin: -3px 0 9px; color: var(--muted); font-size: 0.7rem; }
+
+    .table-wrap {
+      max-height: 360px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+
+    table {
+      width: max-content;
+      min-width: 100%;
+      border-collapse: collapse;
+      font-size: 0.68rem;
+    }
+
+    th, td {
+      padding: 6px 7px;
+      border-right: 1px solid #e2e7ee;
+      border-bottom: 1px solid #e2e7ee;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #263a57;
+      color: white;
+      font-weight: 800;
+    }
+
+    th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+    tr.invalid td { background: #fff2f4; color: #8d2a35; }
+    tr:nth-child(even):not(.invalid) td { background: #f8fafd; }
+
+    .error-list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: #8d2a35;
+      font-size: 0.72rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 1120px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .controls { position: static; max-height: none; }
+      .main-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 650px) {
+      .page-header, .app-shell { padding-left: 12px; padding-right: 12px; }
+      .page-header { align-items: flex-start; flex-direction: column; }
+      .protocol-badge { white-space: normal; }
+      .field-grid, .summary-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .workspace, .controls { padding: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">Publication-oriented maze research</p>
+      <h1>Maze Analytics Lab <span style="color:#2457d6">v15</span></h1>
+      <p class="subtitle">Контролирано сравнение на крайни десетични префикси, детерминистични controls и seed-нат PRNG чрез фиксирани paired прозорци, no-wrap протокол и възпроизводим manifest.</p>
+    </div>
+    <div class="protocol-badge">CHOICE STREAM · REJECTION · NO-WRAP</div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="panel controls" aria-label="Настройки на експеримента">
+      <section class="control-section">
+        <h2 class="section-title">Лабиринт</h2>
+        <div class="field">
+          <label for="algoSelect">Алгоритъм</label>
+          <select id="algoSelect">
+            <optgroup label="Основно сравнение">
+              <option value="dfs">Depth-first search</option>
+              <option value="prim">Randomized Prim (frontier edges)</option>
+              <option value="kruskal">Randomized Kruskal</option>
+              <option value="wilson">Wilson (exact loop-erased walk)</option>
+              <option value="aldous">Aldous–Broder (без fallback)</option>
+              <option value="hunt">Hunt &amp; Kill</option>
+              <option value="growing">Growing Tree (50% newest / 50% random)</option>
+              <option value="division">Recursive Division</option>
+              <option value="eller">Eller</option>
+            </optgroup>
+            <optgroup label="Положителни контроли за посочност">
+              <option value="sidewinder">Sidewinder</option>
+              <option value="binary_ur">Binary Tree ↗</option>
+              <option value="binary_dr">Binary Tree ↘</option>
+              <option value="binary_ul">Binary Tree ↖</option>
+              <option value="binary_dl">Binary Tree ↙</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="mazeCols">Колони</label>
+            <input type="number" id="mazeCols" value="20" min="5" max="100" step="1">
+          </div>
+          <div class="field">
+            <label for="mazeRows">Редове</label>
+            <input type="number" id="mazeRows" value="20" min="5" max="100" step="1">
+          </div>
+        </div>
+      </section>
+
+      <section class="control-section">
+        <h2 class="section-title">Цифров източник</h2>
+        <div class="field">
+          <label for="mathConst">Цифров източник</label>
+          <select id="mathConst">
+            <optgroup label="Основни: доказано ирационални">
+              <option value="pi">π</option>
+              <option value="e">e</option>
+              <option value="sqrt2">√2</option>
+              <option value="sqrt3">√3</option>
+              <option value="sqrt5">√5</option>
+              <option value="sqrt7">√7</option>
+              <option value="ln2">ln(2)</option>
+              <option value="apery">ζ(3), константа на Апери</option>
+            </optgroup>
+            <optgroup label="Свързани източници — не са независими репликации">
+              <option value="phi">φ = (1 + √5) / 2</option>
+              <option value="inv_pi">1 / π</option>
+              <option value="inv_e">1 / e</option>
+            </optgroup>
+            <optgroup label="Exploratory: нерешен аритметичен статус">
+              <option value="euler_m">γ, Ойлер–Маскерони (ирационалност: неизвестна)</option>
+            </optgroup>
+            <optgroup label="Controls">
+              <option value="control_iid_decimal">Seeded pseudo-IID DECIMAL-5</option>
+              <option value="control_direct_prng">Direct xoshiro128** PRNG</option>
+              <option value="control_periodic_1_7">Периодичен рационален поток 1/7</option>
+              <option value="control_block_shuffle">Seed-нат shuffle на 5-цифрени блокове</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label for="manualSource">Ръчен файл (резервен вариант при <code>file://</code>)</label>
+          <input type="file" id="manualSource" accept=".txt,text/plain">
+          <p class="hint">Незадължително. Файлът трябва да съвпадне по дължина и SHA-256 с избрания източник; иначе сесията се отказва.</p>
+        </div>
+        <div id="controlFields" class="field-grid" hidden>
+          <div class="field">
+            <label for="controlSeed">Master seed</label>
+            <input type="text" id="controlSeed" value="maze-study-2026" maxlength="120">
+          </div>
+          <div class="field" id="surrogateBaseField" hidden>
+            <label for="surrogateBase">База за block shuffle</label>
+            <select id="surrogateBase">
+              <option value="pi">π</option><option value="e">e</option><option value="phi">φ</option>
+              <option value="sqrt2">√2</option><option value="sqrt3">√3</option><option value="sqrt5">√5</option>
+              <option value="sqrt7">√7</option><option value="ln2">ln(2)</option><option value="inv_pi">1/π</option>
+              <option value="inv_e">1/e</option><option value="apery">ζ(3)</option><option value="euler_m">γ</option>
+            </select>
+          </div>
+        </div>
+        <label class="check-row" for="commonPrefix">
+          <input type="checkbox" id="commonPrefix" checked>
+          <span>Ограничи корпуса до обща capacity: 980 380 десетични позиции (196 076 цели DECIMAL-5 единици при phase 0); direct PRNG използва същата unit capacity.</span>
+        </label>
+      </section>
+
+      <section class="control-section">
+        <h2 class="section-title">Неприпокриващи се блокове</h2>
+        <div class="field-grid">
+          <div class="field">
+            <label for="repetitions">Повторения</label>
+            <input type="number" id="repetitions" value="16" min="1" max="2000" step="1">
+          </div>
+          <div class="field">
+            <label for="startOffset">Начален 5-цифрен блок (0-based)</label>
+            <input type="number" id="startOffset" value="0" min="0" step="1">
+          </div>
+        </div>
+        <div class="field">
+          <label for="digitPhase">DECIMAL-5 digit phase</label>
+          <select id="digitPhase">
+            <option value="0">0 — цифри [0..4], [5..9], …</option>
+            <option value="1">1 — цифри [1..5], [6..10], …</option>
+            <option value="2">2 — цифри [2..6], [7..11], …</option>
+            <option value="3">3 — цифри [3..7], [8..12], …</option>
+            <option value="4">4 — цифри [4..8], [9..13], …</option>
+          </select>
+          <p class="hint">Фазите 0–4 са отделни sensitivity условия. Те използват припокриващи се цифри и не са независими репликации. За direct PRNG phase не е приложим.</p>
+        </div>
+        <div class="field">
+          <label for="blockBudget" id="budgetLabel">Фиксирани 5-цифрени блокове на run</label>
+          <input type="number" id="blockBudget" value="8000" min="1" step="1">
+          <p class="hint">Бюджетът е част от протокола и не се променя при промяна на броя runs. За direct PRNG единицата е uint32 draw, а не DECIMAL-5 блок.</p>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="studyId">Study ID</label>
+            <input type="text" id="studyId" value="maze-study-001" maxlength="100">
+          </div>
+          <div class="field">
+            <label for="designSequenceOffset">Design sequence offset</label>
+            <input type="number" id="designSequenceOffset" value="0" min="0" step="1">
+          </div>
+          <div class="field">
+            <label for="failureThreshold">Макс. metric-unavailability (%)</label>
+            <input type="number" id="failureThreshold" value="5" min="0" max="100" step="0.1">
+          </div>
+        </div>
+        <p class="hint">При разделяне на един фиксиран schedule в няколко сесии запазете глобалния design offset, за да останат endpoint/root назначенията на същите прозорци идентични.</p>
+        <div class="field">
+          <label for="endpointPolicy">Construction root и solution endpoints</label>
+          <select id="endpointPolicy">
+            <option value="balanced_opposite">Балансирани противоположни ъгли; root е отделен</option>
+            <option value="tl_br">Solution TL→BR; root в TR</option>
+            <option value="tr_bl">Solution TR→BL; root в BR</option>
+            <option value="br_tl">Solution BR→TL; root в BL</option>
+            <option value="bl_tr">Solution BL→TR; root в TL</option>
+          </select>
+        </div>
+        <label class="check-row" for="publicationMode">
+          <input type="checkbox" id="publicationMode" checked>
+          <span>Publication mode: изисквай common corpus, балансиран endpoint/root cycle и отчитай local protocol screen спрямо предварително зададения metric-unavailability threshold. Budget heuristic остава предупреждение, не гаранция.</span>
+        </label>
+        <div id="preflight" class="preflight" aria-live="polite"></div>
+      </section>
+
+      <details>
+        <summary>Provenance на цифровите файлове</summary>
+        <div class="field">
+          <label for="sourceCitation">Source URL / библиографска референция</label>
+          <input type="text" id="sourceCitation" placeholder="Попълнете проверен източник за публикацията">
+        </div>
+        <div class="field-grid">
+          <div class="field"><label for="sourceDate">Дата на получаване/генериране</label><input type="date" id="sourceDate"></div>
+          <div class="field"><label for="sourceLicense">Лиценз / условия</label><input type="text" id="sourceLicense" placeholder="unknown"></div>
+        </div>
+        <div class="field"><label for="sourceMethod">Метод, софтуер, версия и точност</label><input type="text" id="sourceMethod" placeholder="Попълнете или опишете генератора"></div>
+        <p class="hint">SHA-256 доказва идентичност на файла, но не доказва произход. Непопълнените полета се записват като incomplete provenance.</p>
+      </details>
+
+      <div class="actions">
+        <button id="runBtn" class="primary">Стартирай научна сесия</button>
+        <button id="cancelBtn" class="danger" disabled>Спри сесията</button>
+        <button id="exportCsvBtn" class="secondary" disabled>Raw CSV</button>
+        <button id="exportJsonBtn" class="secondary" disabled>Manifest JSON</button>
+        <button id="exportPlanBtn" class="secondary">Export plan</button>
+        <label class="secondary" style="display:grid;place-items:center;cursor:pointer;min-height:40px;border-radius:10px;font-weight:800">Import plan<input type="file" id="importPlanInput" accept="application/json,.json" hidden></label>
+      </div>
+
+      <details>
+        <summary>Как работят DECIMAL-5 и direct PRNG?</summary>
+        <p>Пет цифри образуват число от 00000 до 99999. При 4 посоки всяка получава точно 25 000 стойности. Когато броят възможности не дели 100 000, горните няколко стойности се отхвърлят, за да не се добавя modulo bias. При само една възможност няма случаен избор и блок не се консумира.</p>
+        <p>Това гарантира равен брой възможни кодове при четири посоки, но не гарантира равни емпирични проценти в конкретен краен префикс. Direct PRNG контролът не използва десетични блокове: той преобразува 32-битови стойности чрез отделен rejection mapping и се отчита в <code>uint32_draw</code> единици.</p>
+        <p>При изчерпване на блока run-ът се записва като неуспешен. Потокът никога не започва автоматично отначало.</p>
+      </details>
+      <details>
+        <summary>Научен обхват и ограничения</summary>
+        <p>Сесията изследва краен десетичен префикс, конкретен decoder и конкретна версия на алгоритъм. Тя не доказва нормалност на константата и не обобщава автоматично за всички ирационални числа.</p>
+        <p>Неприпокриващите се прозорци не се приемат автоматично за статистически независими. Вграденото резюме е описателно; за потвърдителни изводи са нужни предварително зададени contrasts, controls и dependence-aware анализ извън приложението.</p>
+        <p>Ирационалността на γ (Ойлер–Маскерони) е с неизвестен статус. π и 1/π, e и 1/e, както и φ и √5 са математически свързани и не трябва да се броят като независими източници.</p>
+      </details>
+    </aside>
+
+    <section class="panel workspace" aria-label="Резултати">
+      <div class="status-row">
+        <div id="status" role="status" aria-live="polite">Готов за нова сесия.</div>
+        <div id="sessionTag"></div>
+      </div>
+      <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Прогрес">
+        <div id="progressFill"></div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><span class="label">Завършени</span><span class="value" id="kpiCompleted">0</span></div>
+        <div class="kpi"><span class="label">Metric-eligible</span><span class="value" id="kpiValid">0</span></div>
+        <div class="kpi"><span class="label">Metric unavailable</span><span class="value" id="kpiFailed">0</span></div>
+        <div class="kpi"><span class="label">Уникални топологии</span><span class="value" id="kpiUnique">0</span></div>
+        <div class="kpi"><span class="label">Средно използвани units</span><span class="value" id="kpiDigits">0</span></div>
+        <div class="kpi"><span class="label">Metric-unavailability rate</span><span class="value" id="kpiFailureRate">0%</span></div>
+        <div class="kpi"><span class="label">Session protocol screen</span><span class="value" id="kpiEligibility">—</span></div>
+      </div>
+
+      <div class="main-grid">
+        <article class="card">
+          <h2>Последен metric-eligible лабиринт</h2>
+          <div class="canvas-wrap" id="canvasWrap">
+            <p class="empty-state" id="canvasEmpty">След успешен run тук ще се визуализира последният валидиран perfect maze.</p>
+            <canvas id="mazeCanvas" role="img" aria-label="Последен metric-eligible лабиринт" hidden></canvas>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Описателна статистика, conditional on metric eligibility</h2>
+          <div id="summaryGrid" class="summary-grid">
+            <p class="empty-state">Mean, sample SD и median/IQR ще се появят след сесията. Не се приема IID и не се показват inferential confidence intervals.</p>
+          </div>
+          <ul id="errorList" class="error-list"></ul>
+        </article>
+      </div>
+
+      <article class="card table-card">
+        <h2>Raw runs</h2>
+        <p class="table-note">Показват се до 250 последни реда; CSV съдържа всички runs без обобщаващи редове и без предварително закръгляне.</p>
+        <div class="table-wrap">
+          <table id="resultsTable">
+            <thead>
+              <tr>
+                <th>Run</th><th>Статус</th><th>Unit window</th><th>Units read</th><th>Rejected units</th>
+                <th>Dead ends %</th><th>Diameter (edges)</th><th>Solution length (edges)</th><th>Manhattan stretch</th>
+                <th>Endpoint path/Euclidean ratio</th><th>Adjusted H–V anisotropy</th><th>Vertical mirror agreement</th><th>Cell-type entropy (bits)</th>
+                <th>Off-path branches</th><th>Maze hash</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr><td colspan="15" style="text-align:center;color:#7a889c;padding:22px">Няма резултати.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+  'use strict';
+
+  const APP_VERSION = '15.0.0';
+  const DECODER_VERSION = 'decimal5-rejection-v2';
+  const SCHEMA_VERSION = 'maze-analytics.v2';
+  const COMMON_PREFIX_LENGTH = 980380;
+  const BLOCK_RANGE = 100000;
+  const UINT32_RANGE = 4294967296;
+  const MAX_VISIBLE_ROWS = 250;
+  const INLINE_JS_SOURCE_AT_LOAD = typeof document === 'undefined' ? '' : (document.currentScript?.textContent || '');
+
+  const SOURCES = Object.freeze({
+    pi:      {label:'π', file:'irrational_numbers/pi.1mil.txt', length:1000000, sha256:'7806ee47461b49ef1f578e14461b2c83c09c6d7a9a914275da1d71e9cbbf7069'},
+    e:       {label:'e', file:'irrational_numbers/e.1mil.txt', length:1000000, sha256:'c6e9fe4f3d84085f85e98234bf1f284b5b8de993059453548d3ccaa3016138ac'},
+    phi:     {label:'φ', file:'irrational_numbers/phi.1mil.txt', length:1000000, sha256:'b3a8d00d8384e1eeda6f906db0132d39c2cbd38447a0fa6eda9f5a06773d72d7'},
+    sqrt2:   {label:'√2', file:'irrational_numbers/sqrt2.1mil.txt', length:1000000, sha256:'b521e4c4ee7afb3e2ce0d58337388c54f9fbbc6811945574117ef5eec093cefb'},
+    sqrt3:   {label:'√3', file:'irrational_numbers/sqrt3.1mil.txt', length:1000000, sha256:'bb0d9aafc282bf86ddee32b7fa2764cb888ffaf973e9ea0be4ce98bc61eb1e3c'},
+    sqrt5:   {label:'√5', file:'irrational_numbers/sqrt5.1mil.txt', length:1000000, sha256:'8e41c7bcb5f3a967df93b8bb7dce80a11e7490a44401f80d2eeadb3241e883b2'},
+    sqrt7:   {label:'√7', file:'irrational_numbers/sqrt7.1mil.txt', length:1000000, sha256:'2fa5041ec14b959878531726fb8264b7dbc915cd331eec2809937ed9337a6766'},
+    ln2:     {label:'ln(2)', file:'irrational_numbers/ln2.1mil.txt', length:1000000, sha256:'f05e0e2dd51d12b49ca959b5edda04afa436d88cb984fc8e8cf510e10142c8f5'},
+    inv_pi:  {label:'1/π', file:'irrational_numbers/1_over_pi.1mil.txt', length:1000000, sha256:'4843a8f7cb0e0c2d4a6892972418973c32547ad133b0bd57e802b358139a126f'},
+    inv_e:   {label:'1/e', file:'irrational_numbers/1_over_e.1mil.txt', length:1000000, sha256:'3dc6c27f31d2680ff6b67d7105fdd2b2bee0fb46e30c30ff2d2df634e89ba5c6'},
+    euler_m: {label:'γ', file:'irrational_numbers/euler_m.1mil.txt', length:1000000, sha256:'f94f0a985277533d11ffe68547169bfb5a0e964658488ec627e00ae8471bcc33'},
+    apery:   {label:'ζ(3)', file:'irrational_numbers/apery.zeta3.1mil.txt', length:980380, sha256:'b0860c94afc5e07f2e0f55ba98c242740cace22729a6815ddf775e927b9f7ffc'}
+  });
+
+  const CONTROL_SOURCES = Object.freeze({
+    control_iid_decimal: {label:'Seeded pseudo-IID DECIMAL-5', kind:'iid_decimal', length:1000000, arithmetic_status:'control'},
+    control_direct_prng: {label:'Direct xoshiro128** PRNG', kind:'direct_prng', length:1000000, arithmetic_status:'control'},
+    control_periodic_1_7: {label:'Периодичен рационален поток 1/7', kind:'periodic_rational', length:1000000, arithmetic_status:'rational_control'},
+    control_block_shuffle: {label:'Seed-нат shuffle на 5-цифрени блокове', kind:'block_shuffle', length:1000000, arithmetic_status:'surrogate_control'}
+  });
+
+  const SOURCE_RELATIONS = Object.freeze({
+    pi:{dependency_family:'pi_family', derived_from:null, formula:'π'},
+    inv_pi:{dependency_family:'pi_family', derived_from:'pi', formula:'1/π'},
+    e:{dependency_family:'e_family', derived_from:null, formula:'e'},
+    inv_e:{dependency_family:'e_family', derived_from:'e', formula:'1/e'},
+    sqrt5:{dependency_family:'sqrt5_phi_family', derived_from:null, formula:'√5'},
+    phi:{dependency_family:'sqrt5_phi_family', derived_from:'sqrt5', formula:'(1+√5)/2'},
+    euler_m:{dependency_family:'gamma_unresolved', derived_from:null, formula:'γ'},
+    apery:{dependency_family:'zeta3', derived_from:null, formula:'ζ(3)'}
+  });
+
+  const ROOTED_ALGORITHMS = new Set(['dfs', 'prim', 'hunt', 'growing', 'aldous', 'wilson']);
+  const PRIMARY_METRIC_KEYS = Object.freeze(['dead_end_fraction', 'diameter_normalized', 'adjusted_orientation_anisotropy']);
+
+  const DIRS = Object.freeze([
+    Object.freeze({di:0, dj:-1, wall:0, opposite:2, name:'U'}),
+    Object.freeze({di:1, dj:0, wall:1, opposite:3, name:'R'}),
+    Object.freeze({di:0, dj:1, wall:2, opposite:0, name:'D'}),
+    Object.freeze({di:-1, dj:0, wall:3, opposite:1, name:'L'})
+  ]);
+
+  const DATA_CACHE = new Map();
+  let currentRuns = [];
+  let currentSession = null;
+  let lastValidDisplay = null;
+  let cancelRequested = false;
+  let activeWorkerClient = null;
+
+  class DigitStreamExhaustedError extends Error {
+    constructor(position, endExclusive) {
+      super(`Digit block exhausted at position ${position}; block end is ${endExclusive}.`);
+      this.name = 'DigitStreamExhaustedError';
+      this.code = 'DIGIT_STREAM_EXHAUSTED';
+    }
+  }
+
+  class DigitStream {
+    constructor(digits, startOffset, endExclusive) {
+      if (typeof digits !== 'string' || !/^\d+$/.test(digits)) throw new TypeError('DigitStream requires a digits-only string.');
+      if (!Number.isInteger(startOffset) || !Number.isInteger(endExclusive) || startOffset < 0 || endExclusive > digits.length || startOffset >= endExclusive || (endExclusive - startOffset) % 5 !== 0) {
+        throw new RangeError('Invalid DigitStream bounds.');
+      }
+      this.digits = digits;
+      this.startOffset = startOffset;
+      this.endExclusive = endExclusive;
+      this.position = startOffset;
+      this.blocksRead = 0;
+      this.rejectedBlocks = 0;
+      this.nextIntCalls = 0;
+      this.successfulNextIntCalls = 0;
+      this.stochasticCalls = 0;
+      this.nextIntHistogram = Object.create(null);
+      this.rejectionsByN = Object.create(null);
+      this.outputCountsByN = Object.create(null);
+      this.neighborChoiceDirectionCounts = {U:0, R:0, D:0, L:0};
+      this.neighborChoiceByMask = Object.create(null);
+      this.unitKind = 'decimal5_block';
+    }
+
+    nextBlock5() {
+      if (this.position + 5 > this.endExclusive) throw new DigitStreamExhaustedError(this.position, this.endExclusive);
+      const value = Number(this.digits.slice(this.position, this.position + 5));
+      this.position += 5;
+      this.blocksRead++;
+      return value;
+    }
+
+    nextInt(n) {
+      if (!Number.isInteger(n) || n < 1 || n > BLOCK_RANGE) throw new RangeError(`nextInt(${n}) is outside 1..${BLOCK_RANGE}.`);
+      this.nextIntCalls++;
+      this.nextIntHistogram[n] = (this.nextIntHistogram[n] || 0) + 1;
+      if (n === 1) {
+        this.successfulNextIntCalls++;
+        this.recordOutput(n, 0);
+        return 0;
+      }
+      this.stochasticCalls++;
+      const limit = Math.floor(BLOCK_RANGE / n) * n;
+      while (true) {
+        const value = this.nextBlock5();
+        if (value < limit) {
+          const result = value % n;
+          this.successfulNextIntCalls++;
+          this.recordOutput(n, result);
+          return result;
+        }
+        this.rejectedBlocks++;
+        this.rejectionsByN[n] = (this.rejectionsByN[n] || 0) + 1;
+      }
+    }
+
+    recordOutput(n, result) {
+      if (!this.outputCountsByN[n]) this.outputCountsByN[n] = Object.create(null);
+      this.outputCountsByN[n][result] = (this.outputCountsByN[n][result] || 0) + 1;
+    }
+
+    choose(items) {
+      if (!Array.isArray(items) || items.length === 0) throw new RangeError('Cannot choose from an empty list.');
+      return items[this.nextInt(items.length)];
+    }
+
+    get digitsConsumed() { return this.position - this.startOffset; }
+    get digitsRemaining() { return this.endExclusive - this.position; }
+    get unitsRead() { return this.blocksRead; }
+    get rejectedUnits() { return this.rejectedBlocks; }
+    get unitsRemaining() { return Math.floor(this.digitsRemaining / 5); }
+  }
+
+  function cyrb128(text) {
+    let h1 = 1779033703, h2 = 3144134277, h3 = 1013904242, h4 = 2773480762;
+    for (let i = 0; i < text.length; i++) {
+      const code = text.charCodeAt(i);
+      h1 = h2 ^ Math.imul(h1 ^ code, 597399067);
+      h2 = h3 ^ Math.imul(h2 ^ code, 2869860233);
+      h3 = h4 ^ Math.imul(h3 ^ code, 951274213);
+      h4 = h1 ^ Math.imul(h4 ^ code, 2716044179);
+    }
+    h1 = Math.imul(h3 ^ (h1 >>> 18), 597399067);
+    h2 = Math.imul(h4 ^ (h2 >>> 22), 2869860233);
+    h3 = Math.imul(h1 ^ (h3 >>> 17), 951274213);
+    h4 = Math.imul(h2 ^ (h4 >>> 19), 2716044179);
+    return [(h1 ^ h2 ^ h3 ^ h4) >>> 0, (h2 ^ h1) >>> 0, (h3 ^ h1) >>> 0, (h4 ^ h1) >>> 0];
+  }
+
+  function rotateLeft32(value, shift) {
+    return ((value << shift) | (value >>> (32 - shift))) >>> 0;
+  }
+
+  class Xoshiro128StarStar {
+    constructor(seed) {
+      this.state = Array.isArray(seed) && seed.length === 4 ? seed.map(value => value >>> 0) : cyrb128(String(seed));
+      if (this.state.every(value => value === 0)) this.state[0] = 1;
+    }
+
+    nextUint32() {
+      const state = this.state;
+      const result = Math.imul(rotateLeft32(Math.imul(state[1], 5) >>> 0, 7), 9) >>> 0;
+      const temporary = (state[1] << 9) >>> 0;
+      state[2] ^= state[0]; state[3] ^= state[1]; state[1] ^= state[2]; state[0] ^= state[3];
+      state[2] ^= temporary;
+      state[3] = rotateLeft32(state[3], 11);
+      state[0] >>>= 0; state[1] >>>= 0; state[2] >>>= 0; state[3] >>>= 0;
+      return result;
+    }
+  }
+
+  class DirectPrngStream {
+    constructor(words, startUnit, endUnitExclusive) {
+      if (!(words instanceof Uint32Array) || !Number.isInteger(startUnit) || !Number.isInteger(endUnitExclusive) ||
+          startUnit < 0 || startUnit >= endUnitExclusive || endUnitExclusive > words.length) {
+        throw new RangeError('Direct PRNG requires a valid contiguous Uint32Array window.');
+      }
+      this.words = words;
+      this.startUnit = startUnit;
+      this.position = startUnit;
+      this.endUnitExclusive = endUnitExclusive;
+      this.unitsBudget = endUnitExclusive - startUnit;
+      this.unitsRead = 0;
+      this.rejectedUnits = 0;
+      this.nextIntCalls = 0;
+      this.successfulNextIntCalls = 0;
+      this.stochasticCalls = 0;
+      this.nextIntHistogram = Object.create(null);
+      this.rejectionsByN = Object.create(null);
+      this.outputCountsByN = Object.create(null);
+      this.neighborChoiceDirectionCounts = {U:0, R:0, D:0, L:0};
+      this.neighborChoiceByMask = Object.create(null);
+      this.unitKind = 'uint32_draw';
+    }
+
+    nextUint32() {
+      if (this.position >= this.endUnitExclusive) {
+        const error = new DigitStreamExhaustedError(this.position, this.endUnitExclusive);
+        error.code = 'CHOICE_BUDGET_EXHAUSTED';
+        throw error;
+      }
+      this.unitsRead++;
+      return this.words[this.position++];
+    }
+
+    nextInt(n) {
+      if (!Number.isInteger(n) || n < 1 || n > BLOCK_RANGE) throw new RangeError(`nextInt(${n}) is outside 1..${BLOCK_RANGE}.`);
+      this.nextIntCalls++;
+      this.nextIntHistogram[n] = (this.nextIntHistogram[n] || 0) + 1;
+      if (n === 1) {
+        this.successfulNextIntCalls++;
+        this.recordOutput(n, 0);
+        return 0;
+      }
+      this.stochasticCalls++;
+      const limit = Math.floor(UINT32_RANGE / n) * n;
+      while (true) {
+        const value = this.nextUint32();
+        if (value < limit) {
+          const result = value % n;
+          this.successfulNextIntCalls++;
+          this.recordOutput(n, result);
+          return result;
+        }
+        this.rejectedUnits++;
+        this.rejectionsByN[n] = (this.rejectionsByN[n] || 0) + 1;
+      }
+    }
+
+    recordOutput(n, result) {
+      if (!this.outputCountsByN[n]) this.outputCountsByN[n] = Object.create(null);
+      this.outputCountsByN[n][result] = (this.outputCountsByN[n][result] || 0) + 1;
+    }
+
+    choose(items) {
+      if (!Array.isArray(items) || items.length === 0) throw new RangeError('Cannot choose from an empty list.');
+      return items[this.nextInt(items.length)];
+    }
+
+    get unitsRemaining() { return this.unitsBudget - this.unitsRead; }
+    get digitsConsumed() { return null; }
+    get digitsRemaining() { return null; }
+  }
+
+  class Cell {
+    constructor(i, j) {
+      this.i = i;
+      this.j = j;
+      this.walls = [true, true, true, true];
+      this.visited = false;
+    }
+  }
+
+  function chooseNeighbor(stream, entries) {
+    if (!Array.isArray(entries) || entries.length === 0 || entries.some(entry => !entry?.dir?.name)) {
+      throw new RangeError('chooseNeighbor requires non-empty directional neighbor entries.');
+    }
+    const chosen = stream.choose(entries);
+    const mask = entries.map(entry => entry.dir.name).join('');
+    if (!stream.neighborChoiceDirectionCounts) stream.neighborChoiceDirectionCounts = {U:0, R:0, D:0, L:0};
+    if (!stream.neighborChoiceByMask) stream.neighborChoiceByMask = Object.create(null);
+    stream.neighborChoiceDirectionCounts[chosen.dir.name]++;
+    if (!stream.neighborChoiceByMask[mask]) stream.neighborChoiceByMask[mask] = {U:0, R:0, D:0, L:0};
+    stream.neighborChoiceByMask[mask][chosen.dir.name]++;
+    return chosen;
+  }
+
+  class Maze {
+    constructor(cols, rows) {
+      if (!Number.isInteger(cols) || !Number.isInteger(rows) || cols < 1 || rows < 1) {
+        throw new RangeError('Maze dimensions must be positive integers.');
+      }
+      if (!Number.isSafeInteger(cols * rows) || cols * rows > 1_000_000) {
+        throw new RangeError('Maze contains too many cells; the core limit is 1,000,000.');
+      }
+      this.cols = cols;
+      this.rows = rows;
+      this.cells = Array.from({length: cols * rows}, (_, index) => new Cell(index % cols, Math.floor(index / cols)));
+    }
+
+    index(i, j) {
+      return i < 0 || j < 0 || i >= this.cols || j >= this.rows ? -1 : i + j * this.cols;
+    }
+
+    neighborEntries(index) {
+      const cell = this.cells[index];
+      const entries = [];
+      for (const dir of DIRS) {
+        const neighbor = this.index(cell.i + dir.di, cell.j + dir.dj);
+        if (neighbor !== -1) entries.push({index: neighbor, dir});
+      }
+      return entries;
+    }
+
+    openNeighborIndices(index) {
+      const cell = this.cells[index];
+      const result = [];
+      for (const dir of DIRS) {
+        if (cell.walls[dir.wall]) continue;
+        const neighbor = this.index(cell.i + dir.di, cell.j + dir.dj);
+        if (neighbor !== -1) result.push(neighbor);
+      }
+      return result;
+    }
+
+    removeWall(aIndex, bIndex) {
+      const a = this.cells[aIndex], b = this.cells[bIndex];
+      const dx = a.i - b.i, dy = a.j - b.j;
+      if (dx === 1 && dy === 0) { a.walls[3] = false; b.walls[1] = false; return; }
+      if (dx === -1 && dy === 0) { a.walls[1] = false; b.walls[3] = false; return; }
+      if (dx === 0 && dy === 1) { a.walls[0] = false; b.walls[2] = false; return; }
+      if (dx === 0 && dy === -1) { a.walls[2] = false; b.walls[0] = false; return; }
+      throw new Error(`Cells ${aIndex} and ${bIndex} are not orthogonal neighbors.`);
+    }
+
+    addWall(aIndex, bIndex) {
+      const a = this.cells[aIndex], b = this.cells[bIndex];
+      const dx = a.i - b.i, dy = a.j - b.j;
+      if (dx === 1 && dy === 0) { a.walls[3] = true; b.walls[1] = true; return; }
+      if (dx === -1 && dy === 0) { a.walls[1] = true; b.walls[3] = true; return; }
+      if (dx === 0 && dy === 1) { a.walls[0] = true; b.walls[2] = true; return; }
+      if (dx === 0 && dy === -1) { a.walls[2] = true; b.walls[0] = true; return; }
+      throw new Error(`Cells ${aIndex} and ${bIndex} are not orthogonal neighbors.`);
+    }
+
+    openAllInternalPassages() {
+      for (const cell of this.cells) {
+        cell.walls = [cell.j === 0, cell.i === this.cols - 1, cell.j === this.rows - 1, cell.i === 0];
+        cell.visited = false;
+      }
+    }
+
+    resetWalls() {
+      for (const cell of this.cells) {
+        cell.walls = [true, true, true, true];
+        cell.visited = false;
+      }
+    }
+
+    resetVisited() { for (const cell of this.cells) cell.visited = false; }
+  }
+
+  function generateDepthFirst(maze, stream, options = {}) {
+    const root = options.constructionRootIndex ?? 0;
+    const stack = [root];
+    maze.cells[root].visited = true;
+    while (stack.length) {
+      const current = stack[stack.length - 1];
+      const candidates = maze.neighborEntries(current).filter(entry => !maze.cells[entry.index].visited);
+      if (!candidates.length) { stack.pop(); continue; }
+      const next = chooseNeighbor(stream, candidates).index;
+      maze.removeWall(current, next);
+      maze.cells[next].visited = true;
+      stack.push(next);
+    }
+  }
+
+  function generateBinary(maze, stream, directionNames) {
+    const allowed = new Set(directionNames);
+    for (let index = 0; index < maze.cells.length; index++) {
+      const options = maze.neighborEntries(index).filter(entry => allowed.has(entry.dir.name));
+      if (options.length) maze.removeWall(index, chooseNeighbor(stream, options).index);
+    }
+  }
+
+  function generateSidewinder(maze, stream) {
+    for (let y = 0; y < maze.rows; y++) {
+      let run = [];
+      for (let x = 0; x < maze.cols; x++) {
+        const index = maze.index(x, y);
+        run.push(index);
+        const atEast = x === maze.cols - 1;
+        const atNorth = y === 0;
+        const closeRun = atEast || (!atNorth && stream.nextInt(2) === 0);
+        if (closeRun) {
+          if (!atNorth) {
+            const member = run[stream.nextInt(run.length)];
+            maze.removeWall(member, member - maze.cols);
+          }
+          run = [];
+        } else {
+          maze.removeWall(index, index + 1);
+        }
+      }
+    }
+  }
+
+  function generatePrim(maze, stream, options = {}) {
+    const visited = new Uint8Array(maze.cells.length);
+    const frontier = [];
+    const addFrontier = index => {
+      for (const entry of maze.neighborEntries(index)) {
+        if (!visited[entry.index]) frontier.push([index, entry.index]);
+      }
+    };
+    const root = options.constructionRootIndex ?? 0;
+    visited[root] = 1;
+    addFrontier(root);
+    while (frontier.length) {
+      const pick = stream.nextInt(frontier.length);
+      const edge = frontier[pick];
+      frontier[pick] = frontier[frontier.length - 1];
+      frontier.pop();
+      const [from, to] = edge;
+      if (visited[to]) continue;
+      maze.removeWall(from, to);
+      visited[to] = 1;
+      addFrontier(to);
+    }
+  }
+
+  function generateHuntAndKill(maze, stream, options = {}) {
+    let current = options.constructionRootIndex ?? 0;
+    maze.cells[current].visited = true;
+    let visitedCount = 1;
+    while (visitedCount < maze.cells.length) {
+      const unvisited = maze.neighborEntries(current).filter(entry => !maze.cells[entry.index].visited);
+      if (unvisited.length) {
+        const next = chooseNeighbor(stream, unvisited).index;
+        maze.removeWall(current, next);
+        maze.cells[next].visited = true;
+        visitedCount++;
+        current = next;
+        continue;
+      }
+      let hunted = false;
+      for (let index = 0; index < maze.cells.length; index++) {
+        if (maze.cells[index].visited) continue;
+        const attached = maze.neighborEntries(index).filter(entry => maze.cells[entry.index].visited);
+        if (!attached.length) continue;
+        const neighbor = chooseNeighbor(stream, attached).index;
+        maze.removeWall(index, neighbor);
+        maze.cells[index].visited = true;
+        visitedCount++;
+        current = index;
+        hunted = true;
+        break;
+      }
+      if (!hunted) throw new Error('Hunt-and-Kill could not find a frontier cell.');
+    }
+  }
+
+  function generateKruskal(maze, stream) {
+    const edges = [];
+    for (let y = 0; y < maze.rows; y++) {
+      for (let x = 0; x < maze.cols; x++) {
+        const index = maze.index(x, y);
+        if (x + 1 < maze.cols) edges.push([index, index + 1]);
+        if (y + 1 < maze.rows) edges.push([index, index + maze.cols]);
+      }
+    }
+    for (let i = edges.length - 1; i > 0; i--) {
+      const j = stream.nextInt(i + 1);
+      [edges[i], edges[j]] = [edges[j], edges[i]];
+    }
+    const parent = Int32Array.from({length: maze.cells.length}, (_, i) => i);
+    const rank = new Uint8Array(maze.cells.length);
+    const find = value => {
+      let root = value;
+      while (parent[root] !== root) root = parent[root];
+      while (parent[value] !== value) {
+        const next = parent[value];
+        parent[value] = root;
+        value = next;
+      }
+      return root;
+    };
+    const unite = (a, b) => {
+      a = find(a); b = find(b);
+      if (a === b) return false;
+      if (rank[a] < rank[b]) [a, b] = [b, a];
+      parent[b] = a;
+      if (rank[a] === rank[b]) rank[a]++;
+      return true;
+    };
+    let carved = 0;
+    for (const [a, b] of edges) {
+      if (!unite(a, b)) continue;
+      maze.removeWall(a, b);
+      carved++;
+      if (carved === maze.cells.length - 1) break;
+    }
+  }
+
+  function generateGrowingTree(maze, stream, options = {}) {
+    const root = options.constructionRootIndex ?? 0;
+    const active = [root];
+    maze.cells[root].visited = true;
+    while (active.length) {
+      const newest = stream.nextInt(2) === 0;
+      const activeIndex = newest ? active.length - 1 : stream.nextInt(active.length);
+      const current = active[activeIndex];
+      const candidates = maze.neighborEntries(current).filter(entry => !maze.cells[entry.index].visited);
+      if (!candidates.length) {
+        active.splice(activeIndex, 1);
+        continue;
+      }
+      const next = chooseNeighbor(stream, candidates).index;
+      maze.removeWall(current, next);
+      maze.cells[next].visited = true;
+      active.push(next);
+    }
+  }
+
+  function generateRecursiveDivision(maze, stream) {
+    maze.openAllInternalPassages();
+    const divide = (x, y, width, height) => {
+      if (width <= 1 || height <= 1) return;
+      const horizontal = height > width ? true : width > height ? false : stream.nextInt(2) === 0;
+      if (horizontal) {
+        const splitY = y + 1 + stream.nextInt(height - 1);
+        const passageX = x + stream.nextInt(width);
+        for (let cx = x; cx < x + width; cx++) {
+          if (cx !== passageX) maze.addWall(maze.index(cx, splitY - 1), maze.index(cx, splitY));
+        }
+        divide(x, y, width, splitY - y);
+        divide(x, splitY, width, y + height - splitY);
+      } else {
+        const splitX = x + 1 + stream.nextInt(width - 1);
+        const passageY = y + stream.nextInt(height);
+        for (let cy = y; cy < y + height; cy++) {
+          if (cy !== passageY) maze.addWall(maze.index(splitX - 1, cy), maze.index(splitX, cy));
+        }
+        divide(x, y, splitX - x, height);
+        divide(splitX, y, x + width - splitX, height);
+      }
+    };
+    divide(0, 0, maze.cols, maze.rows);
+  }
+
+  function generateEller(maze, stream) {
+    let sets = Array(maze.cols).fill(null);
+    let nextSetId = 1;
+    for (let y = 0; y < maze.rows; y++) {
+      for (let x = 0; x < maze.cols; x++) if (sets[x] === null) sets[x] = nextSetId++;
+      const lastRow = y === maze.rows - 1;
+      for (let x = 0; x < maze.cols - 1; x++) {
+        const different = sets[x] !== sets[x + 1];
+        const join = different && (lastRow || stream.nextInt(2) === 0);
+        if (!join) continue;
+        maze.removeWall(maze.index(x, y), maze.index(x + 1, y));
+        const oldSet = sets[x + 1], newSet = sets[x];
+        for (let k = 0; k < maze.cols; k++) if (sets[k] === oldSet) sets[k] = newSet;
+      }
+      if (lastRow) break;
+      const groups = new Map();
+      for (let x = 0; x < maze.cols; x++) {
+        if (!groups.has(sets[x])) groups.set(sets[x], []);
+        groups.get(sets[x]).push(x);
+      }
+      const nextSets = Array(maze.cols).fill(null);
+      for (const [setId, members] of groups) {
+        let selected = members.filter(() => stream.nextInt(2) === 0);
+        if (!selected.length) selected = [members[stream.nextInt(members.length)]];
+        for (const x of selected) {
+          maze.removeWall(maze.index(x, y), maze.index(x, y + 1));
+          nextSets[x] = setId;
+        }
+      }
+      sets = nextSets;
+    }
+  }
+
+  function generateAldousBroder(maze, stream, options = {}) {
+    const visited = new Uint8Array(maze.cells.length);
+    let current = options.constructionRootIndex ?? 0;
+    let visitedCount = 1;
+    visited[current] = 1;
+    while (visitedCount < maze.cells.length) {
+      const next = chooseNeighbor(stream, maze.neighborEntries(current)).index;
+      if (!visited[next]) {
+        maze.removeWall(current, next);
+        visited[next] = 1;
+        visitedCount++;
+      }
+      current = next;
+    }
+  }
+
+  function generateWilson(maze, stream, options = {}) {
+    const visited = new Uint8Array(maze.cells.length);
+    const root = options.constructionRootIndex ?? 0;
+    const unvisited = new Set(Array.from({length: maze.cells.length}, (_, i) => i));
+    unvisited.delete(root);
+    visited[root] = 1;
+    while (unvisited.size) {
+      const start = unvisited.values().next().value;
+      const walk = [start];
+      const positions = new Map([[start, 0]]);
+      let current = start;
+      while (!visited[current]) {
+        const next = chooseNeighbor(stream, maze.neighborEntries(current)).index;
+        if (positions.has(next)) {
+          const keepThrough = positions.get(next);
+          for (let k = walk.length - 1; k > keepThrough; k--) positions.delete(walk[k]);
+          walk.length = keepThrough + 1;
+        } else {
+          positions.set(next, walk.length);
+          walk.push(next);
+        }
+        current = next;
+      }
+      for (let k = 0; k < walk.length - 1; k++) {
+        maze.removeWall(walk[k], walk[k + 1]);
+        visited[walk[k]] = 1;
+        unvisited.delete(walk[k]);
+      }
+    }
+  }
+
+  const GENERATORS = Object.freeze({
+    dfs: generateDepthFirst,
+    prim: generatePrim,
+    kruskal: generateKruskal,
+    wilson: generateWilson,
+    aldous: generateAldousBroder,
+    hunt: generateHuntAndKill,
+    growing: generateGrowingTree,
+    sidewinder: generateSidewinder,
+    division: generateRecursiveDivision,
+    eller: generateEller,
+    binary_ur: (maze, stream) => generateBinary(maze, stream, ['U', 'R']),
+    binary_dr: (maze, stream) => generateBinary(maze, stream, ['D', 'R']),
+    binary_ul: (maze, stream) => generateBinary(maze, stream, ['U', 'L']),
+    binary_dl: (maze, stream) => generateBinary(maze, stream, ['D', 'L'])
+  });
+
+  function generateMaze(algorithm, maze, stream, options = {}) {
+    const generator = GENERATORS[algorithm];
+    if (!generator) throw new RangeError(`Unknown algorithm: ${algorithm}`);
+    if (!(maze instanceof Maze)) throw new TypeError('generateMaze requires a Maze instance.');
+    if (!stream || typeof stream.nextInt !== 'function' || typeof stream.choose !== 'function') {
+      throw new TypeError('generateMaze requires a ChoiceStream-compatible object.');
+    }
+    if (ROOTED_ALGORITHMS.has(algorithm)) {
+      const root = options.constructionRootIndex ?? 0;
+      if (!Number.isInteger(root) || root < 0 || root >= maze.cells.length) throw new RangeError('Invalid construction root index.');
+    }
+    maze.resetWalls();
+    generator(maze, stream, options);
+    maze.resetVisited();
+  }
+
+  const CORNER_ORDER = Object.freeze(['NW', 'NE', 'SE', 'SW']);
+
+  function cornerIndices(cols, rows) {
+    return Object.freeze({NW:0, NE:cols - 1, SE:cols * rows - 1, SW:(rows - 1) * cols});
+  }
+
+  function designForRun(policy, runIndex, cols, rows, algorithm) {
+    const corners = cornerIndices(cols, rows);
+    const rooted = ROOTED_ALGORITHMS.has(algorithm);
+    let startCorner, goalCorner, rootCorner = null, cycleLength;
+    if (policy === 'balanced_opposite') {
+      const endpointSlot = runIndex % 4;
+      startCorner = CORNER_ORDER[endpointSlot];
+      goalCorner = CORNER_ORDER[(endpointSlot + 2) % 4];
+      if (rooted) {
+        const rootPhase = Math.floor(runIndex / 4) % 4;
+        rootCorner = CORNER_ORDER[(endpointSlot + rootPhase) % 4];
+      }
+      cycleLength = rooted ? 16 : 4;
+    } else {
+      const fixed = {
+        tl_br:['NW', 'SE', 'NE'], tr_bl:['NE', 'SW', 'SE'],
+        br_tl:['SE', 'NW', 'SW'], bl_tr:['SW', 'NE', 'NW']
+      }[policy];
+      if (!fixed) throw new RangeError(`Unknown endpoint policy: ${policy}`);
+      [startCorner, goalCorner] = fixed;
+      if (rooted) rootCorner = fixed[2];
+      cycleLength = 1;
+    }
+    return Object.freeze({
+      design_version:'corner-factorial-v1',
+      design_index:runIndex,
+      endpoint_policy:policy,
+      endpoint_pair_id:`${startCorner.toLowerCase()}_${goalCorner.toLowerCase()}`,
+      solution_start_corner:startCorner,
+      solution_start_index:corners[startCorner],
+      solution_goal_corner:goalCorner,
+      solution_goal_index:corners[goalCorner],
+      construction_root_applicable:rooted,
+      construction_root_policy:rooted ? (policy === 'balanced_opposite' ? 'four_corner_factorial' : 'fixed_separate_corner') : 'not_applicable',
+      construction_root_corner:rootCorner,
+      construction_root_index:rootCorner === null ? null : corners[rootCorner],
+      assignment_uses_choice_stream:false,
+      cycle_position:runIndex % cycleLength,
+      cycle_length:cycleLength
+    });
+  }
+
+  function buildValidatedGraph(maze, algorithmCompleted = true, endpointStart = 0, endpointGoal = maze.cols * maze.rows - 1) {
+    const expectedVertices = maze.cols * maze.rows;
+    const cells = Array.isArray(maze.cells) ? maze.cells : [];
+    const adjacency = Array.from({length: expectedVertices}, () => []);
+    const errors = [];
+    let invalidCellCount = 0;
+    let openBoundaryCount = 0;
+    let reciprocityMismatchCount = 0;
+    const schemaOk = cells.length === expectedVertices;
+    if (!schemaOk) errors.push('CELL_COUNT_MISMATCH');
+
+    for (let index = 0; index < Math.min(cells.length, expectedVertices); index++) {
+      const cell = cells[index];
+      const expectedI = index % maze.cols;
+      const expectedJ = Math.floor(index / maze.cols);
+      if (!cell || cell.i !== expectedI || cell.j !== expectedJ || !Array.isArray(cell.walls) || cell.walls.length !== 4 || cell.walls.some(wall => typeof wall !== 'boolean')) {
+        invalidCellCount++;
+      }
+    }
+    if (invalidCellCount) errors.push('INVALID_CELL_SCHEMA');
+
+    if (schemaOk && !invalidCellCount) {
+      for (let y = 0; y < maze.rows; y++) {
+        for (let x = 0; x < maze.cols; x++) {
+          const index = maze.index(x, y);
+          const cell = maze.cells[index];
+          if (y === 0 && !cell.walls[0]) openBoundaryCount++;
+          if (x === maze.cols - 1 && !cell.walls[1]) openBoundaryCount++;
+          if (y === maze.rows - 1 && !cell.walls[2]) openBoundaryCount++;
+          if (x === 0 && !cell.walls[3]) openBoundaryCount++;
+          if (x + 1 < maze.cols) {
+            const neighbor = maze.cells[index + 1];
+            if (cell.walls[1] !== neighbor.walls[3]) reciprocityMismatchCount++;
+            if (!cell.walls[1] && !neighbor.walls[3]) {
+              adjacency[index].push(index + 1);
+              adjacency[index + 1].push(index);
+            }
+          }
+          if (y + 1 < maze.rows) {
+            const neighbor = maze.cells[index + maze.cols];
+            if (cell.walls[2] !== neighbor.walls[0]) reciprocityMismatchCount++;
+            if (!cell.walls[2] && !neighbor.walls[0]) {
+              adjacency[index].push(index + maze.cols);
+              adjacency[index + maze.cols].push(index);
+            }
+          }
+        }
+      }
+    }
+    if (openBoundaryCount) errors.push('OPEN_BOUNDARY');
+    if (reciprocityMismatchCount) errors.push('NON_RECIPROCAL_WALL');
+
+    const seen = new Uint8Array(expectedVertices);
+    let componentCount = 0;
+    for (let root = 0; root < expectedVertices; root++) {
+      if (seen[root]) continue;
+      componentCount++;
+      const queue = [root];
+      seen[root] = 1;
+      for (let head = 0; head < queue.length; head++) {
+        for (const next of adjacency[queue[head]]) if (!seen[next]) {
+          seen[next] = 1;
+          queue.push(next);
+        }
+      }
+    }
+    const degreeSum = adjacency.reduce((sum, neighbors) => sum + neighbors.length, 0);
+    const edgeCount = degreeSum / 2;
+    const cycleRank = edgeCount - expectedVertices + componentCount;
+    const boundaryClosed = openBoundaryCount === 0;
+    const reciprocalWalls = reciprocityMismatchCount === 0;
+    const connected = componentCount === 1;
+    const acyclic = cycleRank === 0;
+    const graphIsTree = schemaOk && invalidCellCount === 0 && boundaryClosed && reciprocalWalls && connected && edgeCount === expectedVertices - 1 && acyclic;
+    const endpointsInRange = Number.isInteger(endpointStart) && Number.isInteger(endpointGoal) && endpointStart >= 0 && endpointGoal >= 0 && endpointStart < expectedVertices && endpointGoal < expectedVertices;
+    const startGoalConnected = endpointsInRange && expectedVertices > 0 ? bfs(adjacency, endpointStart).distance[endpointGoal] !== -1 : false;
+    if (!connected) errors.push('DISCONNECTED_GRAPH');
+    if (edgeCount !== expectedVertices - 1) errors.push('EDGE_COUNT_NOT_V_MINUS_1');
+    if (!acyclic) errors.push('NONZERO_CYCLE_RANK');
+    if (!startGoalConnected) errors.push('START_GOAL_DISCONNECTED');
+    if (!algorithmCompleted) errors.push('ALGORITHM_NOT_COMPLETED');
+    const validation = {
+      schema_ok: schemaOk,
+      coordinates_ok: schemaOk && invalidCellCount === 0,
+      boundary_closed: boundaryClosed,
+      reciprocal_walls: reciprocalWalls,
+      connected,
+      acyclic,
+      graph_is_tree: graphIsTree,
+      perfect_maze: graphIsTree && algorithmCompleted && startGoalConnected,
+      start_goal_connected: startGoalConnected,
+      vertex_count: expectedVertices,
+      edge_count: edgeCount,
+      component_count: componentCount,
+      cycle_rank: cycleRank,
+      degree_sum: degreeSum,
+      open_boundary_count: openBoundaryCount,
+      reciprocity_mismatch_count: reciprocityMismatchCount,
+      invalid_cell_count: invalidCellCount,
+      validation_errors: [...new Set(errors)]
+    };
+    return {validation, adjacency};
+  }
+
+  function bfs(adjacency, start) {
+    const distance = new Int32Array(adjacency.length);
+    const previous = new Int32Array(adjacency.length);
+    distance.fill(-1);
+    previous.fill(-1);
+    const queue = [start];
+    distance[start] = 0;
+    let farthest = start;
+    for (let head = 0; head < queue.length; head++) {
+      const current = queue[head];
+      if (distance[current] > distance[farthest]) farthest = current;
+      for (const next of adjacency[current]) if (distance[next] === -1) {
+        distance[next] = distance[current] + 1;
+        previous[next] = current;
+        queue.push(next);
+      }
+    }
+    return {distance, previous, farthest};
+  }
+
+  function reconstructPath(previous, start, goal) {
+    const path = [];
+    for (let current = goal; current !== -1; current = previous[current]) {
+      path.push(current);
+      if (current === start) break;
+    }
+    if (path[path.length - 1] !== start) return [];
+    return path.reverse();
+  }
+
+  function mean(values) {
+    return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : null;
+  }
+
+  function quantile(values, probability) {
+    if (!values.length) return null;
+    const sorted = [...values].sort((a, b) => a - b);
+    const h = (sorted.length - 1) * probability;
+    const lower = Math.floor(h), fraction = h - lower;
+    return sorted[lower] + fraction * (sorted[Math.min(lower + 1, sorted.length - 1)] - sorted[lower]);
+  }
+
+  function sampleStandardDeviation(values) {
+    if (values.length < 2) return null;
+    const average = mean(values);
+    return Math.sqrt(values.reduce((sum, value) => sum + (value - average) ** 2, 0) / (values.length - 1));
+  }
+
+  function describe(values, attemptedCount = values.length) {
+    const clean = values.filter(value => typeof value === 'number' && Number.isFinite(value));
+    if (!clean.length) return {n:0, n_available:0, n_missing:attemptedCount, mean:null, sample_sd:null, min:null, q1:null, median:null, q3:null, iqr:null, max:null};
+    const average = mean(clean);
+    const sampleSd = sampleStandardDeviation(clean);
+    const q1 = quantile(clean, 0.25), q3 = quantile(clean, 0.75);
+    return {
+      n: clean.length,
+      n_available: clean.length,
+      n_missing: Math.max(0, attemptedCount - clean.length),
+      mean: average,
+      sample_sd: sampleSd,
+      min: Math.min(...clean),
+      q1,
+      median: quantile(clean, 0.5),
+      q3,
+      iqr: q3 - q1,
+      max: Math.max(...clean)
+    };
+  }
+
+  function distributionFields(prefix, values) {
+    return {
+      [`${prefix}_mean`]: mean(values),
+      [`${prefix}_median`]: quantile(values, 0.5),
+      [`${prefix}_q90`]: quantile(values, 0.9),
+      [`${prefix}_max`]: values.length ? Math.max(...values) : null
+    };
+  }
+
+  function cellTypeEntropy(fractions) {
+    return -fractions.reduce((sum, value) => value > 0 ? sum + value * Math.log2(value) : sum, 0);
+  }
+
+  function wallCodeHex(maze) {
+    return maze.cells.map(cell => cell.walls.reduce((code, wall, index) => code | (wall ? 1 << index : 0), 0).toString(16)).join('');
+  }
+
+  function mazeFromWallCodes(cols, rows, wallCodes) {
+    if (typeof wallCodes !== 'string' || wallCodes.length !== cols * rows) throw new RangeError('Invalid maze wall encoding.');
+    const maze = new Maze(cols, rows);
+    for (let index = 0; index < wallCodes.length; index++) {
+      const code = parseInt(wallCodes[index], 16);
+      if (!Number.isInteger(code)) throw new RangeError('Invalid wall-code character.');
+      maze.cells[index].walls = [0, 1, 2, 3].map(bit => Boolean(code & (1 << bit)));
+    }
+    return maze;
+  }
+
+  function fnv1a32(text) {
+    let hash = 0x811c9dc5;
+    for (let i = 0; i < text.length; i++) {
+      hash ^= text.charCodeAt(i);
+      hash = Math.imul(hash, 0x01000193);
+    }
+    return (hash >>> 0).toString(16).padStart(8, '0');
+  }
+
+  function analyzeMaze(maze, graph, endpointStart = 0, endpointGoal = maze.cols * maze.rows - 1) {
+    const {adjacency, validation} = graph;
+    if (!validation.perfect_maze) throw new Error('Metrics require a validated perfect maze.');
+    const vertices = adjacency.length;
+    const degrees = adjacency.map(neighbors => neighbors.length);
+    const degreeCounts = [0, 0, 0, 0, 0];
+    let straightCount = 0, turnCount = 0;
+    for (let index = 0; index < vertices; index++) {
+      const degree = degrees[index];
+      degreeCounts[degree]++;
+      if (degree === 2) {
+        const [a, b] = adjacency[index].map(next => maze.cells[next]);
+        if (a.i === b.i || a.j === b.j) straightCount++;
+        else turnCount++;
+      }
+    }
+    const junctionCount = degreeCounts[3] + degreeCounts[4];
+    const categoryCounts = [degreeCounts[1], straightCount, turnCount, junctionCount];
+    const categoryFractions = categoryCounts.map(count => count / vertices);
+
+    let horizontalEdges = 0, verticalEdges = 0;
+    for (let index = 0; index < vertices; index++) {
+      const cell = maze.cells[index];
+      for (const next of adjacency[index]) if (next > index) {
+        if (maze.cells[next].j === cell.j) horizontalEdges++;
+        else verticalEdges++;
+      }
+    }
+    const edges = validation.edge_count;
+    const horizontalDensity = horizontalEdges / (maze.rows * Math.max(maze.cols - 1, 1));
+    const verticalDensity = verticalEdges / (maze.cols * Math.max(maze.rows - 1, 1));
+    const densitySum = horizontalDensity + verticalDensity;
+
+    let mirrorMatches = 0;
+    for (const cell of maze.cells) {
+      const mirror = maze.cells[maze.index(maze.cols - 1 - cell.i, cell.j)];
+      if (cell.walls[0] === mirror.walls[0] && cell.walls[1] === mirror.walls[3] && cell.walls[2] === mirror.walls[2] && cell.walls[3] === mirror.walls[1]) mirrorMatches++;
+    }
+
+    const startBfs = bfs(adjacency, endpointStart);
+    const path = reconstructPath(startBfs.previous, endpointStart, endpointGoal);
+    const pathSet = new Set(path);
+    const solutionLength = path.length - 1;
+    const startCell = maze.cells[endpointStart], goalCell = maze.cells[endpointGoal];
+    const deltaX = Math.abs(goalCell.i - startCell.i), deltaY = Math.abs(goalCell.j - startCell.j);
+    const manhattan = deltaX + deltaY;
+    const euclidean = Math.hypot(deltaX, deltaY);
+    let solutionTurns = 0;
+    for (let i = 2; i < path.length; i++) {
+      const a = maze.cells[path[i - 2]], b = maze.cells[path[i - 1]], c = maze.cells[path[i]];
+      if ((b.i - a.i) !== (c.i - b.i) || (b.j - a.j) !== (c.j - b.j)) solutionTurns++;
+    }
+
+    let decisionPoints = 0, decisionInformation = 0;
+    for (let i = 0; i < path.length - 1; i++) {
+      const choices = i === 0 ? degrees[path[i]] : degrees[path[i]] - 1;
+      if (choices > 1) {
+        decisionPoints++;
+        decisionInformation += Math.log2(choices);
+      }
+    }
+
+    const branchSizes = [], branchDepths = [];
+    for (const attachment of path) {
+      for (const first of adjacency[attachment]) {
+        if (pathSet.has(first)) continue;
+        const queue = [[first, 1, attachment]];
+        let size = 0, maxDepth = 0;
+        for (let head = 0; head < queue.length; head++) {
+          const [current, depth, previous] = queue[head];
+          size++;
+          maxDepth = Math.max(maxDepth, depth);
+          for (const next of adjacency[current]) if (next !== previous && !pathSet.has(next)) queue.push([next, depth + 1, current]);
+        }
+        branchSizes.push(size);
+        branchDepths.push(maxDepth);
+      }
+    }
+
+    const deadEndDepths = [];
+    if (vertices > 1) for (let leaf = 0; leaf < vertices; leaf++) {
+      if (degrees[leaf] !== 1) continue;
+      let previous = -1, current = leaf, depth = 0;
+      while (true) {
+        if (current !== leaf && degrees[current] !== 2) break;
+        const next = adjacency[current].find(candidate => candidate !== previous);
+        if (next === undefined) break;
+        previous = current;
+        current = next;
+        depth++;
+      }
+      deadEndDepths.push(depth);
+    }
+
+    const edgeKey = (a, b) => a < b ? `${a}:${b}` : `${b}:${a}`;
+    const usedEdges = new Set();
+    const corridorLengths = [];
+    for (let start = 0; start < vertices; start++) {
+      if (degrees[start] === 2) continue;
+      for (const first of adjacency[start]) {
+        if (usedEdges.has(edgeKey(start, first))) continue;
+        let previous = start, current = first, length = 1;
+        usedEdges.add(edgeKey(previous, current));
+        while (degrees[current] === 2) {
+          const next = adjacency[current][0] === previous ? adjacency[current][1] : adjacency[current][0];
+          previous = current;
+          current = next;
+          usedEdges.add(edgeKey(previous, current));
+          length++;
+        }
+        corridorLengths.push(length);
+      }
+    }
+
+    const firstDiameterBfs = bfs(adjacency, 0);
+    const diameterBfs = bfs(adjacency, firstDiameterBfs.farthest);
+    const diameterEdges = diameterBfs.distance[diameterBfs.farthest];
+    const wallHex = wallCodeHex(maze);
+
+    return {
+      degree_0_count: degreeCounts[0],
+      degree_1_count: degreeCounts[1],
+      degree_2_straight_count: straightCount,
+      degree_2_turn_count: turnCount,
+      degree_3_count: degreeCounts[3],
+      degree_4_count: degreeCounts[4],
+      junction_count: junctionCount,
+      dead_end_fraction: degreeCounts[1] / vertices,
+      straight_fraction: straightCount / vertices,
+      turn_fraction: turnCount / vertices,
+      junction_fraction: junctionCount / vertices,
+      mean_degree: validation.degree_sum / vertices,
+      cell_type_entropy_bits: vertices > 1 ? cellTypeEntropy(categoryFractions) : null,
+      junctions_per_dead_end: degreeCounts[1] ? junctionCount / degreeCounts[1] : null,
+      horizontal_edge_count: horizontalEdges,
+      vertical_edge_count: verticalEdges,
+      horizontal_edge_fraction: edges ? horizontalEdges / edges : null,
+      vertical_edge_fraction: edges ? verticalEdges / edges : null,
+      orientation_anisotropy: edges ? (horizontalEdges - verticalEdges) / edges : null,
+      absolute_orientation_anisotropy: edges ? Math.abs(horizontalEdges - verticalEdges) / edges : null,
+      adjusted_orientation_anisotropy: densitySum ? (horizontalDensity - verticalDensity) / densitySum : null,
+      vertical_mirror_cell_agreement: mirrorMatches / vertices,
+      solution_vertex_count: path.length,
+      solution_length_edges: solutionLength,
+      manhattan_min_edges: manhattan,
+      euclidean_distance: euclidean,
+      solution_stretch: manhattan ? solutionLength / manhattan : null,
+      endpoint_path_euclidean_ratio: euclidean ? solutionLength / euclidean : null,
+      solution_turn_count: solutionTurns,
+      solution_turn_rate: solutionLength > 1 ? solutionTurns / (solutionLength - 1) : null,
+      decision_point_count: decisionPoints,
+      heuristic_choice_complexity_bits: decisionInformation,
+      decision_density_per_10_edges: solutionLength ? 10 * decisionPoints / solutionLength : null,
+      off_path_branch_count: branchSizes.length,
+      off_path_vertex_count: branchSizes.reduce((sum, value) => sum + value, 0),
+      off_path_fraction: (vertices - path.length) / vertices,
+      ...distributionFields('off_path_branch_size', branchSizes),
+      ...distributionFields('off_path_branch_depth', branchDepths),
+      ...distributionFields('dead_end_depth', deadEndDepths),
+      corridor_count: corridorLengths.length,
+      ...distributionFields('corridor_length', corridorLengths),
+      diameter_edges: diameterEdges,
+      diameter_normalized: vertices > 1 ? diameterEdges / (vertices - 1) : null,
+      maze_wall_codes_hex: wallHex,
+      maze_hash_fnv1a32: fnv1a32(`maze-wall-v1\n${maze.cols}\n${maze.rows}\n${wallHex}`)
+    };
+  }
+
+  const VALIDATION_COLUMNS = Object.freeze([
+    'schema_ok', 'coordinates_ok', 'boundary_closed', 'reciprocal_walls', 'connected', 'acyclic',
+    'graph_is_tree', 'perfect_maze', 'start_goal_connected', 'vertex_count', 'edge_count',
+    'component_count', 'cycle_rank', 'degree_sum', 'open_boundary_count',
+    'reciprocity_mismatch_count', 'invalid_cell_count', 'validation_errors'
+  ]);
+
+  const METRIC_COLUMNS = Object.freeze([
+    'degree_0_count', 'degree_1_count', 'degree_2_straight_count', 'degree_2_turn_count',
+    'degree_3_count', 'degree_4_count', 'junction_count', 'dead_end_fraction', 'straight_fraction',
+    'turn_fraction', 'junction_fraction', 'mean_degree', 'cell_type_entropy_bits',
+    'junctions_per_dead_end', 'horizontal_edge_count', 'vertical_edge_count',
+    'horizontal_edge_fraction', 'vertical_edge_fraction', 'orientation_anisotropy',
+    'absolute_orientation_anisotropy', 'adjusted_orientation_anisotropy',
+    'vertical_mirror_cell_agreement', 'solution_vertex_count', 'solution_length_edges',
+    'manhattan_min_edges', 'euclidean_distance', 'solution_stretch', 'endpoint_path_euclidean_ratio',
+    'solution_turn_count', 'solution_turn_rate', 'decision_point_count', 'heuristic_choice_complexity_bits',
+    'decision_density_per_10_edges', 'off_path_branch_count', 'off_path_vertex_count',
+    'off_path_fraction', 'off_path_branch_size_mean', 'off_path_branch_size_median',
+    'off_path_branch_size_q90', 'off_path_branch_size_max', 'off_path_branch_depth_mean',
+    'off_path_branch_depth_median', 'off_path_branch_depth_q90', 'off_path_branch_depth_max',
+    'dead_end_depth_mean', 'dead_end_depth_median', 'dead_end_depth_q90', 'dead_end_depth_max',
+    'corridor_count', 'corridor_length_mean', 'corridor_length_median', 'corridor_length_q90',
+    'corridor_length_max', 'diameter_edges', 'diameter_normalized'
+  ]);
+
+  const SUMMARY_METRICS = Object.freeze([
+    {key:'dead_end_fraction', label:'Primary · Dead ends', percent:true},
+    {key:'diameter_normalized', label:'Primary · Normalized diameter'},
+    {key:'adjusted_orientation_anisotropy', label:'Primary · Adjusted H–V anisotropy'}
+  ]);
+
+  function metricDefinition(label, formula, unit, range, denominator = null, role = 'exploratory') {
+    return Object.freeze({role, label, formula, unit, range, denominator, version:'graph-metrics-v15.0'});
+  }
+
+  const METRIC_CODEBOOK = Object.freeze({
+    degree_0_count:metricDefinition('Isolated-cell count','count(vertices with degree 0)','cells','[0,V]','vertex set'),
+    degree_1_count:metricDefinition('Dead-end cell count','count(vertices with degree 1)','cells','[0,V]','vertex set'),
+    degree_2_straight_count:metricDefinition('Straight degree-2 cell count','count(degree-2 vertices whose incident edges are collinear)','cells','[0,V]','vertex set'),
+    degree_2_turn_count:metricDefinition('Turning degree-2 cell count','count(degree-2 vertices whose incident edges are perpendicular)','cells','[0,V]','vertex set'),
+    degree_3_count:metricDefinition('Degree-3 cell count','count(vertices with degree 3)','cells','[0,V]','vertex set'),
+    degree_4_count:metricDefinition('Degree-4 cell count','count(vertices with degree 4)','cells','[0,V]','vertex set'),
+    junction_count:metricDefinition('Junction cell count','degree_3_count + degree_4_count','cells','[0,V]','vertex set'),
+    dead_end_fraction:metricDefinition('Dead-end fraction','degree_1_count / vertex_count','proportion','[0,1]','all cells','primary'),
+    straight_fraction:metricDefinition('Straight-cell fraction','degree_2_straight_count / vertex_count','proportion','[0,1]','all cells'),
+    turn_fraction:metricDefinition('Turning-cell fraction','degree_2_turn_count / vertex_count','proportion','[0,1]','all cells'),
+    junction_fraction:metricDefinition('Junction-cell fraction','junction_count / vertex_count','proportion','[0,1]','all cells'),
+    mean_degree:metricDefinition('Mean graph degree','degree_sum / vertex_count','edges per cell','[0,4]','all cells'),
+    cell_type_entropy_bits:metricDefinition('Cell-type entropy','Shannon entropy of dead-end, straight, turn and junction fractions','bits','[0,2]','four cell categories'),
+    junctions_per_dead_end:metricDefinition('Junctions per dead end','junction_count / degree_1_count','ratio','[0,∞)','dead-end cells'),
+    horizontal_edge_count:metricDefinition('Horizontal passage count','count(unique open horizontal edges)','edges','[0,E]','edge set'),
+    vertical_edge_count:metricDefinition('Vertical passage count','count(unique open vertical edges)','edges','[0,E]','edge set'),
+    horizontal_edge_fraction:metricDefinition('Horizontal passage fraction','horizontal_edge_count / edge_count','proportion','[0,1]','all open edges'),
+    vertical_edge_fraction:metricDefinition('Vertical passage fraction','vertical_edge_count / edge_count','proportion','[0,1]','all open edges'),
+    orientation_anisotropy:metricDefinition('Raw horizontal–vertical anisotropy','(horizontal_edge_count - vertical_edge_count) / edge_count','signed index','[-1,1]','all open edges'),
+    absolute_orientation_anisotropy:metricDefinition('Absolute raw orientation anisotropy','abs(horizontal_edge_count - vertical_edge_count) / edge_count','index','[0,1]','all open edges'),
+    adjusted_orientation_anisotropy:metricDefinition('Boundary-adjusted H–V anisotropy','(horizontal_density - vertical_density) / (horizontal_density + vertical_density)','signed index','[-1,1]','available horizontal/vertical grid edges','primary'),
+    vertical_mirror_cell_agreement:metricDefinition('Vertical mirror cell agreement','cells whose wall pattern equals its vertical mirror / vertex_count; mirror pairs are cell-weighted','proportion','[0,1]','all cells'),
+    solution_vertex_count:metricDefinition('Solution vertex count','number of vertices on the selected endpoint path','cells','[1,V]','selected endpoint path'),
+    solution_length_edges:metricDefinition('Solution length','solution_vertex_count - 1','edges','[0,V-1]','selected endpoint path'),
+    manhattan_min_edges:metricDefinition('Endpoint Manhattan minimum','abs(dx) + abs(dy)','grid edges','[0,∞)','selected endpoints'),
+    euclidean_distance:metricDefinition('Endpoint Euclidean distance','sqrt(dx^2 + dy^2)','cell spacings','[0,∞)','selected endpoints'),
+    solution_stretch:metricDefinition('Manhattan endpoint stretch','solution_length_edges / manhattan_min_edges','ratio','[1,∞)','selected endpoints'),
+    endpoint_path_euclidean_ratio:metricDefinition('Endpoint path/Euclidean ratio','solution_length_edges / euclidean_distance','ratio','[1,∞)','selected endpoints'),
+    solution_turn_count:metricDefinition('Solution turn count','count(direction changes along selected endpoint path)','turns','[0,solution_length_edges-1]','selected endpoint path'),
+    solution_turn_rate:metricDefinition('Solution turn rate','solution_turn_count / (solution_length_edges - 1)','proportion','[0,1]','eligible internal path positions'),
+    decision_point_count:metricDefinition('Path decision-point count','count(path vertices with more than one forward graph neighbor)','cells','[0,solution_vertex_count]','selected endpoint path'),
+    heuristic_choice_complexity_bits:metricDefinition('Heuristic choice-complexity proxy','sum(log2(forward graph choices)) along selected path','bits-like heuristic','[0,∞)','selected endpoint path','exploratory_proxy'),
+    decision_density_per_10_edges:metricDefinition('Decision density','10 * decision_point_count / solution_length_edges','points per 10 edges','[0,∞)','selected endpoint path'),
+    off_path_branch_count:metricDefinition('Off-path attachment count','count(non-path subtrees attached directly to selected path)','branches','[0,∞)','selected endpoint path'),
+    off_path_vertex_count:metricDefinition('Off-path vertex count','sum(vertices in non-path subtrees)','cells','[0,V]','vertices outside selected path'),
+    off_path_fraction:metricDefinition('Off-path vertex fraction','(vertex_count - solution_vertex_count) / vertex_count','proportion','[0,1]','all cells'),
+    off_path_branch_size_mean:metricDefinition('Mean off-path branch size','mean vertex count across off-path subtrees','cells','[1,V]','off-path branches'),
+    off_path_branch_size_median:metricDefinition('Median off-path branch size','linear-interpolated median of subtree vertex counts','cells','[1,V]','off-path branches'),
+    off_path_branch_size_q90:metricDefinition('90th percentile off-path branch size','linear-interpolated q0.90 of subtree vertex counts','cells','[1,V]','off-path branches'),
+    off_path_branch_size_max:metricDefinition('Maximum off-path branch size','maximum subtree vertex count','cells','[1,V]','off-path branches'),
+    off_path_branch_depth_mean:metricDefinition('Mean off-path branch depth','mean maximum graph distance from attachment to each off-path subtree','edges','[1,V-1]','off-path branches'),
+    off_path_branch_depth_median:metricDefinition('Median off-path branch depth','linear-interpolated median of subtree maximum depths','edges','[1,V-1]','off-path branches'),
+    off_path_branch_depth_q90:metricDefinition('90th percentile off-path branch depth','linear-interpolated q0.90 of subtree maximum depths','edges','[1,V-1]','off-path branches'),
+    off_path_branch_depth_max:metricDefinition('Maximum off-path branch depth','maximum subtree depth from its path attachment','edges','[1,V-1]','off-path branches'),
+    dead_end_depth_mean:metricDefinition('Mean dead-end corridor depth','mean distance from a leaf through degree-2 cells to first non-degree-2 cell','edges','[1,V-1]','degree-1 cells'),
+    dead_end_depth_median:metricDefinition('Median dead-end corridor depth','linear-interpolated median of leaf corridor depths','edges','[1,V-1]','degree-1 cells'),
+    dead_end_depth_q90:metricDefinition('90th percentile dead-end corridor depth','linear-interpolated q0.90 of leaf corridor depths','edges','[1,V-1]','degree-1 cells'),
+    dead_end_depth_max:metricDefinition('Maximum dead-end corridor depth','maximum leaf corridor depth','edges','[1,V-1]','degree-1 cells'),
+    corridor_count:metricDefinition('Maximal corridor count','count(maximal paths whose internal vertices have degree 2)','corridors','[0,E]','maximal corridor decomposition'),
+    corridor_length_mean:metricDefinition('Mean corridor length','mean edge length of maximal corridors','edges','[1,V-1]','maximal corridors'),
+    corridor_length_median:metricDefinition('Median corridor length','linear-interpolated median of maximal-corridor edge lengths','edges','[1,V-1]','maximal corridors'),
+    corridor_length_q90:metricDefinition('90th percentile corridor length','linear-interpolated q0.90 of maximal-corridor edge lengths','edges','[1,V-1]','maximal corridors'),
+    corridor_length_max:metricDefinition('Maximum corridor length','maximum edge length of maximal corridors','edges','[1,V-1]','maximal corridors'),
+    diameter_edges:metricDefinition('Graph diameter','maximum shortest-path distance between any two vertices','edges','[0,V-1]','all vertex pairs'),
+    diameter_normalized:metricDefinition('Normalized graph diameter','diameter_edges / (vertex_count - 1)','proportion','[0,1]','all cells','primary')
+  });
+
+  const ALGORITHM_VERSIONS = Object.freeze(Object.fromEntries(Object.keys(GENERATORS).map(key => [key, 'v15.0'])));
+  const ALGORITHM_PARAMETERS = Object.freeze({
+    dfs:Object.freeze({family:'randomized_spanning_tree', construction_root:'run_design'}),
+    prim:Object.freeze({family:'randomized_spanning_tree', variant:'frontier_edge', construction_root:'run_design'}),
+    kruskal:Object.freeze({family:'randomized_spanning_tree', shuffle:'fisher_yates_via_choice_stream'}),
+    wilson:Object.freeze({family:'uniform_spanning_tree_algorithm', distribution_condition:'UST only under IID uniform neighbor choices; no UST claim for constant streams', construction_root:'run_design', unvisited_start_policy:'lowest_row_major_index', walk:'loop_erased', fallback:'none'}),
+    aldous:Object.freeze({family:'uniform_spanning_tree_algorithm', distribution_condition:'UST only under IID uniform neighbor choices; no UST claim for constant streams', construction_root:'run_design', fallback:'none'}),
+    hunt:Object.freeze({family:'randomized_spanning_tree', construction_root:'run_design', hunt_scan_policy:'lowest_row_major_index'}),
+    growing:Object.freeze({family:'growing_tree', construction_root:'run_design', selector:'50_percent_newest_50_percent_uniform_active'}),
+    sidewinder:Object.freeze({family:'positive_directional_control', orientation:'north_east'}),
+    division:Object.freeze({family:'recursive_division', tie_orientation:'choice_stream'}),
+    eller:Object.freeze({family:'eller_row_sets'}),
+    binary_ur:Object.freeze({family:'positive_directional_control', directions:'U,R'}),
+    binary_dr:Object.freeze({family:'positive_directional_control', directions:'D,R'}),
+    binary_ul:Object.freeze({family:'positive_directional_control', directions:'U,L'}),
+    binary_dl:Object.freeze({family:'positive_directional_control', directions:'D,L'})
+  });
+  let isRunning = false;
+
+  function deepFreeze(value) {
+    if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
+    Object.freeze(value);
+    for (const nested of Object.values(value)) deepFreeze(nested);
+    return value;
+  }
+
+  function readInteger(id, minimum, maximum) {
+    const element = document.getElementById(id);
+    const value = Number(element.value);
+    if (!Number.isInteger(value) || value < minimum || value > maximum) {
+      throw new RangeError(`${element.labels?.[0]?.textContent || id}: очаква се цяло число от ${minimum} до ${maximum}.`);
+    }
+    return value;
+  }
+
+  function recommendedBlocks(algorithm, cols, rows) {
+    const vertices = cols * rows;
+    const gridEdges = rows * (cols - 1) + cols * (rows - 1);
+    if (['dfs', 'hunt', 'binary_ur', 'binary_dr', 'binary_ul', 'binary_dl'].includes(algorithm)) return vertices - 1;
+    if (algorithm === 'kruskal') return Math.max(1, gridEdges - 1);
+    if (algorithm === 'prim') return gridEdges;
+    if (algorithm === 'division') return Math.max(vertices, 2 * vertices);
+    if (['sidewinder', 'eller', 'growing'].includes(algorithm)) return 3 * vertices;
+    if (algorithm === 'wilson') return 20 * vertices;
+    if (algorithm === 'aldous') return 40 * vertices;
+    return 4 * vertices;
+  }
+
+  function sourceDefinition(sourceId, surrogateBaseId = 'pi') {
+    if (SOURCES[sourceId]) {
+      const source = SOURCES[sourceId];
+      return {...source, id:sourceId, kind:'constant_file', unitKind:'decimal5_block',
+        arithmetic_status:sourceId === 'euler_m' ? 'unknown' : 'proven_irrational',
+        analysis_role:sourceId === 'euler_m' ? 'exploratory_comparator' : 'primary_source'};
+    }
+    const control = CONTROL_SOURCES[sourceId];
+    if (!control) throw new RangeError('Непознат цифров източник.');
+    const length = sourceId === 'control_block_shuffle' ? SOURCES[surrogateBaseId].length : control.length;
+    return {...control, id:sourceId, length, unitKind:sourceId === 'control_direct_prng' ? 'uint32_draw' : 'decimal5_block', analysis_role:'control'};
+  }
+
+  function readNumber(id, minimum, maximum) {
+    const element = document.getElementById(id);
+    const value = Number(element.value);
+    if (!Number.isFinite(value) || value < minimum || value > maximum) throw new RangeError(`${element.labels?.[0]?.textContent || id}: очаква се число от ${minimum} до ${maximum}.`);
+    return value;
+  }
+
+  function readDraftPlan(actualLength = null) {
+    const algorithm = document.getElementById('algoSelect').value;
+    const sourceId = document.getElementById('mathConst').value;
+    const surrogateBaseId = document.getElementById('surrogateBase').value;
+    const source = sourceDefinition(sourceId, surrogateBaseId);
+    const cols = readInteger('mazeCols', 5, 100);
+    const rows = readInteger('mazeRows', 5, 100);
+    const repetitions = readInteger('repetitions', 1, 2000);
+    const startUnit = readInteger('startOffset', 0, Number.MAX_SAFE_INTEGER);
+    const unitsPerRun = readInteger('blockBudget', 1, Number.MAX_SAFE_INTEGER);
+    const requestedDigitPhase = readInteger('digitPhase', 0, 4);
+    const designSequenceOffset = readInteger('designSequenceOffset', 0, Number.MAX_SAFE_INTEGER);
+    const studyId = document.getElementById('studyId').value.trim();
+    const masterSeed = document.getElementById('controlSeed').value.trim();
+    if (!studyId) throw new RangeError('Study ID е задължителен.');
+    if (source.kind !== 'constant_file' && sourceId !== 'control_periodic_1_7' && !masterSeed) throw new RangeError('Master seed е задължителен за този control.');
+    const sourceLength = actualLength ?? source.length;
+    const commonPrefix = document.getElementById('commonPrefix').checked;
+    const usableDigits = commonPrefix ? Math.min(COMMON_PREFIX_LENGTH, sourceLength) : sourceLength;
+    const digitPhase = source.unitKind === 'decimal5_block' ? requestedDigitPhase : 0;
+    const availableUnits = source.unitKind === 'decimal5_block' ? Math.floor((usableDigits - digitPhase) / 5) : Math.floor(usableDigits / 5);
+    if (startUnit >= availableUnits) throw new RangeError('Началната единица трябва да е преди края на използваемия корпус.');
+    const endUnitExclusive = startUnit + repetitions * unitsPerRun;
+    if (endUnitExclusive > availableUnits) throw new RangeError(`Планът изисква единица ${endUnitExclusive}, а наличните са ${availableUnits}.`);
+    const recommended = recommendedBlocks(algorithm, cols, rows);
+    const publicationMode = document.getElementById('publicationMode').checked;
+    const endpointPolicy = document.getElementById('endpointPolicy').value;
+    const designCycle = endpointPolicy === 'balanced_opposite' ? (ROOTED_ALGORITHMS.has(algorithm) ? 16 : 4) : 1;
+    if (publicationMode && !commonPrefix) throw new RangeError('Publication mode изисква общата corpus capacity за съпоставими условия.');
+    if (publicationMode && endpointPolicy !== 'balanced_opposite') throw new RangeError('Publication mode изисква балансирания opposite-corner endpoint/root дизайн.');
+    if (publicationMode && repetitions % designCycle !== 0) throw new RangeError(`Publication mode изисква repetitions да е кратно на ${designCycle} за балансирания root/endpoint дизайн.`);
+    return {
+      algorithm, sourceId, source, surrogateBaseId, cols, rows, repetitions, startUnit,
+      unitsPerRun, commonPrefix, sourceLength, usableDigits, availableUnits, endUnitExclusive,
+      recommendedUnits:recommended, maxRunsAtBudget:Math.floor((availableUnits - startUnit) / unitsPerRun),
+      variableConsumption:algorithm === 'wilson' || algorithm === 'aldous', unitKind:source.unitKind, digitPhase,
+      studyId, masterSeed, endpointPolicy, designCycle, designSequenceOffset, publicationMode,
+      failureThreshold:readNumber('failureThreshold', 0, 100) / 100,
+      provenance:{citation:document.getElementById('sourceCitation').value.trim(), date:document.getElementById('sourceDate').value,
+        license:document.getElementById('sourceLicense').value.trim(), method:document.getElementById('sourceMethod').value.trim()}
+    };
+  }
+
+  function addPreflightLine(container, label, value) {
+    const line = document.createElement('div');
+    const strong = document.createElement('strong');
+    strong.textContent = `${label}: `;
+    line.append(strong, document.createTextNode(String(value)));
+    container.append(line);
+  }
+
+  function updatePreflight() {
+    const box = document.getElementById('preflight');
+    box.replaceChildren();
+    box.className = 'preflight';
+    try {
+      const plan = readDraftPlan();
+      addPreflightLine(box, 'Използваеми цифри', plan.usableDigits.toLocaleString('bg-BG'));
+      addPreflightLine(box, 'Вид random unit', plan.unitKind);
+      addPreflightLine(box, 'DECIMAL-5 phase', plan.unitKind === 'decimal5_block' ? plan.digitPhase : 'N/A');
+      addPreflightLine(box, 'Налични random units', plan.availableUnits.toLocaleString('bg-BG'));
+      addPreflightLine(box, 'Фиксиран прозорец на run', `${plan.unitsPerRun.toLocaleString('bg-BG')} ${plan.unitKind === 'decimal5_block' ? 'блока' : 'uint32 draws'}`);
+      addPreflightLine(box, 'Резервиран интервал', `[${plan.startUnit.toLocaleString('bg-BG')}, ${plan.endUnitExclusive.toLocaleString('bg-BG')}) units`);
+      addPreflightLine(box, 'Максимални runs при този бюджет', plan.maxRunsAtBudget.toLocaleString('bg-BG'));
+      addPreflightLine(box, 'Planning budget heuristic (не е гаранция)', `${plan.recommendedUnits.toLocaleString('bg-BG')} units`);
+      addPreflightLine(box, 'Endpoint/root cycle', `${plan.designCycle} runs`);
+      if (plan.unitsPerRun < plan.recommendedUnits) {
+        box.classList.add('warning');
+        addPreflightLine(box, 'Предупреждение', plan.variableConsumption
+          ? 'Бюджетът е под работната евристика; изчерпването е допустим и отчетен резултат, не грешка с fallback.'
+          : 'Бюджетът може да е недостатъчен и някои runs да завършат със stream_exhausted.');
+      } else {
+        addPreflightLine(box, 'Състояние', 'Планът е допустим и прозорците не се припокриват.');
+      }
+      if (plan.source.kind === 'constant_file' && (!plan.provenance.citation || !plan.provenance.date || !plan.provenance.license || !plan.provenance.method)) {
+        box.classList.add('warning');
+        addPreflightLine(box, 'Provenance', 'Непълна — сесията ще бъде маркирана като неподготвена за окончателна публикация.');
+      }
+      if (plan.sourceId === 'euler_m') {
+        box.classList.add('warning');
+        addPreflightLine(box, 'γ', 'Exploratory comparator; ирационалността не е доказана.');
+      }
+      if (!isRunning) document.getElementById('runBtn').disabled = false;
+    } catch (error) {
+      box.classList.add('error');
+      addPreflightLine(box, 'Планът е невалиден', error.message);
+      if (!isRunning) document.getElementById('runBtn').disabled = true;
+    }
+  }
+
+  async function sha256Bytes(bytes) {
+    if (!globalThis.crypto?.subtle || typeof TextEncoder === 'undefined') throw new Error('Браузърът не поддържа Web Crypto SHA-256. Използвайте актуален браузър през localhost.');
+    const digest = await globalThis.crypto.subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function sha256Hex(text) {
+    return sha256Bytes(new TextEncoder().encode(text));
+  }
+
+  function uint32LittleEndianBytes(words, start = 0, endExclusive = words.length) {
+    if (!(words instanceof Uint32Array) || !Number.isInteger(start) || !Number.isInteger(endExclusive) || start < 0 || endExclusive < start || endExclusive > words.length) {
+      throw new RangeError('Invalid Uint32Array serialization bounds.');
+    }
+    const bytes = new Uint8Array((endExclusive - start) * 4);
+    const view = new DataView(bytes.buffer);
+    for (let index = start; index < endExclusive; index++) view.setUint32((index - start) * 4, words[index], true);
+    return bytes;
+  }
+
+  function canonicalStringify(value) {
+    if (Array.isArray(value)) return `[${value.map(canonicalStringify).join(',')}]`;
+    if (value && typeof value === 'object') return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${canonicalStringify(value[key])}`).join(',')}}`;
+    return JSON.stringify(value);
+  }
+
+  async function deriveSeed(masterSeed, purpose, baseHash = '-') {
+    const digest = await sha256Hex(`MazeAnalyticsLab/v15/seed-v1\n${purpose}\n${masterSeed}\n${baseHash}`);
+    const words = Array.from({length:4}, (_, index) => parseInt(digest.slice(index * 8, index * 8 + 8), 16) >>> 0);
+    return {digest, words};
+  }
+
+  function uniformUintBelow(prng, n, telemetry = null) {
+    const limit = Math.floor(UINT32_RANGE / n) * n;
+    while (true) {
+      const value = prng.nextUint32();
+      if (telemetry) telemetry.raw_draws++;
+      if (value < limit) return value % n;
+      if (telemetry) telemetry.rejected_draws++;
+    }
+  }
+
+  function makeIidDecimal5Digits(blockCount, prng, telemetry) {
+    const blocks = new Array(blockCount);
+    for (let index = 0; index < blockCount; index++) blocks[index] = String(uniformUintBelow(prng, BLOCK_RANGE, telemetry)).padStart(5, '0');
+    return blocks.join('');
+  }
+
+  function makePeriodicOneSeventhDigits(length) {
+    return '142857'.repeat(Math.ceil(length / 6)).slice(0, length);
+  }
+
+  function makeShuffledBlockDigits(baseDigits, prng, telemetry) {
+    const blocks = Array.from({length:Math.floor(baseDigits.length / 5)}, (_, index) => baseDigits.slice(index * 5, index * 5 + 5));
+    for (let index = blocks.length - 1; index > 0; index--) {
+      const target = uniformUintBelow(prng, index + 1, telemetry);
+      [blocks[index], blocks[target]] = [blocks[target], blocks[index]];
+    }
+    return blocks.join('');
+  }
+
+  function validateSourceText(raw, source) {
+    if (typeof raw !== 'string' || raw.length === 0) throw new Error('Файлът е празен.');
+    if (raw.length > 20_000_000) throw new Error('Файлът надхвърля защитния лимит от 20 MB.');
+    const invalidAt = raw.search(/[^0-9]/);
+    if (invalidAt !== -1) {
+      const character = raw[invalidAt];
+      throw new Error(`Невалиден символ на 0-based позиция ${invalidAt}: ${JSON.stringify(character)}. Допускат се само ASCII цифри 0–9.`);
+    }
+    if (raw.length !== source.length) throw new Error(`Дължината е ${raw.length}, а manifest очаква ${source.length} цифри.`);
+  }
+
+  async function loadConstantSource(sourceId, manualFile = null) {
+    const source = SOURCES[sourceId];
+    const cacheKey = `relative:${sourceId}`;
+    if (!manualFile && DATA_CACHE.has(cacheKey)) return DATA_CACHE.get(cacheKey);
+    let raw, mode, actualFilename;
+    if (manualFile) {
+      if (manualFile.size > 20_000_000) throw new Error('Файлът надхвърля защитния лимит от 20 MB.');
+      raw = await manualFile.text();
+      mode = 'manual';
+      actualFilename = manualFile.name;
+    } else {
+      let response;
+      try {
+        response = await fetch(source.file, {cache:'no-store'});
+      } catch (error) {
+        throw new Error(`Файлът не може да се зареди автоматично. Стартирайте локален HTTP сървър или изберете файла ръчно. Технически детайл: ${error.message}`);
+      }
+      if (!response.ok) throw new Error(`HTTP ${response.status} при зареждане на ${source.file}.`);
+      raw = await response.text();
+      mode = 'relative';
+      actualFilename = source.file;
+    }
+    validateSourceText(raw, source);
+    const hash = await sha256Hex(raw);
+    if (hash !== source.sha256) throw new Error(`SHA-256 не съвпада с manifest. Получен: ${hash}; очакван: ${source.sha256}.`);
+    const loaded = Object.freeze({digits:raw, mode, actualFilename, hash, length:raw.length});
+    if (!manualFile) DATA_CACHE.set(cacheKey, loaded);
+    return loaded;
+  }
+
+  async function loadSource(plan) {
+    const manualFile = document.getElementById('manualSource').files?.[0] || null;
+    if (plan.source.kind === 'constant_file') {
+      const loaded = await loadConstantSource(plan.sourceId, manualFile);
+      return Object.freeze({...loaded, sourceKind:'constant_file', unitKind:'decimal5_block', metadata:{}});
+    }
+    if (plan.sourceId === 'control_direct_prng') {
+      const derived = await deriveSeed(plan.masterSeed, 'direct-uint32-sequence');
+      const prng = new Xoshiro128StarStar(derived.words);
+      const words = new Uint32Array(plan.availableUnits);
+      for (let index = 0; index < words.length; index++) words[index] = prng.nextUint32();
+      const sequenceHash = await sha256Bytes(uint32LittleEndianBytes(words));
+      return Object.freeze({digits:null, words, mode:'generated', actualFilename:'generated:direct-xoshiro128ss', hash:sequenceHash,
+        length:plan.usableDigits, sourceKind:'direct_prng', unitKind:'uint32_draw', metadata:{prng_id:'xoshiro128**', prng_version:'reference-v1',
+          decoder_applied:false, seed_derivation_version:'sha256-text-v1', seed_word_encoding:'four_32bit_big_endian_hex_words',
+          derived_seed_sha256:derived.digest, generated_sequence_units:words.length,
+          generated_sequence_serialization:'uint32_little_endian', hash_scope:'materialized_uint32_sequence'}});
+    }
+    if (plan.sourceId === 'control_periodic_1_7') {
+      const digits = makePeriodicOneSeventhDigits(plan.usableDigits);
+      return Object.freeze({digits, mode:'generated', actualFilename:'generated:1_over_7_periodic', hash:await sha256Hex(digits),
+        length:digits.length, sourceKind:'periodic_rational', unitKind:'decimal5_block', metadata:{decimal_period:'142857', period_length_digits:6,
+          period_length_decimal5_blocks:6, generation_method:'exact_repetition', hash_scope:'materialized_decimal_sequence'}});
+    }
+    if (plan.sourceId === 'control_iid_decimal') {
+      const derived = await deriveSeed(plan.masterSeed, 'iid-decimal5');
+      const telemetry = {raw_draws:0, rejected_draws:0};
+      const digits = makeIidDecimal5Digits(Math.floor(plan.usableDigits / 5), new Xoshiro128StarStar(derived.words), telemetry);
+      return Object.freeze({digits, mode:'generated', actualFilename:'generated:pseudo_iid_decimal5', hash:await sha256Hex(digits),
+        length:digits.length, sourceKind:'iid_decimal', unitKind:'decimal5_block', metadata:{prng_id:'xoshiro128**', derived_seed_sha256:derived.digest,
+          prng_version:'reference-v1', seed_derivation_version:'sha256-text-v1', seed_word_encoding:'four_32bit_big_endian_hex_words',
+          generation_method:'uniform_decimal5_words_uint32_rejection', generated_sequence_serialization:'ascii_5_digit_zero_padded_blocks',
+          hash_scope:'materialized_decimal_sequence', generator_telemetry:telemetry}});
+    }
+    if (plan.sourceId === 'control_block_shuffle') {
+      const base = await loadConstantSource(plan.surrogateBaseId, manualFile);
+      const baseDigits = base.digits.slice(0, plan.usableDigits);
+      const derived = await deriveSeed(plan.masterSeed, 'decimal5-block-shuffle', base.hash);
+      const telemetry = {raw_draws:0, rejected_draws:0};
+      const digits = makeShuffledBlockDigits(baseDigits, new Xoshiro128StarStar(derived.words), telemetry);
+      return Object.freeze({digits, mode:'generated', actualFilename:`generated:shuffle:${base.actualFilename}`, hash:await sha256Hex(digits),
+        length:digits.length, sourceKind:'block_shuffle', unitKind:'decimal5_block', metadata:{base_source_id:plan.surrogateBaseId,
+          base_source_sha256:base.hash, base_prefix_digits:baseDigits.length, blocks_permuted:Math.floor(baseDigits.length / 5),
+          derived_seed_sha256:derived.digest, seed_derivation_version:'sha256-text-v1', seed_word_encoding:'four_32bit_big_endian_hex_words',
+          permutation_unit:'decimal5_block', permutation_algorithm:'fisher_yates_uint32_rejection_v1',
+          generated_sequence_serialization:'ascii_concatenated_decimal5_blocks', hash_scope:'materialized_decimal_sequence', generator_telemetry:telemetry}});
+    }
+    throw new RangeError('Unsupported source control.');
+  }
+
+  function createUuid() {
+    if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+    const bytes = new Uint8Array(16);
+    globalThis.crypto.getRandomValues(bytes);
+    return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function createSessionConfig(plan, loaded) {
+    const now = new Date();
+    const algorithmSelect = document.getElementById('algoSelect');
+    const relation = SOURCE_RELATIONS[plan.sourceId] || {};
+    const provenanceComplete = plan.source.kind !== 'constant_file' || Boolean(plan.provenance.citation && plan.provenance.date && plan.provenance.license && plan.provenance.method);
+    const inlineJsSha256 = await sha256Hex(INLINE_JS_SOURCE_AT_LOAD || `Maze Analytics Lab ${APP_VERSION}`);
+    const baseConfig = {
+      schema_version: SCHEMA_VERSION,
+      session_id: `v15_${createUuid()}`,
+      created_at_utc: now.toISOString(),
+      app: {name:'Maze Analytics Lab', version:APP_VERSION, metric_version:'graph-metrics-v15.0', validation_version:'perfect-maze-v15.0', inline_js_sha256:inlineJsSha256},
+      source: {
+        constant_id: plan.sourceId,
+        constant_label: plan.source.label,
+        source_kind: loaded.sourceKind,
+        analysis_role: plan.source.analysis_role,
+        arithmetic_status: plan.source.arithmetic_status,
+        normality_status:'not_established',
+        dependency_family:relation.dependency_family || (loaded.metadata.base_source_id ? `surrogate_of_${loaded.metadata.base_source_id}` : null),
+        derived_from:relation.derived_from || loaded.metadata.base_source_id || null,
+        formula:relation.formula || null,
+        filename_declared: plan.source.file || null,
+        filename_loaded: loaded.actualFilename,
+        source_mode: loaded.mode,
+        sha256_expected: plan.source.sha256 || null,
+        sha256_verified: loaded.hash,
+        length_digits: loaded.unitKind === 'decimal5_block' ? loaded.length : null,
+        capacity_basis_decimal_positions:loaded.unitKind === 'uint32_draw' ? loaded.length : null,
+        base: 10,
+        format: loaded.unitKind === 'decimal5_block' ? 'fractional_digits_or_generated_decimal_control' : 'direct_uint32_control',
+        parser: loaded.unitKind === 'decimal5_block' ? 'strict_ascii_digits_v1' : null,
+        unit_kind:loaded.unitKind,
+        master_seed:plan.sourceId.startsWith('control_') ? (plan.masterSeed || null) : null,
+        provenance:{...plan.provenance, status:provenanceComplete ? 'complete_user_supplied' : 'incomplete'},
+        ...loaded.metadata
+      },
+      decoder: {
+        version: loaded.unitKind === 'decimal5_block' ? DECODER_VERSION : 'uint32-direct-rejection-v1',
+        decoder_applied:loaded.unitKind === 'decimal5_block',
+        block_width_digits: loaded.unitKind === 'decimal5_block' ? 5 : null,
+        block_value_range: loaded.unitKind === 'decimal5_block' ? BLOCK_RANGE : UINT32_RANGE,
+        integer_mapping: loaded.unitKind === 'decimal5_block' ? 'decimal5_rejection_modulo' : 'uint32_rejection_modulo',
+        auto_wrap: false,
+        direction_order: 'U,R,D,L',
+        singleton_policy:'return_zero_without_consumption',
+        consume_when_n_equals_1:false,
+        digit_phase:loaded.unitKind === 'decimal5_block' ? plan.digitPhase : null,
+        next_int_attempt_semantics:'attempted_calls_including_the_call_that_may_exhaust',
+        next_int_success_semantics:'calls_that_returned_an_integer',
+        raw_output_count_semantics:'choice_index_by_requested_arity_not_absolute_direction'
+      },
+      analysis_plan:{summary_version:'finite-prefix-descriptive-v1', inference_policy:'none', iid_assumed:false,
+        confidence_intervals_reported:false, primary_metric_keys:PRIMARY_METRIC_KEYS,
+        missing_metric_policy:'no_imputation_no_replacement_no_fallback', failure_denominator:'attempted_runs'},
+      experiment: {
+        study_id:plan.studyId,
+        algorithm_id: plan.algorithm,
+        algorithm_label: algorithmSelect.selectedOptions[0].textContent,
+        algorithm_version: ALGORITHM_VERSIONS[plan.algorithm],
+        algorithm_parameters:ALGORITHM_PARAMETERS[plan.algorithm],
+        algorithm_analysis_role:['sidewinder','binary_ur','binary_dr','binary_ul','binary_dl'].includes(plan.algorithm) ? 'positive_directional_control' : 'study_algorithm',
+        cols: plan.cols,
+        rows: plan.rows,
+        requested_runs: plan.repetitions,
+        common_prefix: plan.commonPrefix,
+        usable_digits: loaded.unitKind === 'decimal5_block' ? plan.usableDigits : null,
+        capacity_basis_decimal_positions:loaded.unitKind === 'uint32_draw' ? plan.usableDigits : null,
+        available_units:plan.availableUnits,
+        sampling_policy: loaded.unitKind === 'decimal5_block' ? 'paired_fixed_non_overlapping_decimal5_windows_v15' : 'paired_fixed_non_overlapping_uint32_windows_v15',
+        window_geometry_depends_on_requested_runs:false,
+        start_unit: plan.startUnit,
+        units_per_run: plan.unitsPerRun,
+        blocks_per_run:plan.unitKind === 'decimal5_block' ? plan.unitsPerRun : null,
+        stride_units: plan.unitsPerRun,
+        end_unit_exclusive: plan.endUnitExclusive,
+        automatic_budget:false,
+        digit_phase:loaded.unitKind === 'decimal5_block' ? plan.digitPhase : null,
+        endpoint_policy:plan.endpointPolicy,
+        endpoint_design_cycle:plan.designCycle,
+        design_sequence_offset:plan.designSequenceOffset,
+        publication_mode:plan.publicationMode,
+        preregistered_failure_threshold:plan.failureThreshold,
+        provenance_complete:provenanceComplete,
+        preliminary_protocol_screen_pass:plan.publicationMode && provenanceComplete && plan.sourceId !== 'euler_m' && plan.commonPrefix && plan.endpointPolicy === 'balanced_opposite'
+      }
+    };
+    const conditionDigest = await sha256Hex(canonicalStringify({source_id:plan.sourceId, source_sha256:loaded.hash,
+      master_seed:plan.masterSeed || null, surrogate_base:plan.surrogateBaseId, decoder:baseConfig.decoder,
+      algorithm:plan.algorithm, algorithm_version:ALGORITHM_VERSIONS[plan.algorithm], algorithm_parameters:ALGORITHM_PARAMETERS[plan.algorithm],
+      cols:plan.cols, rows:plan.rows, endpoints:plan.endpointPolicy, units:plan.unitsPerRun}));
+    baseConfig.experiment.condition_id = `c_${conditionDigest.slice(0, 24)}`;
+    const scheduleDigest = await sha256Hex(canonicalStringify({protocol:'paired-fixed-windows-v15', study_id:plan.studyId,
+      start_unit:plan.startUnit, units_per_run:plan.unitsPerRun, digit_phase:baseConfig.experiment.digit_phase}));
+    baseConfig.experiment.schedule_id = `s_${scheduleDigest.slice(0, 24)}`;
+    baseConfig.experiment.protocol_sha256 = await sha256Hex(canonicalStringify({source:baseConfig.source, decoder:baseConfig.decoder,
+      analysis_plan:baseConfig.analysis_plan, experiment:baseConfig.experiment}));
+    return deepFreeze(baseConfig);
+  }
+
+  async function executeRun(config, preparedSource, runIndex) {
+    const experiment = config.experiment;
+    const startUnit = experiment.start_unit + runIndex * experiment.units_per_run;
+    const endUnit = startUnit + experiment.units_per_run;
+    const design = designForRun(experiment.endpoint_policy, experiment.design_sequence_offset + runIndex, experiment.cols, experiment.rows, experiment.algorithm_id);
+    const windowDigest = await sha256Hex(canonicalStringify({protocol:'paired-window-v15', study_id:experiment.study_id,
+      unit_start:startUnit, unit_end_exclusive:endUnit, digit_phase:experiment.digit_phase}));
+    const windowId = `w_${windowDigest.slice(0, 24)}`;
+    const startOffset = config.source.unit_kind === 'decimal5_block' ? experiment.digit_phase + startUnit * 5 : null;
+    const endOffset = config.source.unit_kind === 'decimal5_block' ? experiment.digit_phase + endUnit * 5 : null;
+    let stream;
+    if (config.source.unit_kind === 'uint32_draw') {
+      stream = new DirectPrngStream(preparedSource.words, startUnit, endUnit);
+    } else {
+      stream = new DigitStream(preparedSource.digits, startOffset, endOffset);
+    }
+    const maze = new Maze(experiment.cols, experiment.rows);
+    const totalStarted = performance.now();
+    let status = 'ok', errorCode = '', errorMessage = '', algorithmCompleted = false;
+    let graph, metrics = null, mazeWallCodes = '', mazeHashFnv = '', mazeHashSha256 = '', windowSha256 = '';
+    let generationMs = null, validationMs = null, analysisMs = null, hashMs = null;
+    let stage = 'generation';
+    try {
+      const generationStarted = performance.now();
+      try {
+        generateMaze(experiment.algorithm_id, maze, stream, {constructionRootIndex:design.construction_root_index});
+      } finally {
+        generationMs = performance.now() - generationStarted;
+      }
+      algorithmCompleted = true;
+      stage = 'validation';
+      const validationStarted = performance.now();
+      graph = buildValidatedGraph(maze, true, design.solution_start_index, design.solution_goal_index);
+      validationMs = performance.now() - validationStarted;
+      if (!graph.validation.perfect_maze) {
+        status = 'validation_failed';
+        errorCode = 'PERFECT_MAZE_INVARIANT_FAILED';
+        errorMessage = graph.validation.validation_errors.join('; ');
+      } else {
+        stage = 'analysis';
+        const analysisStarted = performance.now();
+        const analysis = analyzeMaze(maze, graph, design.solution_start_index, design.solution_goal_index);
+        analysisMs = performance.now() - analysisStarted;
+        metrics = Object.fromEntries(METRIC_COLUMNS.map(key => [key, analysis[key] ?? null]));
+      }
+    } catch (error) {
+      status = error instanceof DigitStreamExhaustedError ? 'stream_exhausted' : `${stage}_error`;
+      errorCode = error.code || error.name || 'GENERATION_ERROR';
+      errorMessage = error.message;
+    }
+    if (!graph) {
+      const validationStarted = performance.now();
+      graph = buildValidatedGraph(maze, algorithmCompleted, design.solution_start_index, design.solution_goal_index);
+      validationMs = (validationMs || 0) + performance.now() - validationStarted;
+    }
+    mazeWallCodes = wallCodeHex(maze);
+    mazeHashFnv = fnv1a32(`maze-wall-v1\n${experiment.cols}\n${experiment.rows}\n${mazeWallCodes}`);
+    try {
+      const hashStarted = performance.now();
+      mazeHashSha256 = await sha256Hex(`maze-wall-v1\n${experiment.cols}\n${experiment.rows}\n${mazeWallCodes}`);
+      windowSha256 = config.source.unit_kind === 'decimal5_block'
+        ? await sha256Hex(preparedSource.digits.slice(startOffset, endOffset))
+        : await sha256Bytes(uint32LittleEndianBytes(preparedSource.words, startUnit, endUnit));
+      hashMs = performance.now() - hashStarted;
+    } catch (error) {
+      if (status === 'ok') {
+        status = 'hash_error';
+        errorCode = error.code || error.name || 'HASH_ERROR';
+        errorMessage = error.message;
+        metrics = null;
+      }
+    }
+    const metricEligible = status === 'ok' && graph.validation.perfect_maze && metrics !== null;
+    return {
+      run_index: runIndex,
+      run_id: `${config.session_id}_r${String(runIndex + 1).padStart(4, '0')}`,
+      study_id:experiment.study_id,
+      condition_id:experiment.condition_id,
+      window_id:windowId,
+      source_pair_key:`sp_${(await sha256Hex(canonicalStringify({algorithm:experiment.algorithm_id, cols:experiment.cols, rows:experiment.rows,
+        endpoint:design.endpoint_pair_id, root:design.construction_root_corner, window_id:windowId}))).slice(0, 24)}`,
+      algorithm_pair_key:`ap_${(await sha256Hex(canonicalStringify({source_id:config.source.constant_id, source_sha256:config.source.sha256_verified,
+        cols:experiment.cols, rows:experiment.rows, endpoint:design.endpoint_pair_id, window_id:windowId}))).slice(0, 24)}`,
+      status,
+      metric_eligible:metricEligible,
+      metric_unavailability_reason: metricEligible ? null : errorCode,
+      error_message: errorMessage,
+      design,
+      stream: {
+        unit_kind:config.source.unit_kind,
+        unit_start:startUnit,
+        unit_end_exclusive:endUnit,
+        units_budget:experiment.units_per_run,
+        units_read:stream.unitsRead,
+        accepted_units:stream.unitsRead - stream.rejectedUnits,
+        rejected_units:stream.rejectedUnits,
+        units_remaining:stream.unitsRemaining,
+        start_block:config.source.unit_kind === 'decimal5_block' ? startUnit : null,
+        end_block_exclusive:config.source.unit_kind === 'decimal5_block' ? endUnit : null,
+        offset_start: startOffset,
+        window_end_exclusive: endOffset,
+        offset_final_exclusive:config.source.unit_kind === 'decimal5_block' ? stream.position : null,
+        unit_final_exclusive:startUnit + stream.unitsRead,
+        blocks_budget:config.source.unit_kind === 'decimal5_block' ? experiment.units_per_run : null,
+        blocks_read:config.source.unit_kind === 'decimal5_block' ? stream.blocksRead : null,
+        accepted_blocks:config.source.unit_kind === 'decimal5_block' ? stream.blocksRead - stream.rejectedBlocks : null,
+        rejected_blocks:config.source.unit_kind === 'decimal5_block' ? stream.rejectedBlocks : null,
+        next_int_calls: stream.nextIntCalls,
+        next_int_attempted_calls:stream.nextIntCalls,
+        successful_next_int_calls:stream.successfulNextIntCalls,
+        next_int_successful_calls:stream.successfulNextIntCalls,
+        stochastic_calls: stream.stochasticCalls,
+        next_int_n_histogram: {...stream.nextIntHistogram},
+        rejections_by_n: {...stream.rejectionsByN},
+        output_counts_by_n:JSON.parse(JSON.stringify(stream.outputCountsByN)),
+        neighbor_choice_direction_counts:{...stream.neighborChoiceDirectionCounts},
+        neighbor_choice_by_available_mask:JSON.parse(JSON.stringify(stream.neighborChoiceByMask)),
+        digits_consumed: stream.digitsConsumed,
+        remaining_blocks:config.source.unit_kind === 'decimal5_block' ? stream.unitsRemaining : null,
+        stream_exhausted: status === 'stream_exhausted',
+        wrap_count: 0,
+        period_phase_at_start:config.source.constant_id === 'control_periodic_1_7' ? (startUnit * 5 + experiment.digit_phase) % 6 : null,
+        derived_run_seed_sha256:null,
+        window_sha256:windowSha256
+      },
+      generation: {
+        algorithm_completed: algorithmCompleted,
+        fallback_used: false,
+        generation_ms:generationMs,
+        validation_ms:validationMs,
+        analysis_ms:analysisMs,
+        hash_ms:hashMs,
+        total_run_ms:performance.now() - totalStarted
+      },
+      validation: graph.validation,
+      metrics,
+      maze_wall_codes_hex: mazeWallCodes,
+      maze_hash_fnv1a32: mazeHashFnv,
+      maze_sha256: mazeHashSha256
+    };
+  }
+
+  function setStatus(message, tag = '') {
+    document.getElementById('status').textContent = message;
+    document.getElementById('sessionTag').textContent = tag;
+  }
+
+  function setProgress(completed, total) {
+    const percent = total ? Math.round(completed / total * 100) : 0;
+    document.getElementById('progressFill').style.width = `${percent}%`;
+    const track = document.querySelector('.progress-track');
+    track.setAttribute('aria-valuenow', String(percent));
+    track.setAttribute('aria-valuetext', `${completed} от ${total} runs`);
+  }
+
+  function setRunningState(running) {
+    isRunning = running;
+    for (const control of document.querySelectorAll('.controls input, .controls select')) control.disabled = running;
+    document.getElementById('runBtn').disabled = running;
+    document.getElementById('cancelBtn').disabled = !running;
+    if (!running) { updateSourceFields(false); updatePreflight(); }
+  }
+
+  function formatNumber(value, digits = 4) {
+    if (value === null || value === undefined || !Number.isFinite(value)) return 'N/A';
+    if (Math.abs(value) >= 1000 || Number.isInteger(value)) return value.toLocaleString('bg-BG', {maximumFractionDigits:digits});
+    return value.toLocaleString('bg-BG', {minimumFractionDigits:0, maximumFractionDigits:digits});
+  }
+
+  function summarizeDesignBalance(runs) {
+    const experiment = currentSession?.config.experiment;
+    if (!experiment) return {expected_cells:0, counts:{}, all_cells_present:false, is_balanced:false, minimum_count:0, maximum_count:0};
+    const expected = new Set();
+    for (let index = 0; index < experiment.endpoint_design_cycle; index++) {
+      const design = designForRun(experiment.endpoint_policy, experiment.design_sequence_offset + index, experiment.cols, experiment.rows, experiment.algorithm_id);
+      expected.add(`${design.endpoint_pair_id}|${design.construction_root_corner || 'NA'}`);
+    }
+    const counts = Object.fromEntries([...expected].map(key => [key, 0]));
+    for (const run of runs) {
+      const key = `${run.design.endpoint_pair_id}|${run.design.construction_root_corner || 'NA'}`;
+      counts[key] = (counts[key] || 0) + 1;
+    }
+    const values = Object.values(counts);
+    const minimum = values.length ? Math.min(...values) : 0;
+    const maximum = values.length ? Math.max(...values) : 0;
+    return {
+      expected_cells:expected.size,
+      counts,
+      all_cells_present:values.length > 0 && minimum > 0,
+      is_balanced:values.length > 0 && minimum === maximum,
+      minimum_count:minimum,
+      maximum_count:maximum
+    };
+  }
+
+  function localProtocolScreen() {
+    if (!currentSession) return {pass:false, attempted_balance:summarizeDesignBalance([]), metric_eligible_balance:summarizeDesignBalance([])};
+    const eligible = currentRuns.filter(run => run.metric_eligible && run.metrics);
+    const attemptedBalance = summarizeDesignBalance(currentRuns);
+    const eligibleBalance = summarizeDesignBalance(eligible);
+    const unavailableFraction = currentRuns.length ? (currentRuns.length - eligible.length) / currentRuns.length : null;
+    const pass = Boolean(currentSession.config.experiment.preliminary_protocol_screen_pass &&
+      currentSession.outcome?.status === 'completed' && unavailableFraction !== null &&
+      unavailableFraction <= currentSession.config.experiment.preregistered_failure_threshold &&
+      attemptedBalance.all_cells_present && attemptedBalance.is_balanced &&
+      eligibleBalance.all_cells_present && eligibleBalance.is_balanced);
+    return {pass, attempted_balance:attemptedBalance, metric_eligible_balance:eligibleBalance, metric_unavailability_fraction:unavailableFraction};
+  }
+
+  function refreshKpis() {
+    const valid = currentRuns.filter(run => run.metric_eligible);
+    const failed = currentRuns.length - valid.length;
+    const unique = new Set(valid.map(run => run.maze_sha256).filter(Boolean)).size;
+    const meanUnits = mean(currentRuns.map(run => run.stream.units_read).filter(Number.isFinite));
+    const failureRate = currentRuns.length ? failed / currentRuns.length : 0;
+    const protocolScreen = localProtocolScreen();
+    document.getElementById('kpiCompleted').textContent = currentRuns.length.toLocaleString('bg-BG');
+    document.getElementById('kpiValid').textContent = valid.length.toLocaleString('bg-BG');
+    document.getElementById('kpiFailed').textContent = failed.toLocaleString('bg-BG');
+    document.getElementById('kpiUnique').textContent = unique.toLocaleString('bg-BG');
+    document.getElementById('kpiDigits').textContent = formatNumber(meanUnits, 1);
+    document.getElementById('kpiFailureRate').textContent = `${formatNumber(failureRate * 100, 2)}%`;
+    document.getElementById('kpiEligibility').textContent = currentSession?.outcome?.status === 'completed' ? (protocolScreen.pass ? 'PASS' : 'FAIL') : '—';
+  }
+
+  function collectSummary() {
+    const valid = currentRuns.filter(run => run.metric_eligible && run.metrics);
+    const byStatus = {}, byReason = {};
+    for (const run of currentRuns) {
+      byStatus[run.status] = (byStatus[run.status] || 0) + 1;
+      if (!run.metric_eligible) {
+        const reason = run.metric_unavailability_reason || 'unknown';
+        byReason[reason] = (byReason[reason] || 0) + 1;
+      }
+    }
+    const metrics = {};
+    for (const key of METRIC_COLUMNS) metrics[key] = describe(valid.map(run => run.metrics[key]), currentRuns.length);
+    const unavailable = currentRuns.length - valid.length;
+    const failureRate = currentRuns.length ? unavailable / currentRuns.length : null;
+    const attemptedCount = currentRuns.length;
+    const generationCompleted = currentRuns.filter(run => run.generation.algorithm_completed).length;
+    const streamExhausted = currentRuns.filter(run => run.status === 'stream_exhausted').length;
+    const generationErrors = currentRuns.filter(run => run.status === 'generation_error').length;
+    const topologyInvalid = currentRuns.filter(run => run.status === 'validation_failed').length;
+    const protocolScreen = localProtocolScreen();
+    return {
+      n_requested: currentSession?.config.experiment.requested_runs ?? 0,
+      n_attempted: currentRuns.length,
+      n_not_attempted:Math.max(0, (currentSession?.config.experiment.requested_runs ?? 0) - currentRuns.length),
+      n_metric_eligible: valid.length,
+      n_metric_unavailable:unavailable,
+      metric_unavailability_fraction:failureRate,
+      generation_completed_count:generationCompleted,
+      stream_exhausted_count:streamExhausted,
+      generation_error_count:generationErrors,
+      topology_invalid_count:topologyInvalid,
+      generation_completion_fraction:attemptedCount ? generationCompleted / attemptedCount : null,
+      stream_exhaustion_fraction:attemptedCount ? streamExhausted / attemptedCount : null,
+      generation_error_fraction:attemptedCount ? generationErrors / attemptedCount : null,
+      metric_availability_fraction:attemptedCount ? valid.length / attemptedCount : null,
+      topology_invalid_among_completed_fraction:generationCompleted ? topologyInvalid / generationCompleted : null,
+      counts_by_status:byStatus,
+      counts_by_reason:byReason,
+      failure_denominator:'attempted_runs',
+      preregistered_metric_unavailability_threshold:currentSession?.config.experiment.preregistered_failure_threshold ?? null,
+      attempted_design_balance:protocolScreen.attempted_balance,
+      metric_eligible_design_balance:protocolScreen.metric_eligible_balance,
+      local_protocol_screen_pass:protocolScreen.pass,
+      confirmatory_publication_ready:false,
+      confirmatory_publication_ready_reason:'Requires cross-condition paired-completeness audit, all preregistered digit phases, multiplicity-aware contrasts and an external timestamped protocol.',
+      metrics
+    };
+  }
+
+  function renderSummary() {
+    const container = document.getElementById('summaryGrid');
+    container.replaceChildren();
+    const summary = collectSummary();
+    if (!summary.n_metric_eligible) {
+      const empty = document.createElement('p');
+      empty.className = 'empty-state';
+      empty.textContent = 'Няма metric-eligible runs за описателна статистика.';
+      container.append(empty);
+    } else {
+      const note = document.createElement('div');
+      note.className = 'metric-summary';
+      note.style.gridColumn = '1 / -1';
+      note.textContent = `Описателни резултати за фиксирания набор прозорци; IID не се допуска. Metric availability: ${summary.n_metric_eligible}/${summary.n_attempted}; unavailable ${formatNumber((summary.metric_unavailability_fraction || 0) * 100, 2)}%; stream exhausted ${formatNumber((summary.stream_exhaustion_fraction || 0) * 100, 2)}%. Local protocol screen: ${summary.local_protocol_screen_pass ? 'PASS' : 'FAIL'}; това не означава готовност за потвърдителна публикация.`;
+      container.append(note);
+      for (const item of SUMMARY_METRICS) {
+        const stats = summary.metrics[item.key];
+        const multiplier = item.percent ? 100 : 1;
+        const card = document.createElement('div');
+        card.className = 'metric-summary';
+        const name = document.createElement('div');
+        name.className = 'name';
+        name.textContent = item.percent ? `${item.label} (%)` : item.label;
+        const average = document.createElement('div');
+        average.className = 'mean';
+        average.textContent = `mean ${formatNumber(stats.mean === null ? null : stats.mean * multiplier)}`;
+        const spread = document.createElement('div');
+        spread.className = 'spread';
+        spread.textContent = `sample SD ${formatNumber(stats.sample_sd === null ? null : stats.sample_sd * multiplier)} · median ${formatNumber(stats.median === null ? null : stats.median * multiplier)} · IQR ${formatNumber(stats.q1 === null ? null : stats.q1 * multiplier)}–${formatNumber(stats.q3 === null ? null : stats.q3 * multiplier)} · range ${formatNumber(stats.min === null ? null : stats.min * multiplier)}–${formatNumber(stats.max === null ? null : stats.max * multiplier)} · available ${stats.n_available}/${summary.n_attempted}`;
+        card.append(name, average, spread);
+        container.append(card);
+      }
+    }
+
+    const errors = document.getElementById('errorList');
+    errors.replaceChildren();
+    for (const [status, count] of Object.entries(summary.counts_by_status)) {
+      const item = document.createElement('li');
+      item.textContent = `status ${status}: ${count}`;
+      errors.append(item);
+    }
+    for (const [reason, count] of Object.entries(summary.counts_by_reason)) {
+      const item = document.createElement('li');
+      item.textContent = `metric unavailable · ${reason}: ${count}`;
+      errors.append(item);
+    }
+    const firstDetailed = currentRuns.find(run => !run.metric_eligible && run.error_message);
+    if (firstDetailed) {
+      const item = document.createElement('li');
+      item.textContent = `Първи неуспешен run: ${firstDetailed.error_message}`;
+      errors.append(item);
+    }
+  }
+
+  function appendTableCell(row, value) {
+    const cell = document.createElement('td');
+    cell.textContent = value;
+    row.append(cell);
+  }
+
+  function renderTable() {
+    const body = document.getElementById('tableBody');
+    body.replaceChildren();
+    const visible = currentRuns.slice(-MAX_VISIBLE_ROWS);
+    if (!visible.length) {
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.colSpan = 15;
+      cell.style.textAlign = 'center';
+      cell.style.color = '#7a889c';
+      cell.style.padding = '22px';
+      cell.textContent = 'Няма резултати.';
+      row.append(cell);
+      body.append(row);
+      return;
+    }
+    const fragment = document.createDocumentFragment();
+    for (const run of visible) {
+      const metric = run.metrics || {};
+      const row = document.createElement('tr');
+      if (!run.metric_eligible) row.className = 'invalid';
+      appendTableCell(row, String(run.run_index + 1));
+      appendTableCell(row, run.status);
+      appendTableCell(row, `[${run.stream.unit_start}, ${run.stream.unit_end_exclusive})`);
+      appendTableCell(row, formatNumber(run.stream.units_read, 0));
+      appendTableCell(row, formatNumber(run.stream.rejected_units, 0));
+      appendTableCell(row, metric.dead_end_fraction == null ? '' : formatNumber(metric.dead_end_fraction * 100));
+      appendTableCell(row, formatNumber(metric.diameter_edges));
+      appendTableCell(row, formatNumber(metric.solution_length_edges));
+      appendTableCell(row, formatNumber(metric.solution_stretch));
+      appendTableCell(row, formatNumber(metric.endpoint_path_euclidean_ratio));
+      appendTableCell(row, formatNumber(metric.adjusted_orientation_anisotropy));
+      appendTableCell(row, formatNumber(metric.vertical_mirror_cell_agreement));
+      appendTableCell(row, formatNumber(metric.cell_type_entropy_bits));
+      appendTableCell(row, formatNumber(metric.off_path_branch_count));
+      appendTableCell(row, run.maze_sha256 ? run.maze_sha256.slice(0, 12) : '');
+      fragment.append(row);
+    }
+    body.append(fragment);
+  }
+
+  function drawMaze(maze, design = null) {
+    const canvas = document.getElementById('mazeCanvas');
+    const empty = document.getElementById('canvasEmpty');
+    if (!maze) {
+      canvas.hidden = true;
+      empty.hidden = false;
+      return;
+    }
+    const maxDimension = Math.max(maze.cols, maze.rows);
+    const cellSize = Math.max(4, Math.min(20, Math.floor(600 / maxDimension)));
+    const padding = 8;
+    const width = maze.cols * cellSize + 2 * padding;
+    const height = maze.rows * cellSize + 2 * padding;
+    const ratio = Math.max(1, window.devicePixelRatio || 1);
+    canvas.width = Math.ceil(width * ratio);
+    canvas.height = Math.ceil(height * ratio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    canvas.hidden = false;
+    empty.hidden = true;
+    const context = canvas.getContext('2d');
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    context.clearRect(0, 0, width, height);
+    context.translate(padding, padding);
+    context.strokeStyle = '#15243a';
+    context.lineWidth = Math.max(1, cellSize / 10);
+    context.lineCap = 'square';
+    context.beginPath();
+    for (const cell of maze.cells) {
+      const x = cell.i * cellSize, y = cell.j * cellSize;
+      if (cell.walls[0]) { context.moveTo(x, y); context.lineTo(x + cellSize, y); }
+      if (cell.walls[1]) { context.moveTo(x + cellSize, y); context.lineTo(x + cellSize, y + cellSize); }
+      if (cell.walls[2]) { context.moveTo(x + cellSize, y + cellSize); context.lineTo(x, y + cellSize); }
+      if (cell.walls[3]) { context.moveTo(x, y + cellSize); context.lineTo(x, y); }
+    }
+    context.stroke();
+    const radius = Math.max(2, cellSize * 0.2);
+    const startIndex = design?.solution_start_index ?? 0;
+    const goalIndex = design?.solution_goal_index ?? maze.cells.length - 1;
+    const startCell = maze.cells[startIndex], goalCell = maze.cells[goalIndex];
+    context.fillStyle = '#16825d';
+    context.beginPath();
+    context.arc((startCell.i + 0.5) * cellSize, (startCell.j + 0.5) * cellSize, radius, 0, Math.PI * 2);
+    context.fill();
+    context.fillStyle = '#c63d4c';
+    context.beginPath();
+    context.arc((goalCell.i + 0.5) * cellSize, (goalCell.j + 0.5) * cellSize, radius, 0, Math.PI * 2);
+    context.fill();
+    canvas.setAttribute('aria-label', `Лабиринт ${maze.cols} на ${maze.rows}; зелен старт ${design?.solution_start_corner || startIndex} и червен край ${design?.solution_goal_corner || goalIndex}.`);
+  }
+
+  class RunWorkerClient {
+    constructor() {
+      if (typeof Worker === 'undefined' || !INLINE_JS_SOURCE_AT_LOAD) throw new Error('Web Worker is unavailable.');
+      const workerTail = `
+        let __workerConfig = null, __workerPrepared = null;
+        self.onmessage = async event => {
+          const {requestId, type, payload} = event.data;
+          try {
+            if (type === 'init') { __workerConfig = payload.config; __workerPrepared = payload.prepared; self.postMessage({requestId, ok:true, result:'ready'}); return; }
+            if (type === 'run') { const result = await executeRun(__workerConfig, __workerPrepared, payload.runIndex); self.postMessage({requestId, ok:true, result}); return; }
+            throw new Error('Unknown worker request.');
+          } catch (error) {
+            self.postMessage({requestId, ok:false, error:{message:error.message, code:error.code || error.name || 'WORKER_ERROR'}});
+          }
+        };`;
+      const blob = new Blob([INLINE_JS_SOURCE_AT_LOAD, workerTail], {type:'text/javascript'});
+      this.url = URL.createObjectURL(blob);
+      this.worker = new Worker(this.url);
+      this.pending = new Map();
+      this.sequence = 0;
+      this.worker.onmessage = event => {
+        const pending = this.pending.get(event.data.requestId);
+        if (!pending) return;
+        this.pending.delete(event.data.requestId);
+        if (event.data.ok) pending.resolve(event.data.result);
+        else {
+          const error = new Error(event.data.error.message);
+          error.code = event.data.error.code;
+          pending.reject(error);
+        }
+      };
+      this.worker.onerror = event => this.terminate('WORKER_ERROR', event.message || 'Worker failed.');
+    }
+
+    request(type, payload) {
+      const requestId = ++this.sequence;
+      return new Promise((resolve, reject) => {
+        this.pending.set(requestId, {resolve, reject});
+        this.worker.postMessage({requestId, type, payload});
+      });
+    }
+
+    terminate(code = 'WORKER_TERMINATED', message = 'Worker terminated.') {
+      if (!this.worker) return;
+      this.worker.terminate();
+      URL.revokeObjectURL(this.url);
+      this.worker = null;
+      for (const pending of this.pending.values()) {
+        const error = new Error(message);
+        error.code = code;
+        pending.reject(error);
+      }
+      this.pending.clear();
+    }
+  }
+
+  function resetResultsView() {
+    currentRuns = [];
+    currentSession = null;
+    lastValidDisplay = null;
+    refreshKpis();
+    setProgress(0, 1);
+    renderTable();
+    drawMaze(null);
+    document.getElementById('summaryGrid').replaceChildren();
+    document.getElementById('errorList').replaceChildren();
+    document.getElementById('exportCsvBtn').disabled = true;
+    document.getElementById('exportJsonBtn').disabled = true;
+  }
+
+  async function startSession() {
+    if (isRunning) return;
+    cancelRequested = false;
+    setRunningState(true);
+    setStatus('Зареждане и проверка на цифровия източник…');
+    let newSessionStarted = false;
+    let config = null;
+    try {
+      const draft = readDraftPlan();
+      const loaded = await loadSource(draft);
+      const verifiedPlan = readDraftPlan(loaded.length);
+      config = await createSessionConfig(verifiedPlan, loaded);
+      if (cancelRequested) {
+        const error = new Error('Подготовката е отменена; предишната сесия е запазена.');
+        error.code = 'SESSION_CANCELLED';
+        throw error;
+      }
+      try {
+        activeWorkerClient = new RunWorkerClient();
+        await activeWorkerClient.request('init', {config, prepared:{digits:loaded.digits, words:loaded.words || null}});
+      } catch (workerError) {
+        activeWorkerClient?.terminate();
+        activeWorkerClient = null;
+      }
+      resetResultsView();
+      currentSession = {config, outcome:{status:'running', attempted_runs:0, metric_eligible_runs:0, finished_at_utc:null, execution_mode:activeWorkerClient ? 'web_worker' : 'main_thread_fallback'}};
+      newSessionStarted = true;
+      document.getElementById('exportJsonBtn').disabled = false;
+      setStatus('Сесията се изпълнява…', config.session_id);
+      setProgress(0, config.experiment.requested_runs);
+      for (let index = 0; index < config.experiment.requested_runs; index++) {
+        if (cancelRequested) break;
+        const run = activeWorkerClient
+          ? await activeWorkerClient.request('run', {runIndex:index})
+          : await executeRun(config, {digits:loaded.digits, words:loaded.words || null}, index);
+        currentRuns.push(run);
+        if (run.metric_eligible) {
+          lastValidDisplay = {maze:mazeFromWallCodes(config.experiment.cols, config.experiment.rows, run.maze_wall_codes_hex), design:run.design};
+        }
+        const completed = currentRuns.length;
+        setProgress(completed, config.experiment.requested_runs);
+        refreshKpis();
+        setStatus(`Завършени ${completed} от ${config.experiment.requested_runs} runs…`, config.session_id);
+        if (!activeWorkerClient) await new Promise(resolve => setTimeout(resolve, 0));
+      }
+      const validCount = currentRuns.filter(run => run.metric_eligible).length;
+      currentSession.outcome = {
+        status: cancelRequested ? 'cancelled' : 'completed',
+        attempted_runs: currentRuns.length,
+        metric_eligible_runs: validCount,
+        metric_unavailable_runs: currentRuns.length - validCount,
+        not_attempted_runs:config.experiment.requested_runs - currentRuns.length,
+        execution_mode:activeWorkerClient ? 'web_worker' : 'main_thread_fallback',
+        finished_at_utc: new Date().toISOString()
+      };
+      refreshKpis();
+      renderSummary();
+      renderTable();
+      drawMaze(lastValidDisplay?.maze || null, lastValidDisplay?.design || null);
+      setStatus(cancelRequested
+        ? `Сесията е спряна след ${currentRuns.length} runs; наличните записи могат да се експортират.`
+        : `Сесията завърши: ${validCount} metric-eligible от ${currentRuns.length} attempted runs.`, config.session_id);
+      document.getElementById('exportCsvBtn').disabled = currentRuns.length === 0;
+      document.getElementById('exportJsonBtn').disabled = false;
+    } catch (error) {
+      const cancelled = error.code === 'SESSION_CANCELLED';
+      if (newSessionStarted && currentSession) {
+        const validCount = currentRuns.filter(run => run.metric_eligible).length;
+        currentSession.outcome = {status:cancelled ? 'cancelled' : 'failed', attempted_runs:currentRuns.length,
+          metric_eligible_runs:validCount, metric_unavailable_runs:currentRuns.length - validCount,
+          not_attempted_runs:config.experiment.requested_runs - currentRuns.length, error_code:error.code || error.name,
+          error_message:error.message, finished_at_utc:new Date().toISOString()};
+        refreshKpis(); renderSummary(); renderTable();
+        drawMaze(lastValidDisplay?.maze || null, lastValidDisplay?.design || null);
+        document.getElementById('exportCsvBtn').disabled = currentRuns.length === 0;
+        document.getElementById('exportJsonBtn').disabled = false;
+      }
+      setStatus(cancelled ? error.message : `${newSessionStarted ? 'Сесията прекъсна' : 'Новата сесия не стартира; предишните резултати са запазени'}: ${error.message}`,
+        currentSession?.config.session_id || '');
+      const errors = document.getElementById('errorList');
+      const item = document.createElement('li');
+      item.textContent = error.message;
+      errors.append(item);
+    } finally {
+      activeWorkerClient?.terminate();
+      activeWorkerClient = null;
+      setRunningState(false);
+    }
+  }
+
+  function flattenRun(run) {
+    const config = currentSession.config;
+    const outcome = currentSession.outcome || {};
+    const flat = {
+      schema_version: config.schema_version,
+      session_id: config.session_id,
+      session_status:outcome.status,
+      created_at_utc: config.created_at_utc,
+      finished_at_utc:outcome.finished_at_utc,
+      app_version: config.app.version,
+      metric_version:config.app.metric_version,
+      validation_version:config.app.validation_version,
+      inline_js_sha256:config.app.inline_js_sha256,
+      protocol_sha256:config.experiment.protocol_sha256,
+      study_id:run.study_id,
+      condition_id:run.condition_id,
+      source_id: config.source.constant_id,
+      source_label: config.source.constant_label,
+      source_kind:config.source.source_kind,
+      source_analysis_role:config.source.analysis_role,
+      arithmetic_status: config.source.arithmetic_status,
+      normality_status:config.source.normality_status,
+      dependency_family:config.source.dependency_family,
+      derived_from:config.source.derived_from,
+      source_formula:config.source.formula,
+      source_filename: config.source.filename_loaded,
+      source_mode: config.source.source_mode,
+      source_sha256: config.source.sha256_verified,
+      source_length_digits: config.source.length_digits,
+      source_capacity_basis_decimal_positions:config.source.capacity_basis_decimal_positions,
+      source_hash_scope:config.source.hash_scope,
+      source_provenance_status:config.source.provenance.status,
+      source_citation:config.source.provenance.citation,
+      source_date:config.source.provenance.date,
+      source_license:config.source.provenance.license,
+      source_method:config.source.provenance.method,
+      source_metadata_json:JSON.stringify(Object.fromEntries(Object.entries(config.source).filter(([key]) => !['provenance'].includes(key)))),
+      master_seed:config.source.master_seed,
+      unit_kind:config.source.unit_kind,
+      decoder_version: config.decoder.version,
+      decoder_applied:config.decoder.decoder_applied,
+      block_width_digits: config.decoder.block_width_digits,
+      integer_mapping: config.decoder.integer_mapping,
+      auto_wrap: config.decoder.auto_wrap,
+      direction_order:config.decoder.direction_order,
+      singleton_policy:config.decoder.singleton_policy,
+      digit_phase:config.decoder.digit_phase,
+      next_int_attempt_semantics:config.decoder.next_int_attempt_semantics,
+      next_int_success_semantics:config.decoder.next_int_success_semantics,
+      raw_output_count_semantics:config.decoder.raw_output_count_semantics,
+      algorithm_id: config.experiment.algorithm_id,
+      algorithm_version: config.experiment.algorithm_version,
+      algorithm_analysis_role:config.experiment.algorithm_analysis_role,
+      algorithm_parameters_json:JSON.stringify(config.experiment.algorithm_parameters),
+      cols: config.experiment.cols,
+      rows: config.experiment.rows,
+      requested_runs: config.experiment.requested_runs,
+      common_prefix: config.experiment.common_prefix,
+      usable_digits: config.experiment.usable_digits,
+      capacity_basis_decimal_positions:config.experiment.capacity_basis_decimal_positions,
+      available_units:config.experiment.available_units,
+      sampling_policy: config.experiment.sampling_policy,
+      schedule_id:config.experiment.schedule_id,
+      window_geometry_depends_on_requested_runs:config.experiment.window_geometry_depends_on_requested_runs,
+      start_unit:config.experiment.start_unit,
+      units_per_run:config.experiment.units_per_run,
+      stride_units:config.experiment.stride_units,
+      blocks_per_run: config.experiment.blocks_per_run,
+      automatic_budget:config.experiment.automatic_budget,
+      endpoint_policy:config.experiment.endpoint_policy,
+      design_sequence_offset:config.experiment.design_sequence_offset,
+      preregistered_failure_threshold:config.experiment.preregistered_failure_threshold,
+      publication_mode:config.experiment.publication_mode,
+      run_index: run.run_index,
+      run_id: run.run_id,
+      window_id:run.window_id,
+      source_pair_key:run.source_pair_key,
+      algorithm_pair_key:run.algorithm_pair_key,
+      status: run.status,
+      metric_eligible: run.metric_eligible,
+      metric_unavailability_reason: run.metric_unavailability_reason,
+      error_message: run.error_message,
+      design_version:run.design.design_version,
+      design_index:run.design.design_index,
+      endpoint_pair_id:run.design.endpoint_pair_id,
+      solution_start_corner:run.design.solution_start_corner,
+      solution_start_index:run.design.solution_start_index,
+      solution_goal_corner:run.design.solution_goal_corner,
+      solution_goal_index:run.design.solution_goal_index,
+      construction_root_applicable:run.design.construction_root_applicable,
+      construction_root_policy:run.design.construction_root_policy,
+      construction_root_corner:run.design.construction_root_corner,
+      construction_root_index:run.design.construction_root_index,
+      design_cycle_position:run.design.cycle_position,
+      design_cycle_length:run.design.cycle_length,
+      assignment_uses_choice_stream:run.design.assignment_uses_choice_stream,
+      unit_start:run.stream.unit_start,
+      unit_end_exclusive:run.stream.unit_end_exclusive,
+      units_budget:run.stream.units_budget,
+      units_read:run.stream.units_read,
+      accepted_units:run.stream.accepted_units,
+      rejected_units:run.stream.rejected_units,
+      units_remaining:run.stream.units_remaining,
+      unit_final_exclusive:run.stream.unit_final_exclusive,
+      start_block: run.stream.start_block,
+      end_block_exclusive: run.stream.end_block_exclusive,
+      offset_start: run.stream.offset_start,
+      window_end_exclusive: run.stream.window_end_exclusive,
+      offset_final_exclusive: run.stream.offset_final_exclusive,
+      blocks_budget: run.stream.blocks_budget,
+      blocks_read: run.stream.blocks_read,
+      accepted_blocks: run.stream.accepted_blocks,
+      rejected_blocks: run.stream.rejected_blocks,
+      next_int_calls: run.stream.next_int_calls,
+      next_int_attempted_calls:run.stream.next_int_attempted_calls,
+      successful_next_int_calls:run.stream.successful_next_int_calls,
+      next_int_successful_calls:run.stream.next_int_successful_calls,
+      stochastic_calls: run.stream.stochastic_calls,
+      next_int_n_histogram: JSON.stringify(run.stream.next_int_n_histogram),
+      rejections_by_n: JSON.stringify(run.stream.rejections_by_n),
+      output_counts_by_n:JSON.stringify(run.stream.output_counts_by_n),
+      neighbor_choice_direction_counts:JSON.stringify(run.stream.neighbor_choice_direction_counts),
+      neighbor_choice_by_available_mask:JSON.stringify(run.stream.neighbor_choice_by_available_mask),
+      digits_consumed: run.stream.digits_consumed,
+      remaining_blocks: run.stream.remaining_blocks,
+      stream_exhausted: run.stream.stream_exhausted,
+      wrap_count: run.stream.wrap_count,
+      period_phase_at_start:run.stream.period_phase_at_start,
+      derived_run_seed_sha256:run.stream.derived_run_seed_sha256,
+      window_sha256:run.stream.window_sha256,
+      algorithm_completed: run.generation.algorithm_completed,
+      fallback_used: run.generation.fallback_used,
+      generation_ms:run.generation.generation_ms,
+      validation_ms:run.generation.validation_ms,
+      analysis_ms:run.generation.analysis_ms,
+      hash_ms:run.generation.hash_ms,
+      total_run_ms:run.generation.total_run_ms,
+      maze_wall_codes_hex: run.maze_wall_codes_hex,
+      maze_hash_fnv1a32: run.maze_hash_fnv1a32,
+      maze_sha256: run.maze_sha256
+    };
+    for (const key of VALIDATION_COLUMNS) flat[key] = key === 'validation_errors' ? run.validation.validation_errors.join('|') : run.validation[key];
+    for (const key of METRIC_COLUMNS) flat[key] = run.metrics?.[key] ?? null;
+    return flat;
+  }
+
+  const CSV_BASE_COLUMNS = Object.freeze([
+    'schema_version','session_id','session_status','created_at_utc','finished_at_utc','app_version','metric_version','validation_version',
+    'inline_js_sha256','protocol_sha256','study_id','condition_id','source_id','source_label','source_kind','source_analysis_role',
+    'arithmetic_status','normality_status','dependency_family','derived_from','source_formula','source_filename','source_mode','source_sha256',
+    'source_length_digits','source_capacity_basis_decimal_positions','source_hash_scope','source_provenance_status','source_citation','source_date','source_license','source_method','source_metadata_json',
+    'master_seed','unit_kind','decoder_version','decoder_applied','block_width_digits','integer_mapping','auto_wrap','direction_order',
+    'singleton_policy','digit_phase','next_int_attempt_semantics','next_int_success_semantics','raw_output_count_semantics',
+    'algorithm_id','algorithm_version','algorithm_analysis_role','algorithm_parameters_json','cols','rows','requested_runs','common_prefix',
+    'usable_digits','capacity_basis_decimal_positions','available_units','sampling_policy','schedule_id','window_geometry_depends_on_requested_runs','start_unit','units_per_run','stride_units','blocks_per_run',
+    'automatic_budget','endpoint_policy','design_sequence_offset','preregistered_failure_threshold','publication_mode','run_index','run_id','window_id','source_pair_key','algorithm_pair_key','status',
+    'metric_eligible','metric_unavailability_reason','error_message','design_version','design_index','endpoint_pair_id','solution_start_corner','solution_start_index',
+    'solution_goal_corner','solution_goal_index','construction_root_applicable','construction_root_policy','construction_root_corner','construction_root_index',
+    'design_cycle_position','design_cycle_length','assignment_uses_choice_stream','unit_start','unit_end_exclusive','units_budget','units_read',
+    'accepted_units','rejected_units','units_remaining','unit_final_exclusive','start_block','end_block_exclusive','offset_start','window_end_exclusive',
+    'offset_final_exclusive','blocks_budget','blocks_read','accepted_blocks','rejected_blocks','next_int_calls','next_int_attempted_calls','successful_next_int_calls','next_int_successful_calls',
+    'stochastic_calls','next_int_n_histogram','rejections_by_n','output_counts_by_n','neighbor_choice_direction_counts','neighbor_choice_by_available_mask','digits_consumed','remaining_blocks','stream_exhausted',
+    'wrap_count','period_phase_at_start','derived_run_seed_sha256','window_sha256','algorithm_completed','fallback_used','generation_ms',
+    'validation_ms','analysis_ms','hash_ms','total_run_ms','maze_wall_codes_hex','maze_hash_fnv1a32','maze_sha256'
+  ]);
+
+  function csvCell(value) {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'number') return Number.isFinite(value) ? String(value) : '';
+    let string = String(value);
+    if (/^[=+\-@]/.test(string)) string = `'${string}`;
+    return /[",\r\n]/.test(string) ? `"${string.replace(/"/g, '""')}"` : string;
+  }
+
+  function safeFilenamePart(value) {
+    return String(value).replace(/[^a-zA-Z0-9_-]+/g, '_').slice(0, 80);
+  }
+
+  function downloadText(filename, text, mime) {
+    const blob = new Blob([text], {type:mime});
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function downloadParts(filename, parts, mime) {
+    const blob = new Blob(parts, {type:mime});
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function exportRawCsv() {
+    if (!currentSession || !currentRuns.length) return;
+    const columns = [...CSV_BASE_COLUMNS, ...VALIDATION_COLUMNS, ...METRIC_COLUMNS];
+    const parts = ['\uFEFF', columns.map(csvCell).join(','), '\r\n'];
+    for (const run of currentRuns) {
+      const flat = flattenRun(run);
+      parts.push(columns.map(column => csvCell(flat[column])).join(','), '\r\n');
+    }
+    const experiment = currentSession.config.experiment;
+    const filename = `maze_runs_${safeFilenamePart(experiment.algorithm_id)}_${safeFilenamePart(currentSession.config.source.constant_id)}_${experiment.cols}x${experiment.rows}_${safeFilenamePart(currentSession.config.session_id)}.csv`;
+    downloadParts(filename, parts, 'text/csv;charset=utf-8');
+  }
+
+  function exportManifestJson() {
+    if (!currentSession) return;
+    const manifest = {
+      schema_version: SCHEMA_VERSION,
+      exported_at_utc: new Date().toISOString(),
+      session: currentSession.config,
+      outcome: currentSession.outcome,
+      metric_codebook:METRIC_CODEBOOK,
+      scientific_scope: 'Descriptive results for finite, preregistered windows. Non-overlap is not treated as proof of statistical independence; no inferential confidence intervals are reported.',
+      runs: currentRuns,
+      summary: collectSummary()
+    };
+    const json = JSON.stringify(manifest, (_key, value) => typeof value === 'number' && !Number.isFinite(value) ? null : value);
+    downloadText(`maze_manifest_${safeFilenamePart(currentSession.config.session_id)}.json`, json, 'application/json;charset=utf-8');
+  }
+
+  function rawPlanFromForm() {
+    return {
+      schema_version:'maze-plan.v15', app_version:APP_VERSION,
+      algorithm:document.getElementById('algoSelect').value,
+      source_id:document.getElementById('mathConst').value,
+      surrogate_base:document.getElementById('surrogateBase').value,
+      master_seed:document.getElementById('controlSeed').value,
+      study_id:document.getElementById('studyId').value,
+      cols:document.getElementById('mazeCols').value,
+      rows:document.getElementById('mazeRows').value,
+      repetitions:document.getElementById('repetitions').value,
+      start_unit:document.getElementById('startOffset').value,
+      units_per_run:document.getElementById('blockBudget').value,
+      digit_phase:document.getElementById('digitPhase').value,
+      design_sequence_offset:document.getElementById('designSequenceOffset').value,
+      common_prefix:document.getElementById('commonPrefix').checked,
+      endpoint_policy:document.getElementById('endpointPolicy').value,
+      publication_mode:document.getElementById('publicationMode').checked,
+      failure_threshold_percent:document.getElementById('failureThreshold').value,
+      provenance:{citation:document.getElementById('sourceCitation').value, date:document.getElementById('sourceDate').value,
+        license:document.getElementById('sourceLicense').value, method:document.getElementById('sourceMethod').value}
+    };
+  }
+
+  function planHashPayload(plan) {
+    const payload = {...plan};
+    delete payload.exported_at_utc;
+    delete payload.plan_sha256;
+    return payload;
+  }
+
+  async function exportPlan() {
+    const plan = rawPlanFromForm();
+    const algorithm = plan.algorithm;
+    plan.inline_js_sha256 = await sha256Hex(INLINE_JS_SOURCE_AT_LOAD || `Maze Analytics Lab ${APP_VERSION}`);
+    plan.protocol_specification = {
+      decoder_version:DECODER_VERSION,
+      no_wrap:true,
+      integer_mapping:'rejection',
+      algorithm_version:ALGORITHM_VERSIONS[algorithm],
+      algorithm_parameters:ALGORITHM_PARAMETERS[algorithm],
+      analysis_plan:{inference_policy:'none_in_app', iid_assumed:false, primary_metric_keys:PRIMARY_METRIC_KEYS,
+        missing_metric_policy:'no_imputation_no_replacement_no_fallback'},
+      external_requirements:['timestamped preregistration outside this application','all planned digit phases','paired-completeness audit across conditions','multiplicity-aware contrasts']
+    };
+    plan.exported_at_utc = new Date().toISOString();
+    plan.plan_sha256 = await sha256Hex(canonicalStringify(planHashPayload(plan)));
+    downloadText(`maze_plan_${safeFilenamePart(plan.study_id || 'study')}.json`, JSON.stringify(plan, null, 2), 'application/json;charset=utf-8');
+    setStatus('Plan export е създаден с content hash; export timestamp не е доказателство за външна preregistration.');
+  }
+
+  async function importPlan(file) {
+    if (!file) return;
+    if (file.size > 200_000) throw new Error('Plan JSON е неочаквано голям.');
+    const plan = JSON.parse(await file.text());
+    if (plan.schema_version !== 'maze-plan.v15') throw new Error('Неподдържана plan schema.');
+    if (plan.plan_sha256) {
+      const actualPlanHash = await sha256Hex(canonicalStringify(planHashPayload(plan)));
+      if (actualPlanHash !== plan.plan_sha256) throw new Error('Plan SHA-256 не съвпада; файлът е променен след export.');
+    }
+    const assignments = {algoSelect:plan.algorithm, mathConst:plan.source_id, surrogateBase:plan.surrogate_base,
+      controlSeed:plan.master_seed, studyId:plan.study_id, mazeCols:plan.cols, mazeRows:plan.rows,
+      repetitions:plan.repetitions, startOffset:plan.start_unit, blockBudget:plan.units_per_run,
+      digitPhase:plan.digit_phase ?? 0, designSequenceOffset:plan.design_sequence_offset ?? 0,
+      endpointPolicy:plan.endpoint_policy, failureThreshold:plan.failure_threshold_percent,
+      sourceCitation:plan.provenance?.citation || '', sourceDate:plan.provenance?.date || '',
+      sourceLicense:plan.provenance?.license || '', sourceMethod:plan.provenance?.method || ''};
+    for (const [id, value] of Object.entries(assignments)) {
+      const element = document.getElementById(id);
+      if (element && value !== undefined && value !== null) element.value = String(value);
+    }
+    document.getElementById('commonPrefix').checked = Boolean(plan.common_prefix);
+    document.getElementById('publicationMode').checked = Boolean(plan.publication_mode);
+    document.getElementById('manualSource').value = '';
+    updateSourceFields(false);
+    updatePreflight();
+    setStatus('Experiment plan е импортиран и очаква preflight проверка.');
+  }
+
+  function updateSourceFields(populateProvenance = false) {
+    const sourceId = document.getElementById('mathConst').value;
+    const isControl = Boolean(CONTROL_SOURCES[sourceId]);
+    const needsSeed = ['control_iid_decimal', 'control_direct_prng', 'control_block_shuffle'].includes(sourceId);
+    document.getElementById('controlFields').hidden = !isControl;
+    document.getElementById('controlSeed').closest('.field').hidden = !needsSeed;
+    document.getElementById('surrogateBaseField').hidden = sourceId !== 'control_block_shuffle';
+    document.getElementById('manualSource').disabled = isControl && sourceId !== 'control_block_shuffle';
+    document.getElementById('digitPhase').disabled = sourceId === 'control_direct_prng';
+    if (sourceId === 'control_direct_prng') document.getElementById('digitPhase').value = '0';
+    document.getElementById('budgetLabel').textContent = sourceId === 'control_direct_prng' ? 'Фиксирани uint32 draws на run' : 'Фиксирани 5-цифрени блокове на run';
+    if (populateProvenance) {
+      const url = sourceId === 'pi' ? 'https://pi2e.ch/blog/wp-content/uploads/2017/03/pi_dec_1m.txt'
+        : sourceId === 'euler_m' ? 'https://www.plouffe.fr/simon/constants/gamma.txt' : '';
+      document.getElementById('sourceCitation').value = isControl ? `Generated locally by Maze Analytics Lab ${APP_VERSION}` : url;
+      document.getElementById('sourceDate').value = isControl ? new Date().toISOString().slice(0, 10) : '';
+      document.getElementById('sourceLicense').value = isControl ? 'Generated control; application code protocol applies' : '';
+      document.getElementById('sourceMethod').value = isControl ? sourceDefinition(sourceId, document.getElementById('surrogateBase').value).kind : '';
+    }
+  }
+
+  function initializeApp() {
+    for (const id of ['algoSelect','mazeCols','mazeRows','mathConst','commonPrefix','repetitions','startOffset','blockBudget','digitPhase',
+      'controlSeed','surrogateBase','studyId','designSequenceOffset','failureThreshold','endpointPolicy','publicationMode','sourceCitation','sourceDate','sourceLicense','sourceMethod']) {
+      document.getElementById(id).addEventListener('input', updatePreflight);
+      document.getElementById(id).addEventListener('change', updatePreflight);
+    }
+    document.getElementById('mathConst').addEventListener('change', () => {
+      document.getElementById('manualSource').value = '';
+      updateSourceFields(true);
+      updatePreflight();
+    });
+    document.getElementById('surrogateBase').addEventListener('change', () => { document.getElementById('manualSource').value = ''; });
+    document.getElementById('manualSource').addEventListener('change', () => setStatus('Ръчният файл ще бъде проверен по дължина и SHA-256 при стартиране.'));
+    document.getElementById('runBtn').addEventListener('click', startSession);
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+      cancelRequested = true;
+      document.getElementById('cancelBtn').disabled = true;
+      activeWorkerClient?.terminate('SESSION_CANCELLED', 'Сесията е прекъсната от потребителя.');
+      activeWorkerClient = null;
+      setStatus('Сесията се прекъсва…', currentSession?.config.session_id || '');
+    });
+    document.getElementById('exportCsvBtn').addEventListener('click', exportRawCsv);
+    document.getElementById('exportJsonBtn').addEventListener('click', exportManifestJson);
+    document.getElementById('exportPlanBtn').addEventListener('click', async () => {
+      try { await exportPlan(); } catch (error) { setStatus(`Plan export error: ${error.message}`); }
+    });
+    document.getElementById('importPlanInput').addEventListener('change', async event => {
+      try { await importPlan(event.target.files?.[0]); } catch (error) { setStatus(`Plan import error: ${error.message}`); }
+      event.target.value = '';
+    });
+    updateSourceFields(false);
+    updatePreflight();
+  }
+
+  globalThis.MazeLabCore = Object.freeze({
+    APP_VERSION, SCHEMA_VERSION, DECODER_VERSION, BLOCK_RANGE, DIRS, SOURCES,
+    CONTROL_SOURCES, SOURCE_RELATIONS, ROOTED_ALGORITHMS, PRIMARY_METRIC_KEYS, METRIC_CODEBOOK,
+    DigitStreamExhaustedError, DigitStream, DirectPrngStream, Xoshiro128StarStar,
+    rotateLeft32, uniformUintBelow, makeIidDecimal5Digits, makePeriodicOneSeventhDigits, makeShuffledBlockDigits,
+    Cell, Maze, GENERATORS, generateMaze, cornerIndices, designForRun, mazeFromWallCodes,
+    buildValidatedGraph, bfs, reconstructPath, analyzeMaze, wallCodeHex, fnv1a32,
+    mean, quantile, sampleStandardDeviation, describe, recommendedBlocks, executeRun,
+    METRIC_COLUMNS, VALIDATION_COLUMNS, CSV_BASE_COLUMNS, csvCell
+  });
+
+  if (typeof document !== 'undefined') initializeApp();
+  </script>
+</body>
+</html>

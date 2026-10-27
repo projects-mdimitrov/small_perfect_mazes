@@ -1,0 +1,200 @@
+{
+  "status": "pass",
+  "row_count": 40320,
+  "status_counts": {
+    "ok": 40278,
+    "stream_exhausted": 42
+  },
+  "independently_recomputed_metrics": [
+    "dead_end_fraction",
+    "diameter_normalized",
+    "adjusted_orientation_anisotropy",
+    "solution_stretch"
+  ],
+  "complete_wall_graphs_checked": 40278,
+  "unique_run_keys": 40320,
+  "source_files_hash_checked": 12,
+  "control_corpora": 64,
+  "by_series_algorithm": [
+    {
+      "series": "primary_10x10",
+      "algorithm": "aldous",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "binary_dl",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "binary_dr",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "binary_ul",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "binary_ur",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "dfs",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "division",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "eller",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "growing",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "hunt",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "kruskal",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "prim",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "sidewinder",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "primary_10x10",
+      "algorithm": "wilson",
+      "status": "ok",
+      "count": 2432
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "aldous",
+      "status": "ok",
+      "count": 415
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "aldous",
+      "status": "stream_exhausted",
+      "count": 33
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "binary_dl",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "binary_dr",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "binary_ul",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "binary_ur",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "dfs",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "division",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "eller",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "growing",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "hunt",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "kruskal",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "prim",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "sidewinder",
+      "status": "ok",
+      "count": 448
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "wilson",
+      "status": "ok",
+      "count": 439
+    },
+    {
+      "series": "secondary_20x20",
+      "algorithm": "wilson",
+      "status": "stream_exhausted",
+      "count": 9
+    }
+  ]
+}

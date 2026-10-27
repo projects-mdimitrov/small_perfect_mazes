@@ -1,0 +1,436 @@
+{
+  "package_id": "maze-crossed-study-data-code",
+  "package_version": "1.1.0",
+  "created_utc": "2026-10-20T14:52:39.147610+00:00",
+  "scope": "Standalone experiment code, inputs, raw data, scientific analysis, numeric summaries and independent audits for 10x10 and 20x20 grids. No manuscript or editorial document is included or required.",
+  "raw_csv": "article_all_algorithms_v1/data/crossed_v1/runs.csv",
+  "raw_csv_sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+  "rows": 40320,
+  "statuses": {
+    "ok": 40278,
+    "stream_exhausted": 42
+  },
+  "main_analysis_attempts": 39648,
+  "ancillary_attempts_retained_for_archive_identity": 672,
+  "size_design": [
+    {
+      "series": "primary_10x10",
+      "cols": 10,
+      "rows": 10,
+      "windows": 32,
+      "budget": 6000,
+      "controls": 64
+    },
+    {
+      "series": "secondary_20x20",
+      "cols": 20,
+      "rows": 20,
+      "windows": 16,
+      "budget": 12000,
+      "controls": 16
+    }
+  ],
+  "byte_identical_inputs_and_results": [
+    {
+      "source_relative_path": "maze_analytics_lab-15.html",
+      "package_path": "maze_analytics_lab-15.html",
+      "sha256": "b999ca85b79868b6bdf68a0ed07e0dac73db248106ab55e69a624f440c73f30c",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/run_crossed_study.js",
+      "package_path": "article_all_algorithms_v1/run_crossed_study.js",
+      "sha256": "04a5556f936344698f48471cb78d69123dccfe95ec5eee54657c2b17777d8680",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/protocol.md",
+      "package_path": "article_all_algorithms_v1/protocol.md",
+      "sha256": "4f1c47607dc9d332a8110402e2de9a6dcc288d9a70036ffdbdb227f9a0ca4a6d",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/audit_crossed_study.py",
+      "package_path": "article_all_algorithms_v1/audit_crossed_study.py",
+      "sha256": "bbc8878704b910d8122f215aa0f3196c7242edd4a9fb436d91b74f4c91eb1585",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/1_over_e.1mil.txt",
+      "package_path": "irrational_numbers/1_over_e.1mil.txt",
+      "sha256": "3dc6c27f31d2680ff6b67d7105fdd2b2bee0fb46e30c30ff2d2df634e89ba5c6",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/1_over_pi.1mil.txt",
+      "package_path": "irrational_numbers/1_over_pi.1mil.txt",
+      "sha256": "4843a8f7cb0e0c2d4a6892972418973c32547ad133b0bd57e802b358139a126f",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/apery.zeta3.1mil.txt",
+      "package_path": "irrational_numbers/apery.zeta3.1mil.txt",
+      "sha256": "b0860c94afc5e07f2e0f55ba98c242740cace22729a6815ddf775e927b9f7ffc",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/e.1mil.txt",
+      "package_path": "irrational_numbers/e.1mil.txt",
+      "sha256": "c6e9fe4f3d84085f85e98234bf1f284b5b8de993059453548d3ccaa3016138ac",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/euler_m.1mil.txt",
+      "package_path": "irrational_numbers/euler_m.1mil.txt",
+      "sha256": "f94f0a985277533d11ffe68547169bfb5a0e964658488ec627e00ae8471bcc33",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/ln2.1mil.txt",
+      "package_path": "irrational_numbers/ln2.1mil.txt",
+      "sha256": "f05e0e2dd51d12b49ca959b5edda04afa436d88cb984fc8e8cf510e10142c8f5",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/phi.1mil.txt",
+      "package_path": "irrational_numbers/phi.1mil.txt",
+      "sha256": "b3a8d00d8384e1eeda6f906db0132d39c2cbd38447a0fa6eda9f5a06773d72d7",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/pi.1mil.txt",
+      "package_path": "irrational_numbers/pi.1mil.txt",
+      "sha256": "7806ee47461b49ef1f578e14461b2c83c09c6d7a9a914275da1d71e9cbbf7069",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/sqrt2.1mil.txt",
+      "package_path": "irrational_numbers/sqrt2.1mil.txt",
+      "sha256": "b521e4c4ee7afb3e2ce0d58337388c54f9fbbc6811945574117ef5eec093cefb",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/sqrt3.1mil.txt",
+      "package_path": "irrational_numbers/sqrt3.1mil.txt",
+      "sha256": "bb0d9aafc282bf86ddee32b7fa2764cb888ffaf973e9ea0be4ce98bc61eb1e3c",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/sqrt5.1mil.txt",
+      "package_path": "irrational_numbers/sqrt5.1mil.txt",
+      "sha256": "8e41c7bcb5f3a967df93b8bb7dce80a11e7490a44401f80d2eeadb3241e883b2",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "irrational_numbers/sqrt7.1mil.txt",
+      "package_path": "irrational_numbers/sqrt7.1mil.txt",
+      "sha256": "2fa5041ec14b959878531726fb8264b7dbc915cd331eec2809937ed9337a6766",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/data/crossed_v1/runs.csv",
+      "package_path": "article_all_algorithms_v1/data/crossed_v1/runs.csv",
+      "sha256": "e39fb8b796950642fe2f7be8f6716b7325b1af3299e99ea48b86fee6a9383949",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/data/crossed_v1/manifest.json",
+      "package_path": "article_all_algorithms_v1/data/crossed_v1/manifest.json",
+      "sha256": "fe1e62515e8c536912e8bf7fbd932586fa9d8966d54cd4a7719d00bc78d3d5c0",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/data/crossed_v1/independent_audit.json",
+      "package_path": "article_all_algorithms_v1/data/crossed_v1/independent_audit.json",
+      "sha256": "59fa06465cbc60bd34513ad45348829b438c7d193f314a2a652ae84b519b0e28",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/algorithm_means_10.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/algorithm_means_10.csv",
+      "sha256": "70f596417c4740b1765392ecb28fd75ec47b7090417fda55ef0dbad42d681402",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/algorithm_means_20.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/algorithm_means_20.csv",
+      "sha256": "80ada9ab598a7ed875a44be0c2bd5bf7f8fb4ddf72c815a5afeb64ade2dcac3c",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/algorithm_source_cells_10.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/algorithm_source_cells_10.csv",
+      "sha256": "b6c0057126a93b39f63030bccc4fc94ebfa499227c20f51456ff7961e620fdc3",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/algorithm_source_cells_20.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/algorithm_source_cells_20.csv",
+      "sha256": "f8d380822822ff899048667d83bbb08b7a30e1717e7249249fd02aad1a92c670",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/common_panel_source_contrasts_10.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/common_panel_source_contrasts_10.csv",
+      "sha256": "64f0de7cfff7f6313bdaf32ebe0cc8f0c3b3048f9b86dfa2e8cfdf7a792fff0a",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/common_panel_source_contrasts_20.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/common_panel_source_contrasts_20.csv",
+      "sha256": "0421f3422b12f54d44a166b3915a0df54b1035189ec7104dbd8db932978d6714",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/common_panel_sources_10.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/common_panel_sources_10.csv",
+      "sha256": "3eb054c44f159d56ba7e6df1da71cd70ed0bfc9baf9416e988677d80da80424f",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/common_panel_sources_20.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/common_panel_sources_20.csv",
+      "sha256": "2690b6c2db4056c5e69087fd36f4d6f1b02b7259433b04066b730510aea52cb0",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_control_corpus_means.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_control_corpus_means.csv",
+      "sha256": "937577e1cec1697fe0d0ecc4eccaf92a1c9e39166c9f6aa42133f8b3e4bb1566",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_control_reference.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_control_reference.csv",
+      "sha256": "8f362c6642d20417df1c90eb9fd2592055ac05bc4dfd9bb2599ba8f5dcc77623",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_family_balanced_source_means.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_family_balanced_source_means.csv",
+      "sha256": "83aab83d83f12b3b0e809ab178d41963bc50674e3eca6a04b95557cc7e1d469e",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_source_contrasts.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_source_contrasts.csv",
+      "sha256": "4373a7b175b6b49fe0641b5e468531b53a4685d79a3d506b59e7977d99e6d584",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_variant_contrasts.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/primary_variant_contrasts.csv",
+      "sha256": "b257e478ab27e95fadb8ea071ee7355690d057e55fccd16e2fb5ecc570bbe073",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/run_dispersion_10.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/run_dispersion_10.csv",
+      "sha256": "d9c5ad5649d437b2300b66733ad367d8fb236dacccb072dafbf10527979a6819",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/run_dispersion_20.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/run_dispersion_20.csv",
+      "sha256": "23625792d2424799d65afb16c03c072b59a64f12eedf8bac078665c0909034fd",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/source_means_10.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/source_means_10.csv",
+      "sha256": "83aab83d83f12b3b0e809ab178d41963bc50674e3eca6a04b95557cc7e1d469e",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/source_means_20.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/source_means_20.csv",
+      "sha256": "2690b6c2db4056c5e69087fd36f4d6f1b02b7259433b04066b730510aea52cb0",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/weighted_variance_10.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/weighted_variance_10.csv",
+      "sha256": "920233cb24b5e77c5c5b288a94d9e888e7d3f7d007ddaefc1280c8d16d79e048",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/weighted_variance_20.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/weighted_variance_20.csv",
+      "sha256": "76cd82e85eb4fb4762ca5e8ac5ee26a512775533603c1742f90e416f3e0465a4",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/weighting_sensitivity_10.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/weighting_sensitivity_10.csv",
+      "sha256": "235f1fb9e72dc1f8151f1e09a17b6ba8d1e27eff3094a866fc453732fa364219",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/tables/weighting_sensitivity_20.csv",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/tables/weighting_sensitivity_20.csv",
+      "sha256": "ed77a96b539d862baa937c355976e69bd8c4b105a5614369fc5cbf3f94998d9d",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/outputs/algorithm_means_10_C.csv",
+      "package_path": "article_all_algorithms_v1/revision_v21/outputs/algorithm_means_10_C.csv",
+      "sha256": "4abe437a1675a50b8d963f1ff97092f9075f48803c80123ddadbdb7d04766a0a",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/outputs/algorithm_means_10_I.csv",
+      "package_path": "article_all_algorithms_v1/revision_v21/outputs/algorithm_means_10_I.csv",
+      "sha256": "4f6b48f32454bd32465ac792312d19685277b633399b8f80dad25726d78b0b9a",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/outputs/algorithm_means_20_C.csv",
+      "package_path": "article_all_algorithms_v1/revision_v21/outputs/algorithm_means_20_C.csv",
+      "sha256": "7bb411c89bfad90d75144a902880c72e6517cb24cb39e369919da35fd846e20a",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/outputs/algorithm_means_20_I.csv",
+      "package_path": "article_all_algorithms_v1/revision_v21/outputs/algorithm_means_20_I.csv",
+      "sha256": "442584081c8253bb543a83c07229a47406bd1ef6a46d2676d4ae1481a4e553fd",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/outputs/variance_partition_10_C.csv",
+      "package_path": "article_all_algorithms_v1/revision_v21/outputs/variance_partition_10_C.csv",
+      "sha256": "c76ecc07cc5b21d04ee21bc5170fa3d6e9494bb3b523c1131554401858b13874",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/outputs/variance_partition_10_I.csv",
+      "package_path": "article_all_algorithms_v1/revision_v21/outputs/variance_partition_10_I.csv",
+      "sha256": "18c71904c65bb314ee3ad5e03f21edf8b0f293050475b264f6279916560f6076",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/outputs/variance_partition_20_C.csv",
+      "package_path": "article_all_algorithms_v1/revision_v21/outputs/variance_partition_20_C.csv",
+      "sha256": "63955660c298508a1a72229da80e010cbcce8130ee1945c813d39b3b077f5760",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v21/outputs/variance_partition_20_I.csv",
+      "package_path": "article_all_algorithms_v1/revision_v21/outputs/variance_partition_20_I.csv",
+      "sha256": "1fba8560e2f6c61420d974463318b8a60a79537dd02a650c575a49a01ea595fe",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/current_source_means_10.csv",
+      "package_path": "reference_results/current_reanalysis/current_source_means_10.csv",
+      "sha256": "011dc1a6f660ea1a436e770675a95bbb08d7c7ea9d726762de8c58b1481867cc",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/current_source_means_20.csv",
+      "package_path": "reference_results/current_reanalysis/current_source_means_20.csv",
+      "sha256": "d0af65a19218c5e9d5b08565e98a921b8680332d2af257e14868736b31eecafd",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/deviations_10_dead_end_fraction.csv",
+      "package_path": "reference_results/current_reanalysis/deviations_10_dead_end_fraction.csv",
+      "sha256": "30f9b8899ef21b4111cb2364f567a32b9184e3be02e4d53ba69136680c7235ab",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/deviations_10_diameter_normalized.csv",
+      "package_path": "reference_results/current_reanalysis/deviations_10_diameter_normalized.csv",
+      "sha256": "56364660d27493d5062adbb75c15400884bf81561ce28152242e10cfeb9be196",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/deviations_10_junction_fraction.csv",
+      "package_path": "reference_results/current_reanalysis/deviations_10_junction_fraction.csv",
+      "sha256": "fd6196569584c91e155176e2bc51f66f6f5bfb0ae6a701af86b010579c0f3f10",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/deviations_10_solution_stretch.csv",
+      "package_path": "reference_results/current_reanalysis/deviations_10_solution_stretch.csv",
+      "sha256": "4247ee6cd37fe0f9c34101f77c753c5d8238869bcd3f001cc92ff30b86949469",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/deviations_20_dead_end_fraction.csv",
+      "package_path": "reference_results/current_reanalysis/deviations_20_dead_end_fraction.csv",
+      "sha256": "74f88e9c3bf7768cc4e462495fe779b09e8bccb294af98aca474602a4309e174",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/deviations_20_diameter_normalized.csv",
+      "package_path": "reference_results/current_reanalysis/deviations_20_diameter_normalized.csv",
+      "sha256": "f624703cd1a02f9d2902e3e2fba2516aaefcc576c9bf38fe674abcd487b31c85",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/deviations_20_junction_fraction.csv",
+      "package_path": "reference_results/current_reanalysis/deviations_20_junction_fraction.csv",
+      "sha256": "72482703016be323b6f974a2b2677eda9f17773419eb396d359ebb8901da9689",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/deviations_20_solution_stretch.csv",
+      "package_path": "reference_results/current_reanalysis/deviations_20_solution_stretch.csv",
+      "sha256": "af55226cefcaea180ea0bc2a5042c1415e617fc472cec77543779ee5acb65de4",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/cell_metric_audit.json",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/cell_metric_audit.json",
+      "sha256": "a3291798bf67c8079e5edef1eeda3246cb40b402e74bb9ea56262a38b7f15c7f",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/independent_graph_audit_v12.json",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/independent_graph_audit_v12.json",
+      "sha256": "59fa06465cbc60bd34513ad45348829b438c7d193f314a2a652ae84b519b0e28",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "article_all_algorithms_v1/revision_v12/outputs/summary.json",
+      "package_path": "article_all_algorithms_v1/revision_v12/outputs/summary.json",
+      "sha256": "b640a6a09cac4a6a72f8cf60f92919f5839caddf813c45ad7ebb5d26591ce866",
+      "preserved_byte_for_byte": true
+    },
+    {
+      "source_relative_path": "reference_results/current_reanalysis/minmax_boxplot_data.json",
+      "package_path": "reference_results/current_reanalysis/minmax_boxplot_data.json",
+      "sha256": "b35fc16d6c3345999bf1cca2b5a9f4c31eb13ee134ffea2d7e08be26b06a8e31",
+      "preserved_byte_for_byte": true
+    }
+  ],
+  "adapted_code_provenance": "provenance/code_adaptations.json",
+  "verification_report": "provenance/scientific_validation/validation.json",
+  "license": "No new license assigned; settle authorship, licensing and redistribution rights before public deposit.",
+  "updated_utc": "2026-10-20T15:08:47.293219+00:00",
+  "saved_control_sequences": {
+    "manifest": "control_corpora/manifest.json",
+    "format": "JSON Lines; digits stored as text",
+    "generator_tool": "tools/export_control_corpora.js",
+    "unique_seed_corpora": 64,
+    "digits_per_corpus": 960000,
+    "decimal5_blocks_per_corpus": 192000,
+    "files": [
+      {
+        "path": "control_corpora/control_10x10.jsonl",
+        "records": 64,
+        "bytes": 61452023,
+        "sha256": "5ae79c784d538df9238e2a7b4e19572b1f24a7c1b6a30b4c0346111ac63c090a"
+      },
+      {
+        "path": "control_corpora/control_20x20.jsonl",
+        "records": 16,
+        "bytes": 15362999,
+        "sha256": "e111112616f1f25651187044f3180be6efed93fe34f2825a06bd81c876b5727e"
+      }
+    ],
+    "secondary_corpora": "Exact first 16 primary corpora; no new independent draws",
+    "original_generation_and_numeric_results_unchanged": true,
+    "independent_verification": "provenance/scientific_validation/control_corpora_independent.json"
+  }
+}
